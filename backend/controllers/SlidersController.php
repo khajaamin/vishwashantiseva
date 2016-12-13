@@ -86,7 +86,7 @@ class SlidersController extends Controller
                
                if(!empty($model->image_file))
                {
-                    $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
+                    $model->image_file->saveAs('../images/slider/'.$imageName.'.'.$model->image_file->extension);
                     $model->image_file = $imageName.'.'.$model->image_file->extension;    
 
                      $model->save();
@@ -127,7 +127,7 @@ class SlidersController extends Controller
            $model->image_file = UploadedFile::getInstance($model,'image_file');
 
            if(!empty($model->image_file)){
-                $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
+                $model->image_file->saveAs('../images/slider/'.$imageName.'.'.$model->image_file->extension);
                   echo $imageName.'.'.$model->image_file->extension;
                    $model->image_file = $imageName.'.'.$model->image_file->extension;
                    $model->save();

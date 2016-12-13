@@ -26,14 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'heading',
             'caption:ntext',
-            [
-                'attribute'=>'image_file',
-                'format'=>'html',
-                'value'=>function($data){
-                    return Html::img("../../frontend/web/images/".$data["image_file"],["width"=>"200","height"=>"100","class"=>"img-responsive"]);
-                }
-                // 'value'=>'../../frontend/web/images/'.$data['image_file'],
-                // 'format' => ['image',['width'=>'200','height'=>'100']],
+                         [
+                'attribute' => 'image_file',
+                'format' => 'html',
+                'label' => 'Slider Images',
+                'value' => function ($data) {
+                    return Html::img('../images/slider/' . $data['image_file'],
+                        ['width' => '400px' ,'class' => 'img-responsive thumbnail']);
+                },
             ],
             //'status',
             // 'created_by',

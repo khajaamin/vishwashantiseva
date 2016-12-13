@@ -110,11 +110,9 @@ class EventsController extends Controller
                 if(!empty($model->image_file))
                 {
                     
-                       $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
-                       $model->image_file = $imageName.'.'.$model->image_file->extension;    
-
-                       print_r($model);exit;
-                     // $model->save();
+                       $model->image_file->saveAs('../images/events/'.$imageName.'.'.$model->image_file->extension);
+                       $model->image_file = $imageName.'.'.$model->image_file->extension;     
+                      $model->save();
 
                     return $this->redirect(['view', 'id' => $model->id]); 
                 }
@@ -150,7 +148,7 @@ class EventsController extends Controller
            $model->image_file = UploadedFile::getInstance($model,'image_file');
 
            if(!empty($model->image_file)){
-                $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
+                $model->image_file->saveAs('images/events'.$imageName.'.'.$model->image_file->extension);
                   echo $imageName.'.'.$model->image_file->extension;
                    $model->image_file = $imageName.'.'.$model->image_file->extension;
                    $model->save();
