@@ -101,13 +101,13 @@ class ProfilesController extends Controller
         $model = $this->findModel($pid['id']);
         $image = $model['profile_image'];
         
-
+            
         if ($model->load(Yii::$app->request->post())) {
                $imageName = "profile_image_".rand();
                $model->profile_image = UploadedFile::getInstance($model,'profile_image');
-
+                //echo $model->birthtime;exit;               
                if(!empty($model->profile_image)){
-                    $model->profile_image->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->profile_image->extension);
+                    $model->profile_image->saveAs('../images/profile/'.$imageName.'.'.$model->profile_image->extension);
                       echo $imageName.'.'.$model->profile_image->extension;
                        $model->profile_image = $imageName.'.'.$model->profile_image->extension;
                        $model->save();

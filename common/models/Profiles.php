@@ -69,6 +69,7 @@ class Profiles extends \yii\db\ActiveRecord
 
             [['name','marital_status', 'mobile', 'gender','country', 'state', 'city', 'blood_group'], 'required'],
             [['mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
+            [['date_of_birth', 'birthtime'], 'safe'],
             [['mobile'],'match','pattern'=>'/^[0-9]{10}$/'],
             [['gender'], 'string'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],

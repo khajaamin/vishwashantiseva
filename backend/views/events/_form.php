@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
-use kartik\time\TimePicker;
-//use janisto\timepicker\TimePicker;
+//use kartik\time\TimePicker;
+use janisto\timepicker\TimePicker;
 //use dosamigos\datetimepicker\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\Events */
@@ -29,6 +29,8 @@ use kartik\time\TimePicker;
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
+                        'clientOptions' => ['minDate' => '0'],
+                        //'minDate' => 0,
                         'dateFormat' => 'yyyy-MM-dd',
                         'options'=>['class'=>'form-control'],
                         ]) ?>                
@@ -36,21 +38,32 @@ use kartik\time\TimePicker;
             </div>    
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'start_time')->textInput() ?> 
-                    <?php
-                        // echo '<label>Start Time</label>';
-                        // echo TimePicker::widget([
-                        //     'name' => 'start_time', 
-                        //     'value' => '00:00:00 ',
-                        //     'pluginOptions' => [
-                        //         'showSeconds' => true
-                        //     ]
-                        // ]);
+                    <!-- <?php//$form->field($model, 'start_time')->textInput() ?> --> 
+                    <?= $form->field($model, 'start_time')->widget(\janisto\timepicker\TimePicker::className(), [
+                            //'language' => 'fi',
+                            'mode' => 'time',
+                            'clientOptions'=>[
+                                //'dateFormat' => 'yy-mm-dd',
+                                'timeFormat' => 'HH:mm:ss',
+                                'showSecond' => true,
+                            ]
+                        ]);
                     ?>
                   
                 </div>
                 <div class="col-md-6">
-                    <?= $form->field($model, 'end_time')->textInput() ?>                
+                    <!-- <?php// $form->field($model, 'end_time')->textInput() ?> -->
+                      <?= $form->field($model, 'end_time')->widget(\janisto\timepicker\TimePicker::className(), [
+                            //'language' => 'fi',
+                            'mode' => 'time',
+                            'clientOptions'=>[
+                                //'dateFormat' => 'yy-mm-dd',
+                                'timeFormat' => 'HH:mm:ss',
+                                'showSecond' => true,
+                            ]
+                        ]);
+                    ?>
+
                 </div>
             </div>
             <div class="row">
