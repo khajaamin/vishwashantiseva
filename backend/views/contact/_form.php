@@ -9,8 +9,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="contact-form">
-
-    <?php $form = ActiveForm::begin(); ?>
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4> Contact </h4>
+            </div>
+            <div class="panel-body">
+    			<?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -24,6 +28,9 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>        
+            </div>
+        </div>
+    
 
 </div>

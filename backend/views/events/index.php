@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
+            'image_file',
             'date',
             'start_time',
             'end_time',

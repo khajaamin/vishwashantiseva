@@ -78,13 +78,16 @@ AppAsset::register($this);
                         </li>
                         
                          <li>
-                            <a href="<?php echo Url::toRoute('user/index');?>"><i class="fa fa-user-plus" aria-hidden="true"></i> Create user </a>
+                            <a href="<?php echo Url::toRoute('user/index');?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update user </a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::toRoute('masters/index');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create master </a>
+                            <a href="<?php echo Url::toRoute('masters/index');?>"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Master </a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::toRoute('events/index');?>"><i class="fa fa-calendar" aria-hidden="true"></i> Create event </a>
+                            <a href="<?php echo Url::toRoute('events/index');?>"><i class="fa fa-calendar" aria-hidden="true"></i>  Event </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::toRoute('sliders/index');?>"><i class="fa fa-picture-o" aria-hidden="true"></i> sliders </a>
                         </li>
                         <!-- <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>

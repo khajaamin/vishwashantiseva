@@ -30,6 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
+            [
+                'attribute'=>'image_file',
+                'value'=>'../../frontend/web/images/'.$model->image_file,
+                'format' => ['image',['width'=>'200','height'=>'100']],
+            ],
+            
             'date',
             'start_time',
             'end_time',
