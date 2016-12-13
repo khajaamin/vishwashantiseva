@@ -29,14 +29,14 @@ use kartik\time\TimePicker;
                 </div>
                 <div class="col-md-6">
                     <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
-                        //'language' => 'ru',
                         'dateFormat' => 'yyyy-MM-dd',
+                        'options'=>['class'=>'form-control'],
                         ]) ?>                
                 </div>
             </div>    
             <div class="row">
                 <div class="col-md-6">
-                    <?php $form->field($model, 'start_time')->textInput() ?> 
+                    <?= $form->field($model, 'start_time')->textInput() ?> 
                     <?php
                         // echo '<label>Start Time</label>';
                         // echo TimePicker::widget([

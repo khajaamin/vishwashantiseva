@@ -24,9 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'name',
-            'image_file',
+            [
+                'attribute' => 'image_file',
+                'format' => 'html',
+                'label' => 'Event Images',
+                'value' => function ($data) {
+                    return Html::img('../images/events/' . $data['image_file'],
+                        ['width' => '400px' ,'class' => 'img-responsive thumbnail']);
+                },
+            ],
             'date',
             'start_time',
             'end_time',

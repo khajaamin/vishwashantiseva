@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
                 'attribute'=>'image_file',
-                'value'=>'../../frontend/web/images/'.$model->image_file,
+                'value'=>'../images/events/'.$model->image_file,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
             

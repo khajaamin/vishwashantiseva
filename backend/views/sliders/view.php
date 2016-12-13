@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'caption:ntext',
             [
                 'attribute'=>'image_file',
-                'value'=>'../../frontend/web/images/'.$model->image_file,
+                'value'=>'../images/slider/'.$model->image_file,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
             'status',
