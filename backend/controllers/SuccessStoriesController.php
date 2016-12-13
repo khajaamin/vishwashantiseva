@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use common\models\SuccessStories;
 use common\models\SuccessStoriesSearch;
 use yii\web\Controller;
@@ -20,9 +21,21 @@ class SuccessStoriesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','view','update','delete','logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','delete','logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'logout' => ['post'],
                     'delete' => ['POST'],
                 ],
             ],

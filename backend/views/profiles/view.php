@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Profiles */
 
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -23,6 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+         <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute(['education/update','id'=>$model->id]);?>">Update Education >></a> 
+         <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute('user/index');?>">Back To Home</a>
     </p>
 
     <?= DetailView::widget([
@@ -32,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'education_id',
             'name',
-            'profile_image',
+            
+            [
+                'attribute'=>'profile_image',
+                'value'=>'../../frontend/web/images/'.$model->profile_image,
+                'format' => ['image',['width'=>'200','height'=>'100']],
+            ],
             'date_of_birth',
             'marital_status',
             'gender',

@@ -23,8 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image_file') ?>
 
-    <?= $form->field($model, 'active') ?>
-
     <?= $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>

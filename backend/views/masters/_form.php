@@ -9,8 +9,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="masters-form">
-
-    <?php $form = ActiveForm::begin(); ?>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Master</h3>
+		</div>
+		<div class="panel-body">
+				<?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -22,6 +26,10 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>		
+		</div>
+		
+	</div>
+    
 
 </div>

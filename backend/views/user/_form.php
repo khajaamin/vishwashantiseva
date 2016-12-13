@@ -10,8 +10,14 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <div class="user-form">
-
-             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Update User </h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                          <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
                 <?php
@@ -29,8 +35,15 @@ use yii\helpers\ArrayHelper;
               
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary btn_1', 'name' => 'signup-button']) ?>
+                    <!-- <?php //Html::submitButton('Signup', ['class' => 'btn btn-primary btn_1', 'name' => 'signup-button']) ?> -->
+                    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                 </div>
-         <?php ActiveForm::end(); ?>
+         <?php ActiveForm::end(); ?>                        
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+             
 
 </div>

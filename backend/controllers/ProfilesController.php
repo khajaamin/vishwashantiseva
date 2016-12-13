@@ -3,12 +3,13 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use common\models\Profiles;
 use common\models\ProfilesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\UploadedFile;
 /**
  * ProfilesController implements the CRUD actions for Profiles model.
  */
@@ -17,12 +18,24 @@ class ProfilesController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','view','update','delete','logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','delete','logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'logout' => ['post'],
                     'delete' => ['POST'],
                 ],
             ],
@@ -82,9 +95,28 @@ class ProfilesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        //echo $id;
+        
+        $pid = Profiles::find()->where(['user_id'=>$id])->one();       
+        $model = $this->findModel($pid['id']);
+        $image = $model['profile_image'];
+        
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+               $imageName = "profile_image_".rand();
+               $model->profile_image = UploadedFile::getInstance($model,'profile_image');
+
+               if(!empty($model->profile_image)){
+                    $model->profile_image->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->profile_image->extension);
+                      echo $imageName.'.'.$model->profile_image->extension;
+                       $model->profile_image = $imageName.'.'.$model->profile_image->extension;
+                       $model->save();
+                }else{
+
+                    $model->profile_image = $image;
+                    
+                    $model->save();
+                }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
