@@ -7,9 +7,7 @@ use yii\jui\DatePicker;
 use janisto\timepicker\TimePicker;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Profiles */
-/* @var $form yii\widgets\ActiveForm */?>
+?>
 
 
 <div class="profiles-form">
@@ -114,8 +112,8 @@ use janisto\timepicker\TimePicker;
                         <?= $form->field($model, 'birthplace')->textInput(['maxlength' => true]) ?>                                                             
                     </div>
                     <div class=" col-md-6">
-                        <!-- <?php// $form->field($model, 'birthtime')->textInput() ?> -->
-                         <?= $form->field($model, 'birthtime')->widget(\janisto\timepicker\TimePicker::className(), [
+                        
+                         <?php echo $form->field($model, 'birthtime')->widget(\janisto\timepicker\TimePicker::className(), [
                             //'language' => 'fi',
                             'mode' => 'time',
                             'clientOptions'=>[

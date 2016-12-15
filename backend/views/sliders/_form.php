@@ -3,9 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Sliders */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="sliders-form">
@@ -24,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     		<?= $form->field($model, 'status')->dropDownList([ '1' => 'Active', '0' => 'Deactive', ], ['prompt' => 'select status']) ?>
 
-    		<?php //$form->field($model, 'status')->textInput() ?>
+    		
 
 		    <div class="form-group">
 		        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

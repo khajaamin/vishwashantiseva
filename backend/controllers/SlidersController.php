@@ -82,7 +82,7 @@ class SlidersController extends Controller
 
                $imageName = "slider_image_".rand();
                $model->image_file = UploadedFile::getInstance($model,'image_file');
-               // $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
+               
                
                if(!empty($model->image_file))
                {

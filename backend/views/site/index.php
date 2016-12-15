@@ -1,8 +1,10 @@
           <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Dashboard
+                    </h1>
                 </div>
-                <!-- /.col-lg-12 -->
+
+                <!--Dashboard /.col-lg-12 -->
             </div>
             <!-- /.row -->
             <div class="row">
@@ -15,7 +17,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?= $groom_count ?></div>
-                                    <div>Grooms</div>
+                                    <div><?php echo \Yii::t('app', 'Grooms');?></div>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +39,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?= $bride_count  ?></div>
-                                    <div>Brides</div>
+                                    <div><?php echo \Yii::t('app','Brides');?></div>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +61,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?= $event_count ?></div>
-                                    <div>New event</div>
+                                    <div><?php echo \Yii::t('app', 'Events');?></div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +74,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -93,7 +95,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- /.row -->
             
