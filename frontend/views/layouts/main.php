@@ -42,7 +42,7 @@ AppAsset::register($this);
     <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
       <div class="navbar-inner">
         <div class="container">
-           <a class="brand" href="<?php echo Url::toRoute('site/index');?>"><!-- <img src="kandepohe_static/images/logo.png" alt="logo"> -->Vishwashanti Yuva va Mahila Sanstha</a>
+           <a class="brand" href="<?php echo Url::toRoute('site/index');?>"> <img src="images/Logo.png" alt="Vishwashanti Seva"></a>
            <div class="pull-right">
             <nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,22 +58,20 @@ AppAsset::register($this);
            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav nav_1">
-                    <li><a href="<?php echo Url::toRoute('site/index');?>">Home</a></li>
-<!--                     <li><a href="<?php// echo Url::toRoute('site/about');?>">About</a></li>
-                    <li><a href="<?php //echo Url::toRoute('site/service');?>">Services</a></li>
-                    <li><a href="<?php //echo Url::toRoute('site/gallery');?>">Gallery</a></li>
-                    <li class="last"><a href="<?php// echo Url::toRoute('site/contact');?>">Contacts</a></li> -->
+                    <li><a href="<?php echo Url::toRoute('site/index');?>">होम</a></li>
+
+
                       <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
-                        <li><a href="<?php echo Url::toRoute('site/login');?>">Login</a></li>
-                        <li><a href="<?php echo Url::toRoute('site/signup');?>">Register</a></li>
+                        <li><a href="<?php echo Url::toRoute('site/login');?>">लॉगीन </a></li>
+                        <li><a href="<?php echo Url::toRoute('site/signup');?>">रजिस्टर</a></li>
                         <?php }else{?>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= 'Hii, '.ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo Url::toRoute('profile/index');?>">My Profile</a></li>
-                            <li><?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
+                            <li><a href="<?php echo Url::toRoute('profile/index');?>">माय प्रोफाइल</a></li>
+                            <li><?= Html::a('लॉगऑऊट', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
                       <?php  }?>
