@@ -34,7 +34,7 @@ AppAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""<?php echo Url::toRoute('site/index');?>">Matrimonial</a>
+                <a class="navbar-brand" href=""<?php echo Url::toRoute('site/index');?>">Vishwa Shanti Seva</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -62,7 +62,7 @@ AppAsset::register($this);
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
+                        <!-- <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
@@ -71,8 +71,8 @@ AppAsset::register($this);
                                 </button>
                             </span>
                             </div>
-                            <!-- /input-group -->
-                        </li>
+                            
+                        </li> -->
                         <li>
                             <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="education-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    
 
     <p>
         <?= Html::a('Create Education', ['create'], ['class' => 'btn btn-success']) ?>
@@ -24,15 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
+            
             'user_id',
             'education_area',
             'education',
             'start_date',
-            // 'end_date',
-            // 'institute',
-            // 'result',
-            // 'place',
+             'end_date',
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

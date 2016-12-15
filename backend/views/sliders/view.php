@@ -3,10 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Sliders */
 
-$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            
             'heading',
             'caption:ntext',
             [
@@ -36,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>'../images/slider/'.$model->image_file,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
-            'status',
+            //'status',
         ],
     ]) ?>
 

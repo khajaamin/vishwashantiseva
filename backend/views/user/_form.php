@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
                 ?>
 
                 <?= $form->field($model, 'email') ?>
-                <?= $form->field($model, 'password_hash')->passwordInput() ?>
+                
               
 
                 <div class="form-group">
