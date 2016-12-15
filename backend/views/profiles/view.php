@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
             [
                 'attribute'=>'profile_image',
-                'value'=>'../../frontend/web/images/'.$model->profile_image,
+                'value'=>'../images/profile/'.$model->profile_image,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
             'date_of_birth',

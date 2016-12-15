@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\jui\DatePicker;
+use janisto\timepicker\TimePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Profiles */
@@ -30,6 +32,7 @@ use yii\jui\DatePicker;
                          <?= $form->field($model, 'date_of_birth')->widget(\yii\jui\DatePicker::classname(), [
                         //'language' => 'ru',
                         'dateFormat' => 'yyyy-MM-dd',
+                        'options'=>['class'=>'form-control'],
                         ]) ?>    
                     </div>
                 </div>
@@ -111,7 +114,17 @@ use yii\jui\DatePicker;
                         <?= $form->field($model, 'birthplace')->textInput(['maxlength' => true]) ?>                                                             
                     </div>
                     <div class=" col-md-6">
-                        <?= $form->field($model, 'birthtime')->textInput() ?>                   
+                        <!-- <?php// $form->field($model, 'birthtime')->textInput() ?> -->
+                         <?= $form->field($model, 'birthtime')->widget(\janisto\timepicker\TimePicker::className(), [
+                            //'language' => 'fi',
+                            'mode' => 'time',
+                            'clientOptions'=>[
+                                //'dateFormat' => 'yy-mm-dd',
+                                'timeFormat' => 'HH:mm:ss',
+                                'showSecond' => true,
+                            ]
+                        ]);
+                       ?>                  
                     </div>
                     
                 </div>

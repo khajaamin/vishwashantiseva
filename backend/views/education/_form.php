@@ -34,13 +34,18 @@ use yii\jui\DatePicker;
                         <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::classname(), [
                         //'language' => 'ru',
                         'dateFormat' => 'yyyy-MM-dd',
+                        'options'=>['class'=>'form-control'],
                         ]) ?>    
                     </div>
                 
                     <div class="col-md-6">
                         <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::classname(), [
                         //'language' => 'ru',
+                            //'startDate'=> 'today',
+                            
+                            //'minDate'=> new Date(), 
                         'dateFormat' => 'yyyy-MM-dd',
+                        'options'=>['class'=>'form-control'],
                         ]) ?>    
                     </div>
                 </div>    
