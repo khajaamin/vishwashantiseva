@@ -12,6 +12,11 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'language' => 'hi-IN',
+    
+    // set source language to be English
+    'sourceLanguage' => 'en-US',
+    
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -34,6 +39,21 @@ return [
                 ],
             ],
         ],
+
+        'i18n' => [
+        'translations' => [
+            'app*' => [
+                'class' => 'yii\i18n\PhpMessageSource',
+                //'basePath' => '@app/messages',
+                //'sourceLanguage' => 'en-US',
+                'fileMap' => [
+                    'app' => 'app.php',
+                    'app/error' => 'error.php',
+                ],
+            ],
+        ],
+    ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

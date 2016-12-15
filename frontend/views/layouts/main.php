@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Vishwas Shanti Seva</title>
     <?php $this->head() ?>
     <style type="text/css">
       .brand{
@@ -38,7 +38,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
-    <div class="navbar navbar-inverse-blue navbar">
+    <div class="navbar navbar-inverse-blue navbar-fixed-top">
     <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
       <div class="navbar-inner">
         <div class="container">
@@ -58,20 +58,20 @@ AppAsset::register($this);
            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav nav_1">
-                    <li><a href="<?php echo Url::toRoute('site/index');?>">होम</a></li>
+                    <li><a href="<?php echo Url::toRoute('site/index');?>"><?php echo \Yii::t('app', 'Home');?></a></li>
 
 
                       <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
-                        <li><a href="<?php echo Url::toRoute('site/login');?>">लॉगीन </a></li>
-                        <li><a href="<?php echo Url::toRoute('site/signup');?>">रजिस्टर</a></li>
+                        <li><a href="<?php echo Url::toRoute('site/login');?>"><?php echo \Yii::t('app', 'Login');?> </a></li>
+                        <li><a href="<?php echo Url::toRoute('site/signup');?>"><?php echo \Yii::t('app', 'Register');?></a></li>
                         <?php }else{?>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= 'Hii, '.ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo Url::toRoute('profile/index');?>">माय प्रोफाइल</a></li>
-                            <li><?= Html::a('लॉगऑऊट', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
+                            <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
+                            <li><?= Html::a('echo \Yii::t("app", "logout");', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
                       <?php  }?>
@@ -126,7 +126,7 @@ AppAsset::register($this);
             </div>
             <div class="clearfix"> </div>
             <div class="copy">
-              <p>Copyright &copy; <?= date('Y');?> All Rights Reserved  | Design by <a href="#" target="_blank"></a> </p>
+              <p>Copyright &copy; <?= date('Y');?> 2016 All Rights Reserved | Developed by Virtual Next Technology <a href="#" target="_blank"></a> </p>
             </div>
         </div>
     </div>

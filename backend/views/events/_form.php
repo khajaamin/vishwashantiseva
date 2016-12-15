@@ -3,15 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
-//use kartik\time\TimePicker;
+
 use janisto\timepicker\TimePicker;
-//use dosamigos\datetimepicker\DateTimePicker;
-/* @var $this yii\web\View */
-/* @var $model common\models\Events */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
-<!-- <div class="events-form"> -->
+ <div class="events-form"> 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3>Event</h3>
@@ -93,5 +90,4 @@ use janisto\timepicker\TimePicker;
         </div>
         
     </div>
-
-<!-- </div> -->
+</div> 

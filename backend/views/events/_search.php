@@ -3,9 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\EventsSearch */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="events-search">
@@ -27,11 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'end_time') ?>
 
-    <?php // echo $form->field($model, 'venue') ?>
-
-    <?php // echo $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'organised_by') ?>
+    
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
