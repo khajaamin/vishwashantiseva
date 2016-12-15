@@ -8,5 +8,6 @@ return [
     'Login'=>'लॉगीन',
     'Register'=>'रजिस्टर',
     'My profile'=>'माय प्रोफाइल',
-    'logout'=>'लॉगऑऊट'
+    'logout'=>'लॉगऑऊट',
+    'Search'=>'सर्च'
 ];
