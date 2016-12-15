@@ -11,6 +11,14 @@ use common\models\Sliders;
 
 $this->title = 'Home';
 ?>
+<style>
+  
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: block;
+    width: 100%;
+    height: 530px;
+}
+</style>
 <section>
     <div class="">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -20,7 +28,7 @@ $this->title = 'Home';
         if($slider['status']){
       ?>
           <div class="item active">
-              <img src="images/slider/<?= $slider['image_file'] ?>" alt="slider_image">
+              <img src="images/slider/<?= $slider['image_file'] ?>" alt="slider_image" >
               <div class="carousel-caption">
                  <h1><?= $slider['heading']?></h1> 
                  <?php
@@ -37,7 +45,7 @@ $this->title = 'Home';
         }else{
       ?>
           <div class="item">
-              <img src="images/slider/<?= $slider['image_file']  ?>" alt="slider_image">
+              <img src="images/slider/<?= $slider['image_file']  ?>" alt="slider_image" >
               <div class="carousel-caption">
                 <h1><?= $slider['heading']?></h1>
                  <?php

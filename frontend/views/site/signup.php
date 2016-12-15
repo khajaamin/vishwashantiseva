@@ -22,7 +22,7 @@ $this->title = 'Signup/Register';
      </ul>
    </div>
    <div class="services">
-      <div class="col-sm-6 login_left">
+      <div class="col-md-offset-3 col-sm-6 login_left">
          <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
