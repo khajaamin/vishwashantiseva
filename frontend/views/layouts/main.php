@@ -38,9 +38,9 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <div class="wrap">
-    <div class="navbar navbar-inverse-blue navbar-fixed-top">
+    <div class="navbar navbar-inverse-blue">
     <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
-      <div class="navbar-inner">
+      <div class="navbar-inner " style="position: fixed;width: 100%;z-index: 9999;">
         <div class="container">
            <a class="brand" href="<?php echo Url::toRoute('site/index');?>"> <img src="images/Logo.png" alt="Vishwashanti Seva"></a>
            <div class="pull-right">
@@ -71,7 +71,7 @@ AppAsset::register($this);
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= 'Hii, '.ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
-                            <li><?= Html::a('echo \Yii::t("app", "logout");', ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
+                            <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
                       <?php  }?>
