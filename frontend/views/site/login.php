@@ -21,7 +21,7 @@ $this->title = 'Login';
      </ul>
    </div>
    <div class="services">
-      <div class="col-sm-6 login_left">
+      <div class="col-sm-6 col-md-offset-3 login_left">
        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 

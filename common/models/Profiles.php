@@ -128,4 +128,13 @@ class Profiles extends \yii\db\ActiveRecord
             'expected_occupation' => 'Expected Occupation',
         ];
     }
+
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+
+
 }

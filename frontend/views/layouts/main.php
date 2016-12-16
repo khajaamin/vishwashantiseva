@@ -66,7 +66,7 @@ AppAsset::register($this);
                       ?> 
                         <li><a href="<?php echo Url::toRoute('site/login');?>"><?php echo \Yii::t('app', 'Login');?> </a></li>
                         <li><a href="<?php echo Url::toRoute('site/signup');?>"><?php echo \Yii::t('app', 'Register');?></a></li>
-                        <li><a href=""><?php echo \Yii::t('app', 'Search');?></a></li>
+                        <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
 
 
                         <?php }else{?>

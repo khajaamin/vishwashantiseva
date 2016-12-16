@@ -16,7 +16,7 @@ $this->title = 'Home';
 .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
     display: block;
     width: 100%;
-    height: 530px;
+    height: 450px;
 }
 </style>
 <section>
@@ -45,7 +45,7 @@ $this->title = 'Home';
         }else{
       ?>
           <div class="item">
-              <img src="images/slider/<?= $slider['image_file']  ?>" alt="slider_image" >
+              <img src="images/slider/<?= $slider['image_file']  ?>" alt="slider_image"  style="height:450px">
               <div class="carousel-caption">
                 <h1><?= $slider['heading']?></h1>
                  <?php

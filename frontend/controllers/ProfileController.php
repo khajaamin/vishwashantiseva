@@ -46,6 +46,19 @@ class ProfileController extends Controller
         ];
     }
 
+
+  public function actionSearch()
+    {
+        $searchModel = new ProfilesSearch();
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+          return $this->render('search', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider]);
+    }
+
+
     /**
      * Lists all Profiles models.
      * @return mixed
