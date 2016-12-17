@@ -19,7 +19,7 @@ class ProfilesSearch extends Profiles
     {
         return [
             [['id', 'user_id','mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
-            [['name', 'profile_image', 'date_of_birth', 'marital_status', 'gender', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'birthtime', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation'], 'safe'],
+            [['name', 'profile_image', 'date_of_birth','interested_in', 'marital_status', 'gender', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'birthtime', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation'], 'safe'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],
         ];
     }
@@ -67,6 +67,7 @@ class ProfilesSearch extends Profiles
             'weight' => $this->weight,
             'birthtime' => $this->birthtime,
             'charan' => $this->charan,
+            'interested_in'=>$this->interested_in,
             'brothers' => $this->brothers,
             'sisters' => $this->sisters,
             'expected_min_age' => $this->expected_min_age,
@@ -83,6 +84,7 @@ class ProfilesSearch extends Profiles
             ->andFilterWhere(['like', 'country', $this->country])
             ->andFilterWhere(['like', 'state', $this->state])
             ->andFilterWhere(['like', 'city', $this->city])
+            ->andFilterWhere(['like', 'interested_in', $this->interested_in])
             ->andFilterWhere(['like', 'blood_group', $this->blood_group])
             ->andFilterWhere(['like', 'complextion', $this->complextion])
             ->andFilterWhere(['like', 'built', $this->built])

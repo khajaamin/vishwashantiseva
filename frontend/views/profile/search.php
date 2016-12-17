@@ -1,80 +1,62 @@
+<?php 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+
+?>
 <div class="grid_3">
   <div class="container">
    <div class="breadcrumb1">
      <ul>
         <a href="index.html"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page">New Matches</li>
+        <li class="current-page">Quick Search</li>
      </ul>
    </div>
 
   <div class="profile_search">
       <div class="container wrap_1">
-        <form action="">
-          <div class="search_top">
-            <div class="inline-block">
-              <label class="gender_1">I am looking for :</label>
-              <div class="age_box1" style="max-width: 100%; display: inline-block;">
-                <select>
-                  <option value="">* Select Gender</option>
-                  <option value="Male">Bride</option>
-                  <option value="Female">Groom</option>
-                </select>
-              </div>
-            </div>
-            <div class="inline-block">
-              <label class="gender_1">Located In :</label>
-                <div class="age_box1" style="max-width: 100%; display: inline-block;">
-                  <select>
-                      <option value="">* Select State</option>
-                      <option value="Washington">Washington</option>
-                      <option value="Texas">Texas</option>
-                      <option value="Georgia">Georgia</option>
-                      <option value="Virginia">Virginia</option>
-                      <option value="Colorado">Colorado</option>
-                  </select>
-                </div>
-            </div>
-            <div class="inline-block">
-              <label class="gender_1">Interested In :</label>
-                <div class="age_box1" style="max-width: 100%; display: inline-block;">
-                  <select>
-                    <option value="">* Select Interest</option>
-                    <option value="Sports &amp; Adventure">Sports &amp; Adventure</option>
-                    <option value="Movies &amp; Entertainment">Movies &amp; Entertainment</option>
-                    <option value="Arts &amp; Science">Arts &amp; Science</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Fashion">Fashion</option>
-                  </select>
-                </div>
-            </div>
-          </div>
-          <div class="inline-block">
-            <div class="age_box2" style="max-width: 220px;">
-              <label class="gender_1">Age :</label>
-              <input class="transparent" placeholder="From:" style="width: 34%;" type="text" value="">&nbsp;-&nbsp;<input class="transparent" placeholder="To:" style="width: 34%;" type="text" value="">
-            </div>
-          </div>
-          <div class="inline-block">
-            <label class="gender_1">Status :</label>
-            <div class="age_box1" style="max-width: 100%; display: inline-block;">
-              <select>
-                <option value="">* Select Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="In a Relationship">In a Relationship</option>
-                <option value="It's Complicated">It's Complicated</option>
-              </select>
-            </div>
-          </div>
-          <div class="submit inline-block">
-             <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
-          </div>
-        </form>
+      <?php echo $this->render("_search_quick",['searchModel'=>$searchModel]);?>       
+
       </div>
     </div>  
 
-  <div class="col-md-3 match_right">
+
+
+   <div class="col-md-9 profile_left2">
+       
+        <div class="form_but2">
+            <!--<label class="col-md-2 control-lable1" for="sex">Don't Show : </label>
+            <div class="col-md-10 form_radios">
+                <input type="checkbox" class="radio_1"> Don't show already viewed &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="radio_1" checked="checked"> Don't show already contacted &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="radio_1" checked="checked"> Show profiles with photo
+            </div>-->
+            <div class="clearfix"> </div>
+        </div>
+
+        <?= 
+        \yii\widgets\ListView::widget([
+            'dataProvider' => $dataProvider,
+            'options' => [
+                'tag' => 'div',
+                'class' => 'list-wrapper',
+                'id' => 'list-wrapper',
+            ],
+           // 'layout' => "{pager}\n{items}\n{summary}",
+            'itemView' => '_list_item',
+        ]);
+        ?>
+    
+  </div>
+
+    <div class="col-md-3 match_right">
+      <div class="form_but2">
+    
+            <div class="clearfix"> </div>
+        </div>
+      
     <ul class="menu">
 		<li class="item1"><h3 class="m_2">Show Profiles Created</h3>
 		  <ul class="cute">
@@ -138,42 +120,6 @@
 		</li>
 	  </ul>
    </div>
-
-   <div class="col-md-9 profile_left2">
-        <!--<form>
-        <div class="form_but2">
-            <label class="col-md-2 control-lable1" for="sex">Don't Show : </label>
-            <div class="col-md-10 form_radios">
-                <input type="checkbox" class="radio_1"> Don't show already viewed &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" class="radio_1" checked="checked"> Don't show already contacted &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" class="radio_1" checked="checked"> Show profiles with photo
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        </form>
-    -->
-
-
-
-
-
-        <?= 
-        \yii\widgets\ListView::widget([
-            'dataProvider' => $dataProvider,
-            'options' => [
-                'tag' => 'div',
-                'class' => 'list-wrapper',
-                'id' => 'list-wrapper',
-            ],
-            'layout' => "{pager}\n{items}\n{summary}",
-            'itemView' => '_list_item',
-        ]);
-        ?>
-
-
-
-    
-  </div>
 
    <div class="clearfix"> </div>
   </div>

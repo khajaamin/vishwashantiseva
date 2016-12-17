@@ -14,6 +14,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Sliders;
 use common\models\Profiles;
+use common\models\ProfilesSearch;
 use common\models\Education;
 use common\models\Contact;
 
@@ -78,9 +79,10 @@ class SiteController extends Controller
     {
         
         $slider = new Sliders;
+        $searchModel = new ProfilesSearch();
 
         $sliders = $slider->find()->all(); 
-        return $this->render('index',['sliders'=>$sliders]);
+        return $this->render('index',['sliders'=>$sliders,'searchModel'=>$searchModel]);
     }
 
     /**
@@ -188,7 +190,7 @@ class SiteController extends Controller
                    $profile->user_id = Yii::$app->user->identity->id;
                    $profile->save(false);
              
-                    return $this->goHome();
+                     $this->redirect(array('profile/update'));
                 }
             }
         }

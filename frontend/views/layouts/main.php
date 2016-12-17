@@ -40,7 +40,7 @@ AppAsset::register($this);
 <div class="wrap">
     <div class="navbar navbar-inverse-blue">
     <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
-      <div class="navbar-inner " style="position: fixed;width: 100%;z-index: 9999;">
+      <div class="navbar-inner " >
         <div class="container">
            <a class="brand" href="<?php echo Url::toRoute('site/index');?>"> <img src="images/Logo.png" alt="Vishwashanti Seva"></a>
            <div class="pull-right">

@@ -47,6 +47,16 @@ class ProfileController extends Controller
     }
 
 
+  public function actionFullprofile()
+  {
+        $id =  Yii::$app->request->queryParams('id');
+        $profile = Profiles::find()->where(['id' => $id])->one();
+        return $this->render('full_profile', [
+            'model' => $profile]);
+  }
+
+
+
   public function actionSearch()
     {
         $searchModel = new ProfilesSearch();

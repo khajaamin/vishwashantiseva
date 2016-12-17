@@ -1,3 +1,4 @@
+	 <?php use yii\helpers\Url;?>
 	 <div class="profile_top">
      <a href="view_profile.html">
       <h2><?php echo $model->id;?> | Profile Created for <?php echo $model->education;?></h2>
@@ -7,7 +8,7 @@
 	    <div class="col-sm-3">
 	      <ul class="login_details1">
 			 <li>Last Login : <?php echo $model->education;?></li>
-			 <li><p><?php // print_r($model) ?></p></li>
+			 <li><p><?php echo $model->description ?></p></li>
 		  </ul>
 	    </div>
 	    <div class="col-sm-6">
@@ -35,7 +36,7 @@
 					</tr>
 				    <tr class="closed">
 						<td class="day_label1">Profile Created by :</td>
-						<td class="day_value closed"><span><?php echo $model->user->username;?></span></td>
+						<td class="day_value closed"><span><?php echo (isset($model->user))?$model->user->username:"";?></span></td>
 					</tr>
 				    <tr class="closed">
 						<td class="day_label1">Education :</td>
@@ -44,9 +45,10 @@
 			    </tbody>
 		   </table>
 		   <div class="buttons">
-			   <div class="vertical">Send Mail</div>
-			   <div class="vertical">Shortlisted</div>
-			   <div class="vertical">Send Interest</div>
+			   <!--<div class="vertical">Send Mail</div>
+			   <div class="vertical">Shortlisted</div>-->
+			   <a href="<?php echo Url::toRoute('profile/fullprofile&id='.$model->id);?>"><div class="vertical">View Full Profile</div>
+				 </a>
 		   </div>
 	    </div>
 	    <div class="clearfix"> </div>
