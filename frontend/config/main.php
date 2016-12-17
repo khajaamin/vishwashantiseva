@@ -16,6 +16,11 @@ return [
     // set source language to be English
     'sourceLanguage' => 'en-US',
     'components' => [
+    'SearchById' => [
+ 
+            'class' => 'frontend\components\SearchById',
+ 
+            ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

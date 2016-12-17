@@ -70,6 +70,7 @@ AppAsset::register($this);
 
 
                         <?php }else{?>
+                          <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= 'Hii, '.ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
@@ -77,6 +78,7 @@ AppAsset::register($this);
                             <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
+
                       <?php  }?>
 
                 </ul>
