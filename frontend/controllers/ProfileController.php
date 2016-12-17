@@ -27,10 +27,10 @@ class ProfileController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','create','view','update','delete','logout'],
+                'only' => ['index','create','view','update','delete','logout','fullprofile'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','delete','logout'],
+                        'actions' => ['index','fullprofile','create','view','update','delete','logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -62,7 +62,7 @@ class ProfileController extends Controller
         $searchModel = new ProfilesSearch();
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        //print_r($dataProvider);exit;
           return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);
@@ -113,19 +113,38 @@ class ProfileController extends Controller
      * @param integer $id
      * @return mixed
      */
-    // public function actionView($id)
-    // {
-    //     $pid = Yii::$app->user->identity->id;
-    //     $checkid = Profiles::find()->where( [ 'user_id' => $pid ])->one();
+    public function actionView($id)
+    {
 
-    //     if($checkid['id']==$contact['user_id'] && $id==$contact['id']){
-
-    //         return $this->render('view', [
-    //             'model' => $this->findModel($id),
-    //         ]);
+        $searchModel = new ProfilesSearch();
         
-    //     }
-    // }
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $pid = $id;
+        
+
+        $profile = Profiles::find()->where(['id' => $pid])->one();
+
+
+        $similars =Profiles::find()->where(['gender' => $profile->gender])->limit(4)
+        ->all();
+    
+      return $this->render('view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'profile'=>$profile,
+           
+            'similars'=>$similars,
+        ]);
+            
+       
+        // $pid = Yii::$app->user->identity->id;
+        // $checkid = Profiles::find()->where( [ 'user_id' => $pid ])->one();
+
+        // if($checkid['id']==$contact['user_id'] && $id==$contact['id']){
+ 
+        //}
+    }
     /**
      * Creates a new Profiles model.
      * If creation is successful, the browser will be redirected to the 'view' page.

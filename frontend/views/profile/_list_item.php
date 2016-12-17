@@ -47,7 +47,8 @@
 		   <div class="buttons">
 			   <!--<div class="vertical">Send Mail</div>
 			   <div class="vertical">Shortlisted</div>-->
-			   <a href="<?php echo Url::toRoute('profile/fullprofile&id='.$model->id);?>"><div class="vertical">View Full Profile</div>
+			   
+			   <a href="<?php echo Url::toRoute(['profile/view','id'=>$model->id]);?>"><div class="vertical">View Full Profile</div>
 				 </a>
 		   </div>
 	    </div>

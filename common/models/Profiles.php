@@ -137,5 +137,14 @@ class Profiles extends \yii\db\ActiveRecord
     }
 
 
+    public function getEducations()
+    {
+        return $this->hasMany(Education::className(), ['user_id' => 'id']);
+    }
+
+    public function getContacts()
+    {
+        return $this->hasMany(Contact::className(), ['user_id' => 'id']);
+    }
 
 }
