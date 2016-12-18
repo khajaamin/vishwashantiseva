@@ -17,6 +17,8 @@ use common\models\Profiles;
 use common\models\ProfilesSearch;
 use common\models\Education;
 use common\models\Contact;
+use common\models\Gallery;
+use common\models\GallerySearch;
 
 /**
  * Site controller
@@ -34,7 +36,7 @@ class SiteController extends Controller
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup','gallery'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -53,6 +55,7 @@ class SiteController extends Controller
             ],
         ];
     }
+
 
     /**
      * @inheritdoc
@@ -84,6 +87,18 @@ class SiteController extends Controller
         $sliders = $slider->find()->all(); 
         return $this->render('index',['sliders'=>$sliders,'searchModel'=>$searchModel]);
     }
+
+  public function actionGallery()
+    {
+        
+        $slider = new Gallery();
+        $searchModel = new GallerySearch();
+
+        $images = $slider->find()->where(['is_active'=>1])->all(); 
+        return $this->render('gallery',['images'=>$images,'searchModel'=>$searchModel]);
+    }
+
+
 
     /**
      * Logs in a user.
@@ -155,10 +170,7 @@ class SiteController extends Controller
     {
         return $this->render('service');
     }
-    public function actionGallery()
-    {
-        return $this->render('gallery');
-    }
+
     /**
      * Signs user up.
      *

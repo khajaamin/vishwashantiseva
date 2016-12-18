@@ -80,7 +80,7 @@ class GalleryController extends Controller
         $model = new Gallery();
         $model->scenario = "insert";
       
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post())) {
            // echo '../images/gallery/'.$imageName.'.'.$imageFile->extension;exit;    
             $imageName = "gallery_image_".rand();
             $model->image_file = UploadedFile::getInstance($model,'image_file');

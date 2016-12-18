@@ -62,7 +62,16 @@ class ProfileController extends Controller
         $searchModel = new ProfilesSearch();
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        //print_r($dataProvider);exit;
+        $profiles = $dataProvider->getModels();
+
+        // $searLinks = []; 
+        // foreach($profiles as $profile)
+        // {
+        //     $searLinks[$profile->marital_status] [] = $profile->marital_status;
+        //     $searLinks[$profile->user->mother_tongue] [] = $profile->user->mother_tongue;
+
+        // }
+
           return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);

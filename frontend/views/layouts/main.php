@@ -61,7 +61,7 @@ AppAsset::register($this);
                     <li><a href="<?php echo Url::toRoute('site/index');?>"><?php echo \Yii::t('app', 'Home');?></a></li>
 
                     <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
-                    <li><a href="<?php echo Url::toRoute('profile/gallery');?>"><?php echo \Yii::t('app', 'Gallery');?></a></li>
+                    <li><a href="<?php echo Url::toRoute('site/gallery');?>"><?php echo \Yii::t('app', 'Gallery');?></a></li>
 
                       <?php
                           if (Yii::$app->user->isGuest) {
@@ -74,7 +74,7 @@ AppAsset::register($this);
                         <?php }else{?>
                           
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= 'Hii, '.ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
                             <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
