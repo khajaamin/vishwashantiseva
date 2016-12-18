@@ -9,5 +9,6 @@ return [
     'Register'=>'रजिस्टर',
     'My profile'=>'माय प्रोफाइल',
     'logout'=>'लॉगऑऊट',
-    'Search'=>'सर्च'
+    'Search'=>'सर्च',
+    'Gallery'=>'गॅलरी'
 ];

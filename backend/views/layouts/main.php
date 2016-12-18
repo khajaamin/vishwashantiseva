@@ -87,7 +87,10 @@ AppAsset::register($this);
                             <a href="<?php echo Url::toRoute('events/index');?>"><i class="fa fa-calendar" aria-hidden="true"></i>  Event </a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::toRoute('sliders/index');?>"><i class="fa fa-picture-o" aria-hidden="true"></i> sliders </a>
+                            <a href="<?php echo Url::toRoute('sliders/index');?>"><i class="fa fa-picture-o" aria-hidden="true"></i> Sliders </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::toRoute('gallery/index');?>"><i class="fa fa-picture-o" aria-hidden="true"></i> Gallery </a>
                         </li>
                         <!-- <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
