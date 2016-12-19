@@ -25,14 +25,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'image_file',
+            //'id',
+            [
+                'attribute'=>'image_file',
+                'format' => 'html',
+                'label' => 'Gallery Images',
+                'value'=>function($data)
+                {
+                        return Html::img('../images/gallery/' . $data->image_file,
+                        ['width' => '350px' ,'class' => 'img-responsive thumbnail']);
+                },
+                
+                
+                
+            ],
             'description',
             [
                 'attribute'=>'is_active',
                  'value'=>function($model)
                  {
-                    return Helper::getActiveInActiveStatus($model->is_active);
+                    $arr=Helper::getActiveInActiveStatus();
+                    return $arr[$model->is_active];
                  },
                 'filter'=>Helper::getActiveInActiveStatus(),
             ],

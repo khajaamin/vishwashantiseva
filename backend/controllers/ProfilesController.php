@@ -105,6 +105,13 @@ class ProfilesController extends Controller
         if ($model->load(Yii::$app->request->post())) {
                $imageName = "profile_image_".rand();
                $model->profile_image = UploadedFile::getInstance($model,'profile_image');
+                    
+                    $orderdate = explode('-', $model->date_of_birth);
+                    $year=$orderdate[0];
+                    $currentyr=date("Y");
+                    $age=($currentyr-$year)+1;
+                    $model->age=$age;
+                    echo $model->age;
                                
                if(!empty($model->profile_image)){
                     $model->profile_image->saveAs('../images/profile/'.$imageName.'.'.$model->profile_image->extension);

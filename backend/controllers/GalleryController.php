@@ -49,7 +49,7 @@ class GalleryController extends Controller
     public function actionIndex()
     {
         $searchModel = new GallerySearch();
-        $searchModel->is_active = 1; 
+        $searchModel->is_active = 1;    
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -84,7 +84,8 @@ class GalleryController extends Controller
            // echo '../images/gallery/'.$imageName.'.'.$imageFile->extension;exit;    
             $imageName = "gallery_image_".rand();
             $model->image_file = UploadedFile::getInstance($model,'image_file');
-            $imageFile= $model->image_file;      
+            $imageFile= $model->image_file;
+           // echo  $imageFile;exit;     
             if(!empty($imageFile))
             {
                 $imageFile->saveAs('../images/gallery/'.$imageName.'.'.$imageFile->extension);

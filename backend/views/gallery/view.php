@@ -2,11 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use common\models\Helper;
 /* @var $this yii\web\View */
 /* @var $model common\models\Gallery */
 
-$this->title = $model->id;
+//$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Galleries', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,14 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             [
                 'attribute'=>'image_file',
                 'value'=>'../images/gallery/'.$model->image_file,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
             'description:ntext',
-            'is_active',
+            [
+                'attribute'=>'is_active',
+                 $arr=Helper::getActiveInActiveStatus(),
+                'value'=>$arr[$model->is_active],
+            ],
         ],
     ]) ?>
 
