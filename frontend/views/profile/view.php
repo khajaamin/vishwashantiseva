@@ -517,25 +517,25 @@ $this->title = 'Profiles';
                    
             </div>
         <div class="view_profile">
-                <h3>View Similar Profiles</h3>
-        <?php       
-        foreach ($similars as $similar) {
-        ?>
-        <ul class="profile_item">
-                  <a href="#">
-                   <li class="profile_item-img">
-                      <img src="images/profile/<?php echo $similar->profile_image;?>" class="img-responsive" alt=""/>
-                   </li>
-                   <li class="profile_item-desc">
-                      <h4><?php echo $similar->id;?></h4>
-                      <p><?php echo $similar->marital_status;?></p>
-                      <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical">View Full Profile</div>
-                 </a></h5>
-                   </li>
-                   <div class="clearfix"> 
-                   </div>
-                  </a>
-               </ul>
+            <h3>View Similar Profiles</h3>
+            <?php       
+            foreach ($similars as $similar) {
+            ?>
+            <ul class="profile_item">
+              <a href="#">
+               <li class="profile_item-img">
+                  <img src="images/profile/<?php echo $similar->profile_image;?>" class="img-responsive" alt=""/>
+               </li>
+               <li class="profile_item-desc">
+                  <h4><?php echo $similar->id;?></h4>
+                  <p><?php echo $similar->marital_status;?></p>
+                  <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical">View Full Profile</div>
+             </a></h5>
+               </li>
+               <div class="clearfix"> 
+               </div>
+              </a>
+           </ul>
       
      
         

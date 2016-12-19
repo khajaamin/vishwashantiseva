@@ -64,6 +64,7 @@ class ProfileController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $profiles = $dataProvider->getModels();
 
+
         // $searLinks = []; 
         // foreach($profiles as $profile)
         // {
@@ -75,6 +76,27 @@ class ProfileController extends Controller
           return $this->render('search', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);
+    }
+
+    public function actionAdvancedsearch()
+    {
+        
+        $searchModel = new ProfilesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $profiles = $dataProvider->getModels();
+        // if (Yii::$app->request->post())
+        //  {
+        //     $data = Yii::$app->request->post();
+        //    print_r($data);exit;
+            
+        // }
+
+        $similars =Profiles::find()->indexBy('id')->limit(8)->all();
+        //print_r($similars);exit;
+        return $this->render('advanced_search', [
+        'searchModel' => $searchModel,
+        'dataProvider' => $dataProvider,
+        'similars'=>$similars,]);
     }
 
 
@@ -244,11 +266,16 @@ class ProfileController extends Controller
 
             if ($model->load(Yii::$app->request->post())) {
 
-                $model->profile_image;
+                    $model->profile_image;
+                    $imageName = "profile_image_".rand();
+                    $model->profile_image = UploadedFile::getInstance($model,'profile_image');
 
-                   $imageName = "profile_image_".rand();
-                   
-                   $model->profile_image = UploadedFile::getInstance($model,'profile_image');
+                    //calculating age
+                    $orderdate = explode('-', $model->date_of_birth);
+                    $year=$orderdate[2];
+                    $currentyr=date("Y");
+                    $age=($currentyr-$year)+1;
+                    $model->age=$age;
                    
                    if(!empty($model->profile_image)){
                    

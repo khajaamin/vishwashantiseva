@@ -10,5 +10,6 @@ return [
     'My profile'=>'माय प्रोफाइल',
     'logout'=>'लॉगऑऊट',
     'Search'=>'सर्च',
-    'Gallery'=>'गॅलरी'
+    'Gallery'=>'गॅलरी',
+    'Advanced Search'=>' ऍडव्हान्स सर्च'
 ];
