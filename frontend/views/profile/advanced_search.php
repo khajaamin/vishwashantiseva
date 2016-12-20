@@ -22,44 +22,19 @@ use yii\helpers\ArrayHelper;
               <div class="row_1">
                 <!-- <div class="col-sm-6 paid_people-left"> -->
 
-                <!--<?php  
-        // echo \yii\widgets\ListView::widget([
-        //     'dataProvider' => $dataProvider,
-        //     'options' => [
-        //         'tag' => 'ul',
-        //         'class' => 'profile_item',
-        //         //'id' => 'list-wrapper',
-        //     ],
-        //    // 'layout' => "{pager}\n{items}\n{summary}",
-        //     'itemView' => '_list_item',
-        //]);
-        ?> -->
-
-                  <?php  
-                  if(count($profiles) == 0)
-                  {?>
-                  <span class="help-block">No record found</span>
-                  <?php }     
-                foreach   ($profiles as $profile) {
-                ?>
-                <div class="col-sm-6">
-                  <ul class="profile_item">
-                    <a href="#">
-                     <li class="profile_item-img">
-                        <img src="images/profile/<?php echo $profile->profile_image;?>" class="img-responsive" alt=""/>
-                     </li>
-                     <li class="profile_item-desc">
-                        <h4><?php echo $profile->id;?></h4>
-                        <p><?php echo $profile->marital_status;?></p>
-                        <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$profile->id]);?>"><div class="vertical">View Full Profile</div></a></h5>
-                     </li>
-                     <div class="clearfix"> </div>
-                    </a>
-                  </ul>
-                </div>
-               <?php
-                 }
-                ?>
+                <?php  
+        echo \yii\widgets\ListView::widget([
+            'dataProvider' => $dataProvider,
+            'options' => [
+                'tag' => 'ul',
+                'class' => 'profile_item',
+                //'id' => 'list-wrapper',
+            ],
+           // 'layout' => "{pager}\n{items}\n{summary}",
+            'itemView' => 'advanced_list_item',
+        ]);
+        ?> 
+                 
               </div>
            </div>
         </div>

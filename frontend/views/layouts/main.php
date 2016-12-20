@@ -19,10 +19,10 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
+    <?= Html::csrfMetaTags()?>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
     <title>Vishwas Shanti Seva</title>
-    <?php $this->head() ?>
+    <?php $this->head()?>
     <style type="text/css">
       .brand{
         font-family: 'Lobster', cursive;
