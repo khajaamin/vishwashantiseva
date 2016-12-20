@@ -166,10 +166,24 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionFaqs()
+    {
+        return $this->render('faqs');
+    }
+    public function actionPrivacy()
+    {
+        return $this->render('privacy');
+    }
     public function actionService()
     {
         return $this->render('service');
     }
+    public function actionTerms()
+    {
+        return $this->render('terms');
+    }
+
 
     /**
      * Signs user up.

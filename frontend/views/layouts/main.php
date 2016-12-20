@@ -109,18 +109,18 @@ AppAsset::register($this);
             <div class="col-md-2 col_2">
                 <h4><?php echo \Yii::t('app', 'Help & Support');?></h4>
                 <ul class="footer_links">
-                    <li><a href="#">24x7 Live help</a></li>
-                    <li><a href="contact.html">Contact us</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="faq.html">FAQs</a></li>
+                    
+                    <li><a href="<?php echo Url::toRoute('site/contact');?>"><?php echo \Yii::t('app', 'Contact us');?></a></li>
+                    
+                    <li><a href="<?php echo Url::toRoute('site/faqs');?>"><?php echo \Yii::t('app', 'FAQs');?></a></li>
                 </ul>
             </div>
             <div class="col-md-2 col_2">
                 <h4><?php echo \Yii::t('app', 'Quick Links');?></h4>
                 <ul class="footer_links">
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms and Conditions</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="<?php echo Url::toRoute('site/privacy');?>"><?php echo \Yii::t('app', 'Privacy Policy');?></a></li>
+                    <li><a href="<?php echo Url::toRoute('site/terms');?>"><?php echo \Yii::t('app', 'Terms and Conditions');?></a></li>
+                    <li><a href="<?php echo Url::toRoute('site/service');?>"><?php echo \Yii::t('app', 'Services');?></a></li>
                 </ul>
             </div>
             <div class="col-md-2 col_2">
