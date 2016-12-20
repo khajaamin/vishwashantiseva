@@ -1,5 +1,6 @@
 <?php
 use yii\bootstrap\BootstrapAsset;
+use yii\helpers\Url;
 $this->registerJsFile('@web/kandepohe_static/js/lightbox.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 $this->registerCssFile("@web/kandepohe_static/css/lightbox.min.css", [
@@ -11,9 +12,9 @@ $this->registerCssFile("@web/kandepohe_static/css/lightbox.min.css", [
  <div class="container">
    <div class="breadcrumb1">
      <ul>
-        <a href="index.html"><i class="fa fa-home home_1"></i></a>
+        <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page">Gallery</li>
+        <li class="current-page"><?php echo \Yii::t('app', 'Gallery');?></li>
      </ul>
    </div>
 

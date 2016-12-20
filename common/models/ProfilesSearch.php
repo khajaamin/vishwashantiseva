@@ -23,7 +23,7 @@ class ProfilesSearch extends Profiles
     public function rules()
     {
         return [
-        [['gender'],'required'],
+        //[['gender'],'required'],
             [['id', 'user_id','mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
             [['name', 'profile_image', 'date_of_birth','interested_in', 'marital_status', 'gender', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'birthtime', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation','age_from','age_to','mother_tongue='], 'safe'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],

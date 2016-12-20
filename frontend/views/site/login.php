@@ -17,7 +17,7 @@ $this->title = 'Login';
      <ul>
         <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page"><?= Html::encode($this->title) ?></li>
+        <li class="current-page"><?= Html::encode( \Yii::t('app', $this->title)) ?></li>
      </ul>
    </div>
    <div class="services">
@@ -30,11 +30,11 @@ $this->title = 'Login';
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
             <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    <?php echo \Yii::t('app', 'If you forgot your password you can');?> <?= Html::a( \Yii::t('app','reset it'), ['site/request-password-reset']) ?>.
             </div>
 
             <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn_1', 'name' => 'login-button']) ?>
+            <?= Html::submitButton(\Yii::t('app', 'Login'), ['class' => 'btn btn-primary btn_1', 'name' => 'login-button']) ?>
             </div>
        <?php ActiveForm::end(); ?>
       </div>
