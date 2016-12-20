@@ -80,12 +80,17 @@ class ProfileController extends Controller
 
     public function actionAdvancedsearch()
     {
-        
+        $gender = "M";
         $searchModel = new ProfilesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $profiles = $dataProvider->getModels();
-       
-        $similars =Profiles::find()->indexBy('id')->limit(8)->all();
+
+        if(!empty($profiles[0]))
+        {
+          $gender= $profiles[0]['gender'];
+        }        
+
+        $similars =Profiles::find()->where(['gender'=>$gender])->indexBy('id')->limit(8)->all();
        
         return $this->render('advanced_search', [
         'searchModel' => $searchModel,

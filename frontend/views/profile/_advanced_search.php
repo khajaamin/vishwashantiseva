@@ -31,7 +31,7 @@ use yii\helpers\Url;
                   <label class="col-sm-5 control-lable1" for="sex">Country : </label>
                   <div class="col-sm-7 form_radios">
                     <div class="select-block1">
-                      <?= $form->field($searchModel, 'country')->textInput(['maxlength' => true,'placeholder' => "Enter District / City"])->label(false); ?>
+                      <?= $form->field($searchModel, 'country')->textInput(['maxlength' => true,'placeholder' => "Enter Country"])->label(false); ?>
                     </div>
                   </div>
                   <div class="clearfix"> </div>
@@ -57,6 +57,8 @@ use yii\helpers\Url;
                   <div class="clearfix"> </div>
                 </div>
 
+
+
                 <div class="form_but1">
                   <label class="col-sm-5 control-lable1" for="sex">Religion : </label>
                   <div class="col-sm-7 form_radios">
@@ -67,19 +69,20 @@ use yii\helpers\Url;
                   <div class="clearfix"> </div>
                 </div>
 
-                <!-- <div class="form_but1">
+                 <div class="form_but1">
                   <label class="col-sm-5 control-lable1" for="sex">Mother Tongue : </label>
                   <div class="col-sm-7 form_radios">
                     <div class="select-block1">
-                    <?php
-                        // $motherTongue=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'mother_tongue'])->asArray()->all(), 'name', 'name');
 
-                        // echo $form->field($searchModel, 'mother_tongue')->dropDownList($motherTongue ,['prompt'=>'Mother Tongue'])->label(false); 
+                    <?php
+                        $motherTongue=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'mother_tongue'])->asArray()->all(), 'name', 'name');
+
+                         echo $form->field($searchModel, 'mother_tongue')->dropDownList($motherTongue ,['prompt'=>'Mother Tongue'])->label(false); 
                     ?> 
                     </div>
                   </div>
                   <div class="clearfix"> </div>
-                </div> -->
+                </div> 
                
                 
                 <div class="form_but1">
@@ -87,10 +90,10 @@ use yii\helpers\Url;
                   <div class="col-sm-7 form_radios">
                     <div class="col-sm-5 input-group1">
                         
-                        <?= $form->field($searchModel, 'expected_min_age',['options' => ['class' => ' has-dark-background','id'=>'slider-name']])->textInput(['placeholder' => "25"])->label(false) ?>
+                        <?= $form->field($searchModel, 'age_from',['options' => ['class' => ' has-dark-background','id'=>'slider-name']])->textInput(['placeholder' => "25"])->label(false) ?>
                     </div>
                     <div class="col-sm-5 input-group1">
-                      <?= $form->field($searchModel, 'expected_max_age',['options' => ['class' => ' has-dark-background','id'=>'slider-name']])->textInput(['placeholder' => "40"])->label(false) ?>
+                      <?= $form->field($searchModel, 'age_to',['options' => ['class' => ' has-dark-background','id'=>'slider-name']])->textInput(['placeholder' => "40"])->label(false) ?>
                     </div>
                     <div class="clearfix"> </div>
                   </div>
