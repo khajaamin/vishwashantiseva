@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
           <ul>
             <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
             <span class="divider">&nbsp;|&nbsp;</span>
-            <li class="current-page">Advanced Search</li>
+            <li class="current-page"><?php echo \Yii::t('app', 'Advanced Search');?></li>
           </ul>
         </div>
    
@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
             <?php echo $this->render("_advanced_search",['searchModel'=>$searchModel]);?>
 
            <div class="paid_people">
-             <h1>Search Result</h1>
+             <h1><?php echo \Yii::t('app', 'Search Result');?></h1>
               <div class="row_1">
                 <!-- <div class="col-sm-6 paid_people-left"> -->
 
@@ -45,7 +45,7 @@ use yii\helpers\ArrayHelper;
            
             </div>
             <div class="view_profile ">
-                <h3>View Similar Profiles</h3>
+                <h3><?php echo \Yii::t('app', 'View Similar Profiles');?></h3>
                   <?php       
                   foreach ($similars as $similar) {
                   ?>
@@ -57,7 +57,7 @@ use yii\helpers\ArrayHelper;
                      <li class="profile_item-desc">
                         <h4><?php echo $similar->id;?></h4>
                         <p><?php echo $similar->marital_status;?></p>
-                        <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical">View Full Profile</div>
+                        <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical"><?php echo \Yii::t('app', 'View Full Profile');?></div>
                    </a></h5>
                      </li>
                      <div class="clearfix"> 

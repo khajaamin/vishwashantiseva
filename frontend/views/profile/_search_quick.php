@@ -11,13 +11,13 @@ use yii\helpers\ArrayHelper;
 
           <div class="search_top">
             <div class="inline-block">
-              <label class="gender_1">I am looking for :</label>
+              <label class="gender_1"><?php echo \Yii::t('app', 'I am looking for');?> :</label>
               <div class="age_box1" style="max-width: 100%; display: inline-block;">
                     <?= $form->field($searchModel, 'gender')->dropDownList([ 'm' => 'Male', 'f' => 'Female', ], ['prompt' => 'select gender'])->label(false); ?>                      
               </div>
             </div>
             <div class="inline-block">
-              <label class="gender_1">Located In :</label>
+              <label class="gender_1"><?php echo \Yii::t('app', 'Located In ');?> :</label>
                 <div class="age_box1" style="max-width: 100%; display: inline-block;">
                <?php
                   $maritalStatus=ArrayHelper::map(\common\models\Profiles::findBySql("SELECT DISTINCT(city) as city from profiles where city != ''")->asArray()->all(),'city','city');
@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
                 </div>
             </div>
             <div class="inline-block">
-              <label class="gender_1">Interested In :</label>
+              <label class="gender_1"><?php echo \Yii::t('app', 'Interested In');?> :</label>
                 <div class="age_box1" style="max-width: 100%; display: inline-block;">
                  <?php
                   $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'interested_in'])->asArray()->all(),'name','name');
@@ -37,12 +37,12 @@ use yii\helpers\ArrayHelper;
           </div>
           <div class="inline-block">
             <div class="age_box2" style="max-width: 220px;">
-              <label class="gender_1">Age :</label>
+              <label class="gender_1"><?php echo \Yii::t('app', 'Age');?> :</label>
               <input class="transparent" placeholder="From:" style="width: 34%;" type="text" value="">&nbsp;-&nbsp;<input class="transparent" placeholder="To:" style="width: 34%;" type="text" value="">
             </div>
           </div>
           <div class="inline-block">
-            <label class="gender_1">Status :</label>
+            <label class="gender_1"><?php echo \Yii::t('app', 'Marital Status');?> :</label>
             <div class="age_box1" style="max-width: 100%; display: inline-block;">
                   <?php
                   $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'marital_status'])->asArray()->all(),'name','name');
@@ -52,6 +52,6 @@ use yii\helpers\ArrayHelper;
             </div>
           </div>
           <div class="submit inline-block">
-             <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
+             <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="<?php echo \Yii::t('app', 'Find matches');?>">
           </div>
 <?php ActiveForm::end(); ?>

@@ -7,7 +7,7 @@
 	    </div>
 	    <div class="col-sm-3">
 	      <ul class="login_details1">
-			 <li>Last Login : <?php echo $model->education;?></li>
+			 <li><?php echo \Yii::t('app', 'Country');?> : <?php echo $model->country;?></li>
 			 <li><p><?php echo $model->description ?></p></li>
 		  </ul>
 	    </div>
@@ -15,31 +15,31 @@
 	    	<table class="table_working_hours">
 	        	<tbody>
 	        		<tr class="opened_1">
-						<td class="day_label1">Age / Height :</td>
-						<td class="day_value"><?php echo $model->height;?></td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Age');?> /<?php echo \Yii::t('app', 'Height');?>  :</td>
+						<td class="day_value"><?php echo $model->age."/".$model->height;?></td>
 					</tr>
 				    <tr class="opened">
-						<td class="day_label1">Last Login :</td>
-						<td class="day_value"><?php echo $model->education;?></td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Religion');?> :</td>
+						<td class="day_value"><?php echo $model->religion;?></td>
 					</tr>
-				    <tr class="opened">
-						<td class="day_label1">Religion :</td>
+					<tr class="opened">
+						<td class="day_label1"><?php echo \Yii::t('app', 'Caste');?> :</td>
 						<td class="day_value"><?php echo $model->caste;?></td>
 					</tr>
 				    <tr class="opened">
-						<td class="day_label1">Marital Status :</td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Marital Status');?> :</td>
 						<td class="day_value"><?php echo $model->marital_status;?></td>
 					</tr>
 				    <tr class="opened">
-						<td class="day_label1">Location :</td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Location');?> :</td>
 						<td class="day_value"><?php echo $model->city;?></td>
 					</tr>
 				    <tr class="closed">
-						<td class="day_label1">Profile Created by :</td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Profile Created by');?>  :</td>
 						<td class="day_value closed"><span><?php echo (isset($model->user))?$model->user->username:"";?></span></td>
 					</tr>
 				    <tr class="closed">
-						<td class="day_label1">Education :</td>
+						<td class="day_label1"><?php echo \Yii::t('app', 'Education');?> :</td>
 						<td class="day_value closed"><span><?php echo $model->education;?></span></td>
 					</tr>
 			    </tbody>
@@ -48,7 +48,7 @@
 			   <!--<div class="vertical">Send Mail</div>
 			   <div class="vertical">Shortlisted</div>-->
 			   
-			   <a href="<?php echo Url::toRoute(['profile/view','id'=>$model->id]);?>"><div class="vertical">View Full Profile</div>
+			   <a href="<?php echo Url::toRoute(['profile/view','id'=>$model->id]);?>"><div class="vertical"><?php echo \Yii::t('app', 'View Full Profile');?></div>
 				 </a>
 		   </div>
 	    </div>

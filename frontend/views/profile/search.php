@@ -11,7 +11,7 @@ use yii\helpers\Url;
      <ul>
         <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page">Quick Search</li>
+        <li class="current-page"><?php echo \Yii::t('app', 'Quick Search');?></li>
      </ul>
    </div>
 

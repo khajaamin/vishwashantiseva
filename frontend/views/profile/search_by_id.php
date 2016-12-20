@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 </div>
 <div class="col-md-2">
 
-<input type="submit" value="Go">
+<input type="submit" value="<?php echo \Yii::t('app', 'Go');?>">
 </div>
 </div>
 <?php ActiveForm::end(); ?>

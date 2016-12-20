@@ -34,9 +34,9 @@ $this->title = 'Home';
                  <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
-                  <a href="<?php echo Url::toRoute('site/signup');?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
+                  <a href="<?php echo Url::toRoute('site/signup');?>" class="hvr-shutter-out-horizontal"><?php echo \Yii::t('app', 'Create your Profile');?></a>
                 <?php }else{?>
-                  <a href="<?php echo Url::toRoute('profile/update');?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
+                  <a href="<?php echo Url::toRoute('profile/update');?>" class="hvr-shutter-out-horizontal"><?php echo \Yii::t('app', 'Create your Profile');?></a>
 
                   <?php }?>
               </div>
@@ -51,9 +51,9 @@ $this->title = 'Home';
                  <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
-                  <a href="<?php echo Url::toRoute('site/signup');?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
+                  <a href="<?php echo Url::toRoute('site/signup');?>" class="hvr-shutter-out-horizontal"><?php echo \Yii::t('app', 'Create your Profile');?></a>
                 <?php }else{?>
-                  <a href="<?php echo Url::toRoute('profile/update');?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
+                  <a href="<?php echo Url::toRoute('profile/update');?>" class="hvr-shutter-out-horizontal"><?php echo \Yii::t('app', 'Create your Profile');?></a>
 
                   <?php }?>
               </div>
