@@ -84,18 +84,13 @@ class ProfileController extends Controller
         $searchModel = new ProfilesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $profiles = $dataProvider->getModels();
-        // if (Yii::$app->request->post())
-        //  {
-        //     $data = Yii::$app->request->post();
-        //    print_r($data);exit;
-            
-        // }
-
+       
         $similars =Profiles::find()->indexBy('id')->limit(8)->all();
-        //print_r($similars);exit;
+       
         return $this->render('advanced_search', [
         'searchModel' => $searchModel,
         'dataProvider' => $dataProvider,
+        'profiles'=>$profiles,
         'similars'=>$similars,]);
     }
 

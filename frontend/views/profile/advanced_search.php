@@ -35,19 +35,23 @@ use yii\helpers\ArrayHelper;
         //]);
         ?> -->
 
-                  <?php       
-                foreach ($similars as $similar) {
+                  <?php  
+                  if(count($profiles) == 0)
+                  {?>
+                  <span class="help-block">No record found</span>
+                  <?php }     
+                foreach   ($profiles as $profile) {
                 ?>
                 <div class="col-sm-6">
                   <ul class="profile_item">
                     <a href="#">
                      <li class="profile_item-img">
-                        <img src="images/profile/<?php echo $similar->profile_image;?>" class="img-responsive" alt=""/>
+                        <img src="images/profile/<?php echo $profile->profile_image;?>" class="img-responsive" alt=""/>
                      </li>
                      <li class="profile_item-desc">
-                        <h4><?php echo $similar->id;?></h4>
-                        <p><?php echo $similar->marital_status;?></p>
-                        <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical">View Full Profile</div></a></h5>
+                        <h4><?php echo $profile->id;?></h4>
+                        <p><?php echo $profile->marital_status;?></p>
+                        <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$profile->id]);?>"><div class="vertical">View Full Profile</div></a></h5>
                      </li>
                      <div class="clearfix"> </div>
                     </a>

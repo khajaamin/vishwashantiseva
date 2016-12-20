@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 ?>
 
-  <?php $form = ActiveForm::begin(['action' => ['profile/advancedsearch'],'method'=>'post']); ?>
+  <?php $form = ActiveForm::begin(['action' => ['profile/advancedsearch'],'method'=>'get']); ?>
                 <div class="form_but1">
                   <label class="col-sm-5 control-lable1" for="sex">Gender : </label>
                   <div class="col-sm-7 form_radios">
