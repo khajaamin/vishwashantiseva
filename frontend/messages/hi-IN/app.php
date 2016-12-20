@@ -105,5 +105,10 @@ return [
  	'Unmarried'=>' अविवाहित',
  	'Widowed'=>'विधवा',
  	'Divorced'=>'घटस्फोटीत',
- 	'Seperated'=>'विभक्त', 
+ 	'Seperated'=>'विभक्त',
+    'Contact us'=>'संपर्क साधा',
+    'FAQs'=>'वारंवार  विचारलेले प्रश्न',
+    'Terms and Conditions'=>'नियम आणि अटी',
+    'Privacy Policy'=>'गोपनीयता धोरण',
+    'Services'=>' कार्य', 
 ];
