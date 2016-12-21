@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
          <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute(['education/update','id'=>$model->id]);?>">Update Education >></a> 
          <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute('user/index');?>">Back To Home</a>
+         <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute(['paid-profiles/create','id'=>$model->user_id]);?>">Add Paid For Profile</a>
     </p>
 
     <?= DetailView::widget([

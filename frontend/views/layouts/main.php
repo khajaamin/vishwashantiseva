@@ -73,7 +73,7 @@ AppAsset::register($this);
 
 
                         <?php }else{?>
-                          
+                        <li><a href="<?php echo Url::toRoute('profile/paidforprofile');?>"><?php echo \Yii::t('app', 'Paid For Profile');?></a></li>                          
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
@@ -106,7 +106,7 @@ AppAsset::register($this);
                 <h4><?php echo \Yii::t('app', 'About Us');?></h4>
                 <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."</p>
             </div>
-            <div class="col-md-2 col_2">
+            <div class="col-md-4 col_2">
                 <h4><?php echo \Yii::t('app', 'Help & Support');?></h4>
                 <ul class="footer_links">
                     
@@ -115,7 +115,7 @@ AppAsset::register($this);
                     <li><a href="<?php echo Url::toRoute('site/faqs');?>"><?php echo \Yii::t('app', 'FAQs');?></a></li>
                 </ul>
             </div>
-            <div class="col-md-2 col_2">
+            <div class="col-md-4 col_2">
                 <h4><?php echo \Yii::t('app', 'Quick Links');?></h4>
                 <ul class="footer_links">
                     <li><a href="<?php echo Url::toRoute('site/privacy');?>"><?php echo \Yii::t('app', 'Privacy Policy');?></a></li>
@@ -123,15 +123,7 @@ AppAsset::register($this);
                     <li><a href="<?php echo Url::toRoute('site/service');?>"><?php echo \Yii::t('app', 'Services');?></a></li>
                 </ul>
             </div>
-            <div class="col-md-2 col_2">
-                <h4><?php echo \Yii::t('app', 'Social');?></h4>
-                <ul class="footer_social">
-                  <li><a href="#"><i class="fa fa-facebook fa1"> </i></a></li>
-                  <li><a href="#"><i class="fa fa-twitter fa1"> </i></a></li>
-                  <li><a href="#"><i class="fa fa-google-plus fa1"> </i></a></li>
-                  <li><a href="#"><i class="fa fa-youtube fa1"> </i></a></li>
-                </ul>
-            </div>
+            
             <div class="clearfix"> </div>
             <div class="copy">
               <p>Copyright &copy; <?= date('Y');?> 2016 All Rights Reserved | Developed by Virtual Next Technology <a href="#" target="_blank"></a> </p>

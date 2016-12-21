@@ -41,7 +41,7 @@ use Yii;
  * @property string $father
  * @property string $mother
  * @property integer $brothers
- * @property integer $sisters
+ * @property integer $sisterstt
  * @property string $expected_caste
  * @property integer $expected_min_age
  * @property integer $expected_max_age
@@ -141,6 +141,7 @@ class Profiles extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Education::className(), ['user_id' => 'id']);
     }
+    
 
     public function getContacts()
     {
