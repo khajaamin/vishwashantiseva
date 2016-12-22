@@ -111,4 +111,7 @@ return [
     'Terms and Conditions'=>'नियम आणि अटी',
     'Privacy Policy'=>'गोपनीयता धोरण',
     'Services'=>' कार्य', 
+    'Paid For Profile'=>'पेड फॉर प्रोफाइल ',
+    'Date'=>'तारीख',
+    'Paid For Profile Id'=>'पेड फॉर प्रोफाइल आय.डी.'
 ];

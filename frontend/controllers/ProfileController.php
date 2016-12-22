@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
+use common\models\PaidProfiles;
 use common\models\Education;
 use common\models\Contact;
 use common\models\User;
@@ -97,6 +98,27 @@ class ProfileController extends Controller
         'dataProvider' => $dataProvider,
         'profiles'=>$profiles,
         'similars'=>$similars,]);
+    }
+
+    public function actionPaidforprofile()
+    {
+      
+      $user_id=Yii::$app->user->identity->id;
+      // $paidprofiles=PaidProfiles::find()->with('profiles')->one();
+      // echo "profile =".$paidprofiles->profiles->name;exit;    
+//       $posts = Post::find()
+//     ->where(['like', 'title', $searchword])
+//     ->with('author')
+//     ->all();
+// // show the results
+// foreach($posts as $post) {
+//     echo "Title = {$post->title}\n";
+    
+// }
+      $user=User::findOne($user_id);
+      $records=$user->paidprofiles;
+      return $this->render('paid_for_profile',['records'=>$records]);
+      
     }
 
 

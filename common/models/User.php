@@ -196,5 +196,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Education::className(), ['user_id' => 'id']);
     }
-
+    
+    public function getPaidprofiles()
+    {
+        return $this->hasMany(PaidProfiles::className(), ['user_id' => 'id']);
+    }
 }
