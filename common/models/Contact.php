@@ -43,11 +43,11 @@ class Contact extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'phone' => 'Phone',
-            'email' => 'Email',
-            'message' => 'Message',
+            'id' => \Yii::t('app','ID'),
+            'name' => \Yii::t('app','Name'),
+            'phone' => \Yii::t('app','Mobile Number'),
+            'email' => \Yii::t('app','Email'),
+            'message' => \Yii::t('app','Message'),
         ];
     }
 }

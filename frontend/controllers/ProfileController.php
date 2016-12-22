@@ -104,17 +104,7 @@ class ProfileController extends Controller
     {
       
       $user_id=Yii::$app->user->identity->id;
-      // $paidprofiles=PaidProfiles::find()->with('profiles')->one();
-      // echo "profile =".$paidprofiles->profiles->name;exit;    
-//       $posts = Post::find()
-//     ->where(['like', 'title', $searchword])
-//     ->with('author')
-//     ->all();
-// // show the results
-// foreach($posts as $post) {
-//     echo "Title = {$post->title}\n";
-    
-// }
+     
       $user=User::findOne($user_id);
       $records=$user->paidprofiles;
       return $this->render('paid_for_profile',['records'=>$records]);
@@ -236,7 +226,7 @@ class ProfileController extends Controller
                
                Yii::$app->response->redirect([
                                 'profile/index',
-                                'profile'=>$profile,
+                                //'profile'=>$profile,
                                 'user'=>$user,
                                 'education'=>$education,
                                 'contact'=>$contact,
@@ -321,7 +311,7 @@ class ProfileController extends Controller
                         
                         if($model->save(false)){
 
-                            Yii::$app->session->setFlash('success', "Profile Updated !!!");
+                            Yii::$app->session->setFlash('success', \Yii::t('app', "Profile Updated !!!"));
                             Yii::$app->response->redirect([
                                 'profile/index',
                                 'profile'=>$profile,

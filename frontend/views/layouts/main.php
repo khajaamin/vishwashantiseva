@@ -59,6 +59,7 @@ AppAsset::register($this);
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav nav_1">
                     <li><a href="<?php echo Url::toRoute('site/index');?>"><?php echo \Yii::t('app', 'Home');?></a></li>
+                    <li><a href="<?php echo Url::toRoute('site/about');?>"><?php echo \Yii::t('app', 'About Us');?></a></li>
 
                     <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
                     <li><a href="<?php echo Url::toRoute('profile/advancedsearch');?>"><?php echo \Yii::t('app', 'Advanced Search');?></a></li>
@@ -104,7 +105,7 @@ AppAsset::register($this);
         <div class="container">
             <div class="col-md-4 col_2">
                 <h4><?php echo \Yii::t('app', 'About Us');?></h4>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."</p>
+                <p>"विश्वशांती युवा व महिला संस्थेची स्थापना १९९६ रोजी संपन्न झाली. व शिवराञ सन २०१२ पासून शिवराञ महोत्सव, अभिषेक व जेष्ठ नागरिकांचा सत्कार संपन्न होत आहे. समाजातील विविध क्षेत्रामध्ये उल्लेखनीय काम करणाऱ्या प्रतिष्ठित व्यक्तींचा गुणगौरव सत्कार दरवर्षी साजरा केला जातो. विविध संस्थांना गरजेनुसार सायकल वाटप विद्यार्थ्यांना त्यांच्या कलेनुसार लागणारे साहित्य वाटप केले जाते. समाजातील लिंगायत, मुस्लिम व ख्रिश्चन या समाजातील दफन भूमी मिळविण्यासाठी शासन दरबारी प्रयत्न करीत आहे."</p>
             </div>
             <div class="col-md-4 col_2">
                 <h4><?php echo \Yii::t('app', 'Help & Support');?></h4>
@@ -126,7 +127,7 @@ AppAsset::register($this);
             
             <div class="clearfix"> </div>
             <div class="copy">
-              <p>Copyright &copy; <?= date('Y');?> 2016 All Rights Reserved | Developed by Virtual Next Technology <a href="#" target="_blank"></a> </p>
+              <p>Copyright &copy; <?= date('Y');?>  All Rights Reserved | Developed by Virtual Next Technology <a href="#" target="_blank"></a> </p>
             </div>
         </div>
     </div>

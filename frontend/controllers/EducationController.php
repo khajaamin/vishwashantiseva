@@ -157,7 +157,7 @@ class EducationController extends Controller
         if($checkid['id']==$education['user_id'] && $id==$education['id']){
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', "Education Details Updated Successfully !!!");
+                Yii::$app->session->setFlash('success',\Yii::t('app',"Education Details Updated Successfully !!!") );
                 return $this->redirect(array('profile/index'));
             } else {
                 return $this->render('update', [
@@ -181,7 +181,7 @@ class EducationController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect('index');
     }
 
     /**
