@@ -16,10 +16,10 @@ $this->title = 'Create Profiles';
      <ul>
         <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page"><?= Html::encode($this->title) ?></li>
+        <li class="current-page"><?= Html::encode( \Yii::t('app',$this->title)) ?></li>
      </ul>
    </div>
-   	 <h1><?= Html::encode($this->title) ?></h1>
+   	 <h1><?= Html::encode(\Yii::t('app',$this->title)) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

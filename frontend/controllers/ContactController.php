@@ -153,7 +153,7 @@ class ContactController extends Controller
             
             $model = $this->findModel($id);
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', "Contact Details Updated Successfully !!!");
+                Yii::$app->session->setFlash('success', \Yii::t('app',"Contact Details Updated Successfully !!!"));
                 return $this->redirect(array('profile/index'));
             
             } else {
@@ -175,6 +175,7 @@ class ContactController extends Controller
      */
     public function actionDelete($id)
     {
+        echo "id=".$id;exit;
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

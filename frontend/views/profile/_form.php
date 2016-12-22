@@ -20,7 +20,7 @@ use kartik\time\TimePicker;
        <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                 <div class="basic_1">
-                    <h3>Basic Information</h3>
+                    <h3><?php echo \Yii::t('app', 'Basic Info');?></h3>
                     <div class="basic_1-left">     
                         <div class="row">
                             <div class="col-md-12">
@@ -75,7 +75,7 @@ use kartik\time\TimePicker;
        <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                 <div class="basic_1">
-                <h3>Physical and Education Details</h3>
+                <h3><?php echo \Yii::t('app', 'Physical and Education Details');?></h3>
                     <div class="basic_1-left">                                    
                         <div class="row">
                             <div class="col-md-6">
@@ -130,7 +130,7 @@ use kartik\time\TimePicker;
        <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                 <div class="basic_1">
-                    <h3>Astro Background</h3>
+                    <h3><?php echo \Yii::t('app', 'Astro Background');?></h3>
                     <div class="basic_1-left">                                    
                         <div class="row">
                             <div class="col-md-6">
@@ -208,7 +208,7 @@ use kartik\time\TimePicker;
        <div id="myTabContent" class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
                 <div class="basic_1">
-                    <h3>Family and Partner Preference</h3>
+                    <h3><?php echo \Yii::t('app', 'Family and');?><?php echo \Yii::t('app', 'Partner Preference');?> </h3>
                     <div class="basic_1-left">                                    
                         <div class="row">
                             <div class="col-md-6">
@@ -264,7 +264,7 @@ use kartik\time\TimePicker;
 <div class="row">
     <div class="col-md-offset-4 col-md-4">
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success btn-block btn_1' : 'btn btn-primary btn-block btn_1']) ?>
+            <?= Html::submitButton($model->isNewRecord ? \Yii::t('app','Create') : \Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-block btn_1' : 'btn btn-primary btn-block btn_1']) ?>
         </div>        
     </div>
 </div>
