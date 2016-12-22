@@ -18,11 +18,11 @@ $this->title = 'Signup/Register';
      <ul>
         <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page"><?= Html::encode($this->title) ?></li>
+        <li class="current-page"><?= Html::encode(\Yii::t('app', $this->title)) ?></li>
      </ul>
    </div>
    <div class="services">
-      <div class="col-sm-6 login_left">
+      <div class="col-md-offset-3 col-sm-6 login_left">
          <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
             
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -42,7 +42,7 @@ $this->title = 'Signup/Register';
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary btn_1', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton(\Yii::t('app', 'Signup'), ['class' => 'btn btn-primary btn_1', 'name' => 'signup-button']) ?>
                 </div>
          <?php ActiveForm::end(); ?>
       </div>

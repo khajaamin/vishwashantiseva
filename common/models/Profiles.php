@@ -41,7 +41,7 @@ use Yii;
  * @property string $father
  * @property string $mother
  * @property integer $brothers
- * @property integer $sisters
+ * @property integer $sisterstt
  * @property string $expected_caste
  * @property integer $expected_min_age
  * @property integer $expected_max_age
@@ -69,11 +69,12 @@ class Profiles extends \yii\db\ActiveRecord
 
             [['name','marital_status', 'mobile', 'gender','country', 'state', 'city', 'blood_group'], 'required'],
             [['mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
+            [['date_of_birth', 'birthtime','profile_image','interested_in','description'], 'safe'],
             [['mobile'],'match','pattern'=>'/^[0-9]{10}$/'],
-            [['gender'], 'string'],
+            [['gender','description'], 'string'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],
             [['profile_image'],'file'],
-            [['name','marital_status', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation'], 'string', 'max' => 255], 
+            [['name','marital_status', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation','description'], 'string', 'max' => 255], 
         ];
     }
 
@@ -92,6 +93,7 @@ class Profiles extends \yii\db\ActiveRecord
             'gender' => 'Gender',
             'country' => 'Country',
             'state' => 'State',
+            'description'=>'About Me',
             'city' => 'City',
             'mobile' => 'Mobile',
             'height' => 'Height',
@@ -127,4 +129,23 @@ class Profiles extends \yii\db\ActiveRecord
             'expected_occupation' => 'Expected Occupation',
         ];
     }
+
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+
+    public function getEducations()
+    {
+        return $this->hasMany(Education::className(), ['user_id' => 'id']);
+    }
+    
+
+    public function getContacts()
+    {
+        return $this->hasMany(Contact::className(), ['user_id' => 'id']);
+    }
+
 }

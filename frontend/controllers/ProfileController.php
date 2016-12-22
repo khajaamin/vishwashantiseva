@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
+use common\models\PaidProfiles;
 use common\models\Education;
 use common\models\Contact;
 use common\models\User;
@@ -27,10 +28,10 @@ class ProfileController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','create','view','update','delete','logout'],
+                'only' => ['index','create','view','update','delete','logout','fullprofile'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','view','update','delete','logout'],
+                        'actions' => ['index','fullprofile','create','view','update','delete','logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -45,6 +46,81 @@ class ProfileController extends Controller
             ],
         ];
     }
+
+
+  public function actionFullprofile()
+  {
+        $id =  Yii::$app->request->queryParams('id');
+        $profile = Profiles::find()->where(['id' => $id])->one();
+        return $this->render('full_profile', [
+            'model' => $profile]);
+  }
+
+
+
+  public function actionSearch()
+    {
+        $searchModel = new ProfilesSearch();
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $profiles = $dataProvider->getModels();
+
+
+        // $searLinks = []; 
+        // foreach($profiles as $profile)
+        // {
+        //     $searLinks[$profile->marital_status] [] = $profile->marital_status;
+        //     $searLinks[$profile->user->mother_tongue] [] = $profile->user->mother_tongue;
+
+        // }
+
+          return $this->render('search', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider]);
+    }
+
+    public function actionAdvancedsearch()
+    {
+        $gender = "M";
+        $searchModel = new ProfilesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $profiles = $dataProvider->getModels();
+
+        if(!empty($profiles[0]))
+        {
+          $gender= $profiles[0]['gender'];
+        }        
+
+        $similars =Profiles::find()->where(['gender'=>$gender])->indexBy('id')->limit(8)->all();
+       
+        return $this->render('advanced_search', [
+        'searchModel' => $searchModel,
+        'dataProvider' => $dataProvider,
+        'profiles'=>$profiles,
+        'similars'=>$similars,]);
+    }
+
+    public function actionPaidforprofile()
+    {
+      
+      $user_id=Yii::$app->user->identity->id;
+      // $paidprofiles=PaidProfiles::find()->with('profiles')->one();
+      // echo "profile =".$paidprofiles->profiles->name;exit;    
+//       $posts = Post::find()
+//     ->where(['like', 'title', $searchword])
+//     ->with('author')
+//     ->all();
+// // show the results
+// foreach($posts as $post) {
+//     echo "Title = {$post->title}\n";
+    
+// }
+      $user=User::findOne($user_id);
+      $records=$user->paidprofiles;
+      return $this->render('paid_for_profile',['records'=>$records]);
+      
+    }
+
 
     /**
      * Lists all Profiles models.
@@ -90,19 +166,38 @@ class ProfileController extends Controller
      * @param integer $id
      * @return mixed
      */
-    // public function actionView($id)
-    // {
-    //     $pid = Yii::$app->user->identity->id;
-    //     $checkid = Profiles::find()->where( [ 'user_id' => $pid ])->one();
+    public function actionView($id)
+    {
 
-    //     if($checkid['id']==$contact['user_id'] && $id==$contact['id']){
-
-    //         return $this->render('view', [
-    //             'model' => $this->findModel($id),
-    //         ]);
+        $searchModel = new ProfilesSearch();
         
-    //     }
-    // }
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $pid = $id;
+        
+
+        $profile = Profiles::find()->where(['id' => $pid])->one();
+
+
+        $similars =Profiles::find()->where(['gender' => $profile->gender])->limit(4)
+        ->all();
+    
+      return $this->render('view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'profile'=>$profile,
+           
+            'similars'=>$similars,
+        ]);
+            
+       
+        // $pid = Yii::$app->user->identity->id;
+        // $checkid = Profiles::find()->where( [ 'user_id' => $pid ])->one();
+
+        // if($checkid['id']==$contact['user_id'] && $id==$contact['id']){
+ 
+        //}
+    }
     /**
      * Creates a new Profiles model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -193,11 +288,16 @@ class ProfileController extends Controller
 
             if ($model->load(Yii::$app->request->post())) {
 
-                $model->profile_image;
+                    $model->profile_image;
+                    $imageName = "profile_image_".rand();
+                    $model->profile_image = UploadedFile::getInstance($model,'profile_image');
 
-                   $imageName = "profile_image_".rand();
-                   
-                   $model->profile_image = UploadedFile::getInstance($model,'profile_image');
+                    //calculating age
+                    $orderdate = explode('-', $model->date_of_birth);
+                    $year=$orderdate[2];
+                    $currentyr=date("Y");
+                    $age=($currentyr-$year)+1;
+                    $model->age=$age;
                    
                    if(!empty($model->profile_image)){
                    

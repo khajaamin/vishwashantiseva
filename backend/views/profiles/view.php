@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Profiles */
 
-$this->title = $model->name;
+
 $this->params['breadcrumbs'][] = ['label' => 'Profiles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,19 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
          <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute(['education/update','id'=>$model->id]);?>">Update Education >></a> 
          <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute('user/index');?>">Back To Home</a>
+         <a class="btn btn-primary btn-md" href="<?php echo Url::toRoute(['paid-profiles/create','id'=>$model->user_id]);?>">Add Paid For Profile</a>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            // 'id',
-            'user_id',
-            'education_id',
+            
+            //'education_id',
             'name',
             
             [
                 'attribute'=>'profile_image',
-                'value'=>'../../frontend/web/images/'.$model->profile_image,
+                'value'=>'../images/profile/'.$model->profile_image,
                 'format' => ['image',['width'=>'200','height'=>'100']],
             ],
             'date_of_birth',

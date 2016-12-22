@@ -190,4 +190,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+    public function getEducation()
+    {
+        return $this->hasMany(Education::className(), ['user_id' => 'id']);
+    }
+    
+    public function getPaidprofiles()
+    {
+        return $this->hasMany(PaidProfiles::className(), ['user_id' => 'id']);
+    }
 }

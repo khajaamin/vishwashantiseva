@@ -14,8 +14,11 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Sliders;
 use common\models\Profiles;
+use common\models\ProfilesSearch;
 use common\models\Education;
 use common\models\Contact;
+use common\models\Gallery;
+use common\models\GallerySearch;
 
 /**
  * Site controller
@@ -33,7 +36,7 @@ class SiteController extends Controller
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
-                        'actions' => ['signup'],
+                        'actions' => ['signup','gallery'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -52,6 +55,7 @@ class SiteController extends Controller
             ],
         ];
     }
+
 
     /**
      * @inheritdoc
@@ -78,10 +82,23 @@ class SiteController extends Controller
     {
         
         $slider = new Sliders;
+        $searchModel = new ProfilesSearch();
 
         $sliders = $slider->find()->all(); 
-        return $this->render('index',['sliders'=>$sliders]);
+        return $this->render('index',['sliders'=>$sliders,'searchModel'=>$searchModel]);
     }
+
+  public function actionGallery()
+    {
+        
+        $slider = new Gallery();
+        $searchModel = new GallerySearch();
+
+        $images = $slider->find()->where(['is_active'=>1])->all(); 
+        return $this->render('gallery',['images'=>$images,'searchModel'=>$searchModel]);
+    }
+
+
 
     /**
      * Logs in a user.
@@ -149,14 +166,25 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionFaqs()
+    {
+        return $this->render('faqs');
+    }
+    public function actionPrivacy()
+    {
+        return $this->render('privacy');
+    }
     public function actionService()
     {
         return $this->render('service');
     }
-    public function actionGallery()
+    public function actionTerms()
     {
-        return $this->render('gallery');
+        return $this->render('terms');
     }
+
+
     /**
      * Signs user up.
      *
@@ -188,7 +216,7 @@ class SiteController extends Controller
                    $profile->user_id = Yii::$app->user->identity->id;
                    $profile->save(false);
              
-                    return $this->goHome();
+                     $this->redirect(array('profile/update'));
                 }
             }
         }

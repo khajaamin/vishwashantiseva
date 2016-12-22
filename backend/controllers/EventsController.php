@@ -78,35 +78,17 @@ class EventsController extends Controller
     public function actionCreate()
     {
 
-        // $model = new Events();
-
-        // if ($model->load(Yii::$app->request->post()) ) {
-        //     $imageName="event_image_".rand();
-        //     $model->image_file = UploadedFile::getInstance($model,'image_file');
-        //     $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
-        //     $model->image_file = $imageName.'.'.$model->image_file->extension;    
-
-        //      $model->save();
-        //     //  echo $model->id;
-        //     //return $this->redirect(['view','id' => $model->id]);
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // } else {
-        //     return $this->render('create', [
-        //         'model' => $model,
-        //     ]);
-        // }
-
+        
 
         $model = new Events();
 
         if ($model->load(Yii::$app->request->post())) {
 
                      
-            //print_r($model->load(Yii::$app->request->post()));
-                // echo $model->id;exit;
+            
                $imageName = "event_image_".rand();
                $model->image_file = UploadedFile::getInstance($model,'image_file');
-               // $model->image_file->saveAs('../../frontend/web/images/'.$imageName.'.'.$model->image_file->extension);
+               
                 if(!empty($model->image_file))
                 {
                     
@@ -119,7 +101,7 @@ class EventsController extends Controller
                 else
                 {
                        
-                     $model->image_file = 'default_event.jpeg';                            
+                     $model->image_file = 'default_event.png';                            
                      $model->save();
                     return $this->redirect(['view', 'id' => $model->id]); 
                }
@@ -141,14 +123,14 @@ class EventsController extends Controller
         $eid=Events::find()->where(['id'=>$id])->one();
         $model = $this->findModel($eid['id']);
         $image = $model['image_file'];
-        //$model = $this->findModel($id);
+        
             
         if ($model->load(Yii::$app->request->post()) ) {
                 $imageName = "event_image_".rand();
            $model->image_file = UploadedFile::getInstance($model,'image_file');
 
            if(!empty($model->image_file)){
-                $model->image_file->saveAs('images/events'.$imageName.'.'.$model->image_file->extension);
+                $model->image_file->saveAs('../images/events/'.$imageName.'.'.$model->image_file->extension);
                   echo $imageName.'.'.$model->image_file->extension;
                    $model->image_file = $imageName.'.'.$model->image_file->extension;
                    $model->save();

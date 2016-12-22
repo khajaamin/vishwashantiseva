@@ -60,4 +60,14 @@ class SignupForm extends Model
 
         return $user->save() ? $user : null;
     }
+    public function attributeLabels()
+    {
+    return [
+        'username' => \Yii::t('app', 'Username'),
+        'profile_for'=>\Yii::t('app', 'Profile For'),
+        'password' => \Yii::t('app', 'Password'),
+        'mother_tongue'=>\Yii::t('app', 'Mother Tongue'),
+        'email'=>\Yii::t('app', 'Email'),
+    ];
+}
 }

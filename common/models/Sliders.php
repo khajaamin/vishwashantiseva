@@ -45,12 +45,13 @@ class Sliders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['heading', 'caption', 'image_file', 'status'], 'required'],
+            [['heading', 'caption', 'status'], 'required'],
             [['caption'], 'string'],
             [['status'], 'integer'],
             [['heading'], 'string', 'max' => 255],
+            [['image_file'], 'safe'],
             [['image_file'], 'file'],
-            [['image_file'],'file'],
+            
             [['status', 'created_by', 'updated_by', 'is_deleted'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['heading'], 'string', 'max' => 255],
