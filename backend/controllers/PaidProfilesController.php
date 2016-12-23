@@ -86,10 +86,20 @@ class PaidProfilesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        //$date = date('Y/m/d h:i:s ', time());
+        $time_now=mktime(date('h')+5,date('i')+30,date('s'));
+        $date = date('Y-m-d H:i:s', $time_now);
+        //echo $date;exit;
+        
+        //echo $date;exit;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->date=$date;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            $model->date=$date;
+            $model->save();
             return $this->render('update', [
                 'model' => $model,
             ]);

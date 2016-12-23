@@ -56,14 +56,29 @@ public function beforeAction($action)
     return parent::beforeAction($action);
 }
 
-  public function actionPaymentsuccess()
+  public function actionPaymentsuccess($pid)
 {
-    print_r($_REQUEST); exit; 
+    //print_r($_REQUEST); exit;
+    $model = new PaidProfiles();
+    $model->user_id=Yii::$app->user->identity->id;
+    $model->paid_for_profile_id=$pid;
+    $model->status=1;
+    $model->save();
+    return $this->redirect(['profile/view', 'id' => $pid]);
+   // $this->redirect(array('profile/search')); 
 }
 
- public function actionPaymentfail()
+ public function actionPaymentfail($pid)
 {
-    print_r($_REQUEST); exit; 
+    // echo $_REQUEST['status']; 
+    // echo $pid;exit; 
+    $model = new PaidProfiles();
+    $model->user_id=Yii::$app->user->identity->id;
+    $model->paid_for_profile_id=$pid;
+    $model->status=0;
+    $model->save();
+    return $this->redirect(['profile/view', 'id' => $pid]);
+    //$this->redirect(array('profile/search'));
 }
   public function actionFullprofile()
   {
@@ -123,17 +138,24 @@ public function beforeAction($action)
       $user_id=Yii::$app->user->identity->id;
      
       $user=User::findOne($user_id);
-      $records=$user->paidprofiles;
+      $records=$user->getPaidprofiles()->andWhere(['status'=>1])->all();
+      //print_r($records);
       return $this->render('paid_for_profile',['records'=>$records]);
       
     }
 
 
-    public function actionMakepayment()
+    public function actionMakepayment($pid)
     {
+        //echo $pid;exit;
         $searchModel = new ProfilesSearch();
+        $user_id=Yii::$app->user->identity->id;
+        $user=User::findOne($user_id);
+        $profile = Profiles::find()->where(['user_id' => $user_id])->one();
+        //print_r($profile);exit;   
+        //print_r($user);exit;
 
-      return $this->render('make_payment',[]);
+      return $this->render('make_payment',['user'=>$user,'profile'=>$profile,'pid'=>$pid]);
         
 
     }
@@ -185,8 +207,17 @@ public function beforeAction($action)
     public function actionView($id)
     {
 
+        $user_id=Yii::$app->user->identity->id;
+               
+        $paid=PaidProfiles::find()->where(['and', ['user_id' => $user_id], ['paid_for_profile_id'=>$id],['status'=>1]])->one();
+        if(empty($paid))
+        {
+          //if already not paid for this profile
+          $this->redirect(array('profile/makepayment','pid'=>$id));
+        }
+        
 
-        $this->redirect(array('profile/makepayment'));
+        
 
         $searchModel = new ProfilesSearch();
         
