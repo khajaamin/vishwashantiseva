@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags()?>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
     <title>Vishwas Shanti Seva</title>
+    <?= Html::csrfMetaTags() ?>
     <?php $this->head()?>
     <style type="text/css">
       .brand{

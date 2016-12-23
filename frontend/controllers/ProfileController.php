@@ -48,6 +48,23 @@ class ProfileController extends Controller
     }
 
 
+public function beforeAction($action)
+{            
+    if ($action->id == 'makepayment' ||  $action->id == "paymentfail" ||  $action->id == "paymentsuccess") {
+        $this->enableCsrfValidation = false;
+    }
+    return parent::beforeAction($action);
+}
+
+  public function actionPaymentsuccess()
+{
+    print_r($_REQUEST); exit; 
+}
+
+ public function actionPaymentfail()
+{
+    print_r($_REQUEST); exit; 
+}
   public function actionFullprofile()
   {
         $id =  Yii::$app->request->queryParams('id');
@@ -112,6 +129,15 @@ class ProfileController extends Controller
     }
 
 
+    public function actionMakepayment()
+    {
+        $searchModel = new ProfilesSearch();
+
+      return $this->render('make_payment',[]);
+        
+
+    }
+
     /**
      * Lists all Profiles models.
      * @return mixed
@@ -158,6 +184,9 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
+
+
+        $this->redirect(array('profile/makepayment'));
 
         $searchModel = new ProfilesSearch();
         
