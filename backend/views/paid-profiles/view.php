@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use common\models\Helper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PaidProfiles */
@@ -28,11 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'user_id',
             'paid_for_profile_id',
             'date',
-            'status',
+            [
+                'attribute'=>'status',
+                 $arr=Helper::getSuccessFailureStatus(),
+                'value'=>$arr[$model->status],
+            ],
+            //'status',
         ],
     ]) ?>
 
