@@ -107,7 +107,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             </div>
             <div class="col-md-3 ">
                 <div class="form-group">
-                  <input name="amount" value="100" class="form-control" readOnly="true" />                   
+                  <input name="amount" value="1" class="form-control" readOnly="true" />                   
                 </div>
    
             </div>
@@ -156,7 +156,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
                <label for="email">Phone: </label>        
             </div>
             <div class="col-md-3">
-                <input name="phone" value="<?php// if(isset($profile->mobile)){echo $profile->mobile; } ?>" />    
+                <input name="phone" value="<?php // if(isset($profile->mobile)){echo $profile->mobile; } ?>" />    
             </div>
  -->    </div>
 
@@ -205,7 +205,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </tr>
         <tr>
           <td>Address1: </td>
-          <td><input name="address1" value="<?php// echo (empty($posted['address1'])) ? '' : $posted['address1']; ?>" /></td>
+          <td><input name="address1" value="<?php // echo (empty($posted['address1'])) ? '' : $posted['address1']; ?>" /></td>
           <td>Address2: </td>
           <td><input name="address2" value="<?php //echo (empty($posted['address2'])) ? '' : $posted['address2']; ?>" /></td>
         </tr>
@@ -219,7 +219,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           <td>Country: </td>
           <td><input name="country" value="<?php //echo (empty($posted['country'])) ? '' : $posted['country']; ?>" /></td>
           <td>Zipcode: </td>
-          <td><input name="zipcode" value="<?php// echo (empty($posted['zipcode'])) ? '' : $posted['zipcode']; ?>" /></td>
+          <td><input name="zipcode" value="<?php // echo (empty($posted['zipcode'])) ? '' : $posted['zipcode']; ?>" /></td>
         </tr>
         <tr>
           <td>UDF1: </td>
@@ -254,7 +254,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </div>
           <?php //if(!$hash) { ?>
             <!-- <td colspan="4"><input type="submit" value="Confirm" /></td> -->
-          <?php// } ?>
+          <?php // } ?>
         <!-- </tr> -->
       <!-- </table> -->
 

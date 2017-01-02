@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use common\models\LoginForm;
 use common\models\Profiles;
 use common\models\Events;
+use common\models\Sms;
 /**
  * Site controller
  */
@@ -52,6 +53,16 @@ class SiteController extends Controller
         ];
     }
 
+
+public function beforeAction($action)
+{            
+    if ($action->id == 'sendsms' ) {
+        $this->enableCsrfValidation = false;
+    }
+    return parent::beforeAction($action);
+}
+
+
     /**
      * Displays homepage.
      *
@@ -67,6 +78,15 @@ class SiteController extends Controller
     }
 
  
+     public function actionSendsms()
+    {   
+        $model =  new Sms();
+
+
+         return $this->render('send_sms',['model' =>$model]);
+    }
+
+
    /**
      * Login action.
      *
