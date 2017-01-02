@@ -53,7 +53,7 @@ use bootui\datepicker\Datepicker;
                                 </div>
                             </div>
                             <div class="form-group">
-                                <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success btn_1' : 'btn btn-primary btn_1']) ?>
+                                <?= Html::submitButton($model->isNewRecord ? \Yii::t('app','Create') : \Yii::t('app','Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn_1' : 'btn btn-primary btn_1']) ?>
                             </div>
                     </div>
                 </div>

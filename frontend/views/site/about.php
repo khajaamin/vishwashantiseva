@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-$this->title = 'About';
+$this->title = 'About Us';
 
 ?>
 <div class="grid_3">
@@ -13,7 +13,7 @@ $this->title = 'About';
      <ul>
         <a href="<?php echo Url::toRoute('site/index');?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page"><?= Html::encode($this->title) ?></li>
+        <li class="current-page"><?= Html::encode(\Yii::t('app', $this->title)) ?></li>
      </ul>
    </div>
    <div class="about">
@@ -21,34 +21,20 @@ $this->title = 'About';
    	  	<img src="kandepohe_static/images/a3.jpg" class="img-responsive" alt=""/>
    	  </div>
    	  <div class="col-md-6 about_right">
-   	  	<h1>About us</h1>
-   	  	<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-   	  	<div class="accordation">
-		   <div class="jb-accordion-wrapper">
-				<div class="jb-accordion-title">Accordion 1 <button type="button" class="jb-accordion-button" data-toggle="collapse" data-target="#accordion-1-"><i class="fa fa-angle-down"> </i></button></div>
-				<p><!-- /.accordion-title -->
-				</p><div id="accordion-1-" class="jb-accordion-content collapse in" style="height: auto;">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae...</p>
-				</div>
-				<p><!-- /.collapse --></p>
-			</div>
-			<div class="jb-accordion-wrapper">
-				<div class="jb-accordion-title">Accordion2 <button type="button" class="jb-accordion-button" data-toggle="collapse" data-target="#accordion2-"><i class="fa fa-angle-down"> </i></button></div>
-				<p><!-- /.accordion-title -->
-				</p><div id="accordion2-" class="jb-accordion-content collapse ">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt </p>
-				</div>
-				<p><!-- /.collapse --></p>
-			</div>
-			<div class="jb-accordion-wrapper">
-				<div class="jb-accordion-title">Accordion3<button type="button" class="jb-accordion-button" data-toggle="collapse" data-target="#accordion3"><i class="fa fa-angle-down"> </i></button></div>
-				<p><!-- /.accordion-title -->
-				</p><div id="accordion3" class="jb-accordion-content collapse ">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt </p>
-				</div>
-				<p><!-- /.collapse --></p>
-			</div>
-		</div>
+   	  	<h1><?php echo \Yii::t('app', $this->title)?></h1>
+   	<p>
+   	  	विश्वशांती युवा व महिला संस्थेची स्थापना १९९६ रोजी संपन्न झाली. व शिवराञ सन २०१२ पासून शिवराञ महोत्सव, अभिषेक व जेष्ठ नागरिकांचा सत्कार संपन्न होत आहे. समाजातील विविध क्षेत्रामध्ये उल्लेखनीय काम करणाऱ्या प्रतिष्ठित व्यक्तींचा गुणगौरव सत्कार दरवर्षी साजरा केला जातो. विविध संस्थांना गरजेनुसार सायकल वाटप विद्यार्थ्यांना त्यांच्या कलेनुसार लागणारे साहित्य वाटप केले जाते. समाजातील लिंगायत, मुस्लिम व ख्रिश्चन या समाजातील दफन भूमी मिळविण्यासाठी शासन दरबारी प्रयत्न करीत आहे.
+   	</p>
+   	<p> 
+    	शिवरातरी सालाबादाप्रमाणे  १५१ जोड्या (जोडपी) रुद्राभिषेक प्राणप्रतिष्ठा आयोजन केले जाते. सर्व धर्म समभाव या संस्थेच्या वैशिष्ठ्यपूर्ण कार्यक्रमास मान्यवरांचे सत्कार केले जातात. समाजातील उच्च पदावर नियुक्त झालेल्या व उत्कृष्ट कामगिरी केल्याबद्दल त्यांचा गौरव करणे हे आमचे कर्तव्य मानतो.
+   	</p>
+    <p>	 
+    	तसेच माउली भजनी मंडळ यांचा दरवर्षी भजन कीर्तनाचा कार्यक्रम आयोजित करतो. ह.भ.प. भानुदास तुपे महाराज यांचे शिवरात्री निमित्त प्रवचनाचे आयोजन केले जाते. मुस्लिम समाजाची रमजान व ईद या उपासाच्या कालावधीत फळ वाटप केले जाते. व रमजान ईद ला मान्यवरांचा सत्कार केला जातो. राष्ट्रीय सण साजरे केले जातात. व महापुरुषांची जयंती साजरी केली जाते.
+    </p>
+    <p> 
+    	तसेच बारा ज्योतिर्लिंगांचे दर्शन सहलींचे आयोजन संस्थेमार्फत करून अनेक भाविकांना दर्शनाचा लाभ मिळवून दिला आहे. श्री बाळासाहेब विभुते मित्र परिवाराच्या वतीने सहलीचे आयोजन केले जाते. 
+	</p>
+   	  	
    	  </div>
    	  <div class="clearfix"> </div>
    </div>

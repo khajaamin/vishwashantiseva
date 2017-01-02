@@ -46,15 +46,15 @@ class Education extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'education_area' => 'Education Area',
-            'education' => 'Education',
-            'start_date' => 'Start Date',
-            'end_date' => 'End Date',
-            'institute' => 'Institute',
-            'result' => 'Result',
-            'place' => 'Place',
+            'id' => \Yii::t('app','ID'),
+            'user_id' => \Yii::t('app','User ID'),
+            'education_area' => \Yii::t('app','Education Area'),
+            'education' => \Yii::t('app','Education'),
+            'start_date' => \Yii::t('app','Start Date'),
+            'end_date' => \Yii::t('app','End Date'),
+            'institute' =>\Yii::t('app','Institute') ,
+            'result' => \Yii::t('app','Result'),
+            'place' =>\Yii::t('app','Place') ,
         ];
     }
 }

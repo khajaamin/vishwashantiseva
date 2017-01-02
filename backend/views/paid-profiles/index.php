@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Helper;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\PaidProfilesSearch */
@@ -16,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Paid Profiles', ['create'], ['class' => 'btn btn-success']) ?>
+        <!-- <?php //Html::a('Create Paid Profiles', ['create'], ['class' => 'btn btn-success']) ?> -->
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,11 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'user_id',
             'paid_for_profile_id',
             'date',
-            'status',
+            [
+                'attribute'=>'status',
+                 'value'=>function($model)
+                 {
+                    $arr=Helper::getSuccessFailureStatus();
+                    return $arr[$model->status];
+                 },
+                'filter'=>Helper::getSuccessFailureStatus(),
+            ],
+            
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datetime\DateTimePicker;
+use common\models\Helper
+//use dosamigos\datetimepicker\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\PaidProfiles */
@@ -21,9 +24,20 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'paid_for_profile_id')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'date')->textInput() ?>
+            <!-- <?php// $form->field($model, '')->textInput() ?> -->
+            <!-- <?php //$form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
+                        //'clientOptions' => ['minDate' => '0'],
+                        //'minDate' => 0,
+                        //'dateFormat' => 'yyyy-MM-dd',
+                        //'options'=>['class'=>'form-control'],
+                        //])
+                         ?> -->
 
-            <?= $form->field($model, 'status')->textInput() ?>
+                       
+
+
+            <?= $form->field($model, 'status')->dropDownList(Helper::getSuccessFailureStatus(),['prompt'=>'select status']) ?>
+            
 
             <div class="form-group">
                 <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

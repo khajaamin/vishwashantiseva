@@ -29,7 +29,7 @@ class PaidProfiles extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'paid_for_profile_id', 'date'], 'required'],
+            [[ 'paid_for_profile_id'], 'required'],
             [['id', 'user_id', 'paid_for_profile_id', 'status'], 'integer'],
             [['date'], 'safe'],
         ];
