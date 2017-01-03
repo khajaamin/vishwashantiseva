@@ -1,5 +1,5 @@
 <?php
-//print_r($profile);exit;
+
 // Merchant key here as provided by Payu
 $MERCHANT_KEY = "KRHfD2Fy";
 
@@ -46,7 +46,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   ) {
     $formError = 1;
   } else {
-    
 	$hashVarsSeq = explode('|', $hashSequence);
     $hash_string = '';	
 	foreach($hashVarsSeq as $hash_var) {
@@ -80,6 +79,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   </head>
   <body onload="submitPayuForm()">
   <div class="grid_3">
+
  <div class="container">
 
     <h2>Pay And Access Selected Profile For Forever</h2>
@@ -91,9 +91,10 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       <br/>
     <?php } ?>
     <form action="<?php echo $action; ?>" method="post" name="payuForm">
-      <input type="hidden" name="key" value="<?php echo $MERCHANT_KEY ?>" />
+      <input type="hidden" name="key"  value="<?php echo $MERCHANT_KEY ?>" />
       <input type="hidden" name="hash" value="<?php echo $hash ?>"/>
       <input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
+
         <div class="row">
             <div class="col-md-2">
                <label for="email">Amount: </label>        
@@ -114,6 +115,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
               </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-2">
                <label for="email">Email:  </label>        
@@ -129,9 +131,10 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                  <input name="phone" class="form-control" value="<?php if(isset($profile->mobile)){echo $profile->mobile; } ?>" />
+                  <input name="phone" class="form-control" value="<?php if(isset($user->mobile_no)){echo $user->mobile_no; } ?>" />
                 </div>    
             </div>
+
         </div>
         <div class="row">
             <div class="col-md-2">
@@ -140,13 +143,15 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             <div class="col-md-3">
                 <textarea name="productinfo" class="form-control">One profile access</textarea>    
             </div>
-        </div>
-        <tr>         
-          <td colspan="3"><input type="hidden" name="surl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["profile/paymentsuccess","pid"=>$pid]); ?>" size="64" /></td>
+     </div>   
+        
+        <tr>
+         
+          <td colspan="3"><input type="hidden" name="surl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["events/paymentsuccess","pid"=>$pid]); ?>" size="64" /></td>
         </tr>
         <tr>
          
-          <td colspan="3"><input  type="hidden"  name="furl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["profile/paymentfail","pid"=>$pid]); ?>" size="64" /></td>
+          <td colspan="3"><input  type="hidden"  name="furl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["events/paymentfail","pid"=>$pid]); ?>" size="64" /></td>
         </tr>
 
         <tr>

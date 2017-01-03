@@ -26,6 +26,7 @@ class Helper extends Model
     public  static function getSuccessFailureStatus($status =null)
     {
         $statusList = ['1'=>'Success','0'=>'Failure']; 
+       
         if(empty($status))
         {
             return $statusList;

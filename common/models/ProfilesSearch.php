@@ -49,7 +49,6 @@ class ProfilesSearch extends Profiles
     public function search($params)
     {
         $query = Profiles::find();
-
         $query->joinWith(['user']);
 
         // add conditions that should always apply here
@@ -88,6 +87,7 @@ class ProfilesSearch extends Profiles
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['between', 'age', $this->age_from, $this->age_to])
+           
             ->andFilterWhere(['like', 'profile_image', $this->profile_image])
             ->andFilterWhere(['like', 'date_of_birth', $this->date_of_birth])
             ->andFilterWhere(['in', 'marital_status', $this->marital_status])
@@ -117,6 +117,11 @@ class ProfilesSearch extends Profiles
             ->andFilterWhere(['like', 'expected_caste', $this->expected_caste])
             ->andFilterWhere(['like', 'expected_education', $this->expected_education])
             ->andFilterWhere(['like', 'expected_occupation', $this->expected_occupation]);
+
+            if(isset(Yii::$app->user->identity->id))
+            {
+              $query->andFilterWhere(['!=', 'user.id', Yii::$app->user->identity->id]);
+            }
 
         return $dataProvider;
     }

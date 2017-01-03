@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
+use common\models\Events;
 use common\models\PaidProfiles;
 use common\models\Education;
 use common\models\Contact;
@@ -96,17 +97,10 @@ public function beforeAction($action)
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $profiles = $dataProvider->getModels();
-
-
-        // $searLinks = []; 
-        // foreach($profiles as $profile)
-        // {
-        //     $searLinks[$profile->marital_status] [] = $profile->marital_status;
-        //     $searLinks[$profile->user->mother_tongue] [] = $profile->user->mother_tongue;
-
-        // }
+        $similars =Events::find()->where(['status'=>1])->orderBy('date')->limit(4)->all();
 
           return $this->render('search', [
+            'similars'=>$similars,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);
     }
@@ -143,7 +137,17 @@ public function beforeAction($action)
       return $this->render('paid_for_profile',['records'=>$records]);
       
     }
-
+    public function actionPaidforevent()
+    {
+      
+      $user_id=Yii::$app->user->identity->id;
+     
+      $user=User::findOne($user_id);
+      $records=$user->getPaidForEvents()->andWhere(['status'=>1])->all();
+      //print_r($records);
+      return $this->render('paid_for_event',['records'=>$records]);
+      
+    }
 
     public function actionMakepayment($pid)
     {
@@ -158,6 +162,10 @@ public function beforeAction($action)
       return $this->render('make_payment',['user'=>$user,'profile'=>$profile,'pid'=>$pid]);
         
 
+    }
+     public function actionMakepaymentForEvent($pid)
+    {
+      return $this->render('make_payment_for_event');
     }
 
     /**
@@ -235,8 +243,7 @@ public function beforeAction($action)
       return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'profile'=>$profile,
-           
+            'profile'=>$profile,           
             'similars'=>$similars,
         ]);
             

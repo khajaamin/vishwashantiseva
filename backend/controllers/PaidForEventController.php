@@ -4,16 +4,16 @@ namespace backend\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use common\models\PaidProfiles;
-use common\models\PaidProfilesSearch;
+use common\models\PaidForEvent;
+use common\models\PaidForEventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PaidProfilesController implements the CRUD actions for PaidProfiles model.
+ * PaidForEventController implements the CRUD actions for PaidForEvent model.
  */
-class PaidProfilesController extends Controller
+class PaidForEventController extends Controller
 {
     /**
      * @inheritdoc
@@ -43,12 +43,12 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Lists all PaidProfiles models.
+     * Lists all PaidForEvent models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PaidProfilesSearch();
+        $searchModel = new PaidForEventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -58,8 +58,8 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Displays a single PaidProfiles model.
-     * @param string $id
+     * Displays a single PaidForEvent model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -70,18 +70,15 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Creates a new PaidProfiles model.
+     * Creates a new PaidForEvent model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate()
     {
-        $model = new PaidProfiles();
-         $model->user_id=$id;
-         
+        $model = new PaidForEvent();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //print_r($model);exit;
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -91,28 +88,18 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Updates an existing PaidProfiles model.
+     * Updates an existing PaidForEvent model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //$date = date('Y/m/d h:i:s ', time());
-        $time_now=mktime(date('h')+5,date('i')+30,date('s'));
-        $date = date('Y-m-d H:i:s', $time_now);
-        //echo $date;exit;
-        
-        //echo $date;exit;
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->date=$date;
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            $model->date=$date;
-            $model->save();
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -120,9 +107,9 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Deletes an existing PaidProfiles model.
+     * Deletes an existing PaidForEvent model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -133,15 +120,15 @@ class PaidProfilesController extends Controller
     }
 
     /**
-     * Finds the PaidProfiles model based on its primary key value.
+     * Finds the PaidForEvent model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return PaidProfiles the loaded model
+     * @param integer $id
+     * @return PaidForEvent the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PaidProfiles::findOne($id)) !== null) {
+        if (($model = PaidForEvent::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

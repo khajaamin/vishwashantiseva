@@ -6,7 +6,7 @@
 return [
     'Home' => 'होम',
     'Login'=>'लॉगीन',
-    'Register'=>'रजिस्टर',
+    'Register'=>'नोंदणी करा',
     'My profile'=>'माय प्रोफाइल',
     'logout'=>'लॉगऑऊट',
     'Search'=>'सर्च',
@@ -47,7 +47,7 @@ return [
     'Weight'=>'वजन',
     'Blood Group'=>'रक्त गट',
     'Diet'=>'आहार',
-    'Religious / Social & Astro Background'=>'धार्मिक / सामाजिक & फलज्योतिषविषयक माहिती',
+    'Religious / Social & Astro Background'=>'धार्मिक / सामाजिक & फलज्योतिष विषयक माहिती',
     'Astro Background'=>'फलज्योतिषविषयक माहिती',
     'Time of Birth'=>'जन्म वेळ',
     'Date of Birth'=>'जन्म तारीख',
@@ -133,5 +133,9 @@ return [
     'Message'=>'संदेश',
     'Profile Updated !!!'=>'प्रोफाइल संपादित केली..!!!',
     'Education Details Updated Successfully !!!'=>'शैक्षणिक माहिती संपादित केली..!!!',
-    'Contact Details Updated Successfully !!!'=>'संपर्काची माहिती संपादित केली..!!!'
+    'Contact Details Updated Successfully !!!'=>'संपर्काची माहिती संपादित केली..!!!',
+    'Event'=>'मेळावा ', 
+    'Amount'=>'रक्कम',
+    'Register for Melava'=>'ह्या मेळाव्या करीता नोंदणी करा ',
+    'Sorry You are not Registered for any of the Event'=>'माफ करा तुम्ही कोणत्याही मेळाव्यासाठी नोंदणी केलेली नाही', 
 ];

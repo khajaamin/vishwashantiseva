@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
-
+use common\components\languageSwitcher;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -65,7 +65,7 @@ AppAsset::register($this);
                     <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
                     <li><a href="<?php echo Url::toRoute('profile/advancedsearch');?>"><?php echo \Yii::t('app', 'Advanced Search');?></a></li>
                     <li><a href="<?php echo Url::toRoute('site/gallery');?>"><?php echo \Yii::t('app', 'Gallery');?></a></li>
-
+                    <li><a href="<?php echo Url::toRoute('site/event');?>"><?php echo \Yii::t('app', 'Event');?></a></li>
                       <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
@@ -85,8 +85,11 @@ AppAsset::register($this);
                         </li> 
 
                       <?php  }?>
+                     
 
                 </ul>
+
+
              </div><!-- /.navbar-collapse -->
             </nav>
            </div> <!-- end pull-right -->

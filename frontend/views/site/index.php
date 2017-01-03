@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use common\models\Sliders;
-
+use common\components\languageSwitcher;
 $this->title = 'Home';
 ?>
 <style>
@@ -88,6 +88,8 @@ $this->title = 'Home';
 
       </div>
     </div>    
+
+    <?= languageSwitcher::Widget() ?>
 </section> 
 
 
