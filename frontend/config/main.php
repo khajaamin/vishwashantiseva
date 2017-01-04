@@ -9,13 +9,16 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','languageSwitcher',],
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'hi-IN',
     
     // set source language to be English
     'sourceLanguage' => 'en-US',
     'components' => [
+     'languageSwitcher' => [
+            'class' => 'common\components\languageSwitcher',
+        ],
     'SearchById' => [
  
             'class' => 'frontend\components\SearchById',

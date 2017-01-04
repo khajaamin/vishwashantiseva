@@ -80,6 +80,13 @@ public function beforeAction($action)
  
      public function actionSendsms()
     {   
+        // if(isset($_GET['data'])){
+        //     $data = $_GET['data'];
+        //     $jsonData = json_decode($data);
+        //     //print_r($jsonData);
+        //     //echo 'success';
+        //     return $this->render('send_sms',['model' =>$model,'jsonData'=>$jsonData]);
+        // }
         $model =  new Sms();
 
 

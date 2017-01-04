@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use common\models\PaidProfiles;
 use common\models\PaidProfilesSearch;
 use yii\web\Controller;
@@ -17,12 +18,24 @@ class PaidProfilesController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','view','update','delete','logout'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','view','update','delete','logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'logout' => ['post'],
                     'delete' => ['POST'],
                 ],
             ],

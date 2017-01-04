@@ -18,7 +18,7 @@ $this->title = 'About Us';
    </div>
    <div class="about">
    	  <div class="col-md-6 about_left">
-   	  	<img src="kandepohe_static/images/a3.jpg" class="img-responsive" alt=""/>
+   	  	<img src="images/about.jpg" class="img-responsive" alt=""/>
    	  </div>
    	  <div class="col-md-6 about_right">
    	  	<h1><?php echo \Yii::t('app', $this->title)?></h1>
