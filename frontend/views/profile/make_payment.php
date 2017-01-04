@@ -1,19 +1,19 @@
 <?php
-//print_r($profile);exit;
+use yii\helpers\Html;
 // Merchant key here as provided by Payu
-$MERCHANT_KEY = "KRHfD2Fy";
+$MERCHANT_KEY = "plAebeeQ";
 
 // Merchant Salt as provided by Payu
-$SALT = "1QndRCDvhC";
+$SALT = "iCV58CoyKg";
 
 // End point - change to https://secure.payu.in for LIVE mode
-$PAYU_BASE_URL = "https://test.payu.in";
+$PAYU_BASE_URL = "https://secure.payu.in";
 
 $action = '';
 
 $posted = array();
 if(!empty($_POST)) {
-    //print_r($_POST);
+
   foreach($_POST as $key => $value) {    
     $posted[$key] = $value; 
 	
@@ -53,15 +53,14 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       $hash_string .= isset($posted[$hash_var]) ? $posted[$hash_var] : '';
       $hash_string .= '|';
     }
-
     $hash_string .= $SALT;
-
-
     $hash = strtolower(hash('sha512', $hash_string));
+    //echo $hash;exit;
     $action = $PAYU_BASE_URL . '/_payment';
   }
 } elseif(!empty($posted['hash'])) {
   $hash = $posted['hash'];
+  //echo $hash;exit;
   $action = $PAYU_BASE_URL . '/_payment';
 }
 ?>
@@ -78,35 +77,32 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
     }
   </script>
   </head>
-  <body onload="submitPayuForm()">
+<body onload="submitPayuForm()">
   <div class="grid_3">
- <div class="container">
+    <div class="container">
 
-    <h2>Pay And Access Selected Profile For Forever</h2>
-    <br/>
-    <?php if($formError) { ?>
-	
-      <span style="color:red">Please fill all mandatory fields.</span>
+      <h2><?= Html::encode(\Yii::t('app', 'Pay And Access Selected Profile For Forever')) ?></h2>
+      <br/>
+      <?php if($formError) { ?>
+      <span style="color:red"><?= Html::encode(\Yii::t('app', 'Please fill all mandatory fields')) ?></span>
       <br/>
       <br/>
-    <?php } ?>
-    <form action="<?php echo $action; ?>" method="post" name="payuForm">
+      <?php } ?>
+      <form action="<?php echo $action; ?>" method="post" name="payuForm">
       <input type="hidden" name="key" value="<?php echo $MERCHANT_KEY ?>" />
       <input type="hidden" name="hash" value="<?php echo $hash ?>"/>
       <input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
         <div class="row">
             <div class="col-md-2">
-               <label for="email">Amount: </label>        
+               <label for="amount"><?= Html::encode(\Yii::t('app', 'Amount')) ?>: </label>        
             </div>
             <div class="col-md-3 ">
                 <div class="form-group">
                   <input name="amount" value="1" class="form-control" readOnly="true" />                   
-                </div>
-   
-            </div>
-        
+                </div>   
+            </div>       
             <div class="col-md-offset-1 col-md-2">
-               <label for="email">First Name: </label>        
+               <label for="firstname"><?= Html::encode(\Yii::t('app', 'Name')) ?>: </label>        
             </div>
             <div class="col-md-3">
               <div class="form-group">
@@ -116,7 +112,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </div>
         <div class="row">
             <div class="col-md-2">
-               <label for="email">Email:  </label>        
+               <label for="email"><?= Html::encode(\Yii::t('app', 'Email')) ?>:  </label>        
             </div>
             <div class="col-md-3">
                 <div class="form-group">  
@@ -125,7 +121,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             </div>
         
             <div class="col-md-offset-1 col-md-2">
-               <label for="email">Phone: </label>        
+               <label for="phone"><?= Html::encode(\Yii::t('app', 'Phone Number')) ?>: </label>        
             </div>
             <div class="col-md-3">
                 <div class="form-group">
@@ -135,10 +131,10 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         </div>
         <div class="row">
             <div class="col-md-2">
-               <label for="email">Product Info:  </label>        
+               <label for="email"><?= Html::encode(\Yii::t('app', 'Product Info')) ?>:  </label>        
             </div>
             <div class="col-md-3">
-                <textarea name="productinfo" class="form-control">One profile access</textarea>    
+                <textarea name="productinfo" class="form-control"><?= Html::encode(\Yii::t('app', 'One profile access')) ?></textarea>    
             </div>
         </div>
         <tr>         
@@ -155,17 +151,17 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
         <div class="row">
         <?php if(!$hash) { ?>
           <div class=" col-md-2">
-            <input type="submit" value="Confirm" class="btn btn-success btn_1"/>
+            <input type="submit" value="<?= Html::encode(\Yii::t('app', 'Confirm')) ?>" class="btn btn-success btn_1"/>
           </div>
          <?php }else{
           ?>
 
-           <div class=" col-md-12 text-center" style="padding :15px;"> <h3><i class="fa fa-spinner fa-spin fa-3" style="font-size:24px"></i> Please wait...</h3></div>
+           <div class=" col-md-12 text-center" style="padding :15px;"> <h3><i class="fa fa-spinner fa-spin fa-3" style="font-size:24px"></i> <?= Html::encode(\Yii::t('app', 'Please wait')) ?>...</h3></div>
           <?php
           } ?> 
         </div>
-    </form>
+      </form>
     </div>
-    </div>
-  </body>
+  </div>
+</body>
 </html>

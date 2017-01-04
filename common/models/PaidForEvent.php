@@ -43,6 +43,10 @@ class PaidForEvent extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'event_id' => 'Event ID',
             'status' => 'Status',
+            'mihpayid' => 'Payment ID',
+            'bankcode' => 'Bank Code',
+            'unmappedstatus' => 'Causes',
+            'addedon'=> 'Transaction On',
         ];
     }
     public function getEvents()

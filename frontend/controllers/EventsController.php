@@ -73,6 +73,9 @@ class EventsController extends Controller
         $user_id=Yii::$app->user->identity->id;
 
         $paid=PaidForEvent::find()->where(['and', ['user_id' => $user_id], ['event_id'=>$id],['status'=>1]])->one();
+
+        // print_r($paid);exit;    
+        $similars =Events::find()->where(['status'=>1])->orderBy('date')->limit(4)->all();
         if(empty($paid)){
 
              $this->redirect(array('events/makepayment','pid'=>$id));
@@ -82,7 +85,9 @@ class EventsController extends Controller
             $pid = $id; 
             $events = Events::find()->where(['id' => $pid])->one();
             return $this->render('view', [            
-                'events'=>$events,            
+                'events'=>$events,
+                'paid'=>$paid,
+                'similars'=>$similars,            
             ]);    
         
         }
@@ -172,24 +177,39 @@ class EventsController extends Controller
     }
      public function actionPaymentsuccess($pid)
     {
-    //print_r($_REQUEST); exit;
+    
+     print_r($_REQUEST); exit;
     $model = new PaidForEvent();
     $model->user_id=Yii::$app->user->identity->id;
     $model->event_id=$pid;
     $model->status=1;
+    $model->bank_ref_num=$_REQUEST['bank_ref_num'];
+    $model->bankcode=$_REQUEST['bankcode'];
+    $model->unmappedstatus=$_REQUEST['unmappedstatus'];
+    $model->addedon = $_REQUEST['addedon'];
+    $model->mihpayid = $_REQUEST['mihpayid'];
     $model->save();
-    return $this->redirect(['profile/paid_for_event', 'id' => $pid]);
+    
+    return $this->redirect(['events/paid_for_event', 'id' => $pid]);
    // $this->redirect(array('profile/search')); 
     }
 
      public function actionPaymentfail($pid)
     {
-        // echo $_REQUEST['status']; 
-        // echo $pid;exit; 
+         //$curl = new \linslin\yii2\curl\Curl();
+
+        //get http://example.com/
+      //   $response = $curl->get('http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day');
+       print_r($response);exit;
         $model = new PaidForEvent();
         $model->user_id=Yii::$app->user->identity->id;
         $model->event_id=$pid;
         $model->status=0;
+        $model->bank_ref_num=$_REQUEST['bank_ref_num'];
+        $model->bankcode=$_REQUEST['bankcode'];
+        $model->unmappedstatus=$_REQUEST['unmappedstatus'];
+        $model->addedon = $_REQUEST['addedon'];
+        $model->mihpayid = $_REQUEST['mihpayid'];
         $model->save();
         return $this->redirect(['events/view', 'id' => $pid]);
         //$this->redirect(array('profile/search'));

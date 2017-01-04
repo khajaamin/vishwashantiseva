@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "44f9c7f7afcc359848457331c2181928",
-    "content-hash": "7c944fe9ba518d28a716f31202648d3a",
+    "hash": "d5774e09dd1b02c39d17a0fe54706a63",
+    "content-hash": "4a10a25b11d46a79f2dc7eb6f6c6a203",
     "packages": [
         {
             "name": "2amigos/yii2-date-time-picker-widget",
@@ -658,6 +658,49 @@
                 "yii2"
             ],
             "time": "2016-01-12 09:50:39"
+        },
+        {
+            "name": "linslin/yii2-curl",
+            "version": "1.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linslin/Yii2-Curl.git",
+                "reference": "72ea79e6841696e489577c19b27859075b6aca72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linslin/Yii2-Curl/zipball/72ea79e6841696e489577c19b27859075b6aca72",
+                "reference": "72ea79e6841696e489577c19b27859075b6aca72",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "linslin\\yii2\\curl\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Gajsek",
+                    "email": "info@linslin.org"
+                }
+            ],
+            "description": "Easy and nice cURL extension with RESTful support for Yii2",
+            "keywords": [
+                " curl",
+                "extension",
+                "restful",
+                "yii2"
+            ],
+            "time": "2016-10-31 12:31:06"
         },
         {
             "name": "maxwen/yii2-curl",

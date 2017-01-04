@@ -19,7 +19,7 @@ class languageSwitcher extends Widget
 {
     /* ใส่ภาษาของคุณที่นี่ */
     public $languages = [
-        'English' => 'English',
+        'EN' => 'English',
         'JP' => 'Japanese',
         'TH' => 'Thai',
         'hi-IN'=>"Marathi"

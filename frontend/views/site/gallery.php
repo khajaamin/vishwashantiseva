@@ -18,14 +18,21 @@ $this->registerCssFile("@web/kandepohe_static/css/lightbox.min.css", [
      </ul>
    </div>
 
-
-<div class="row">
-    <?php foreach($images as $image):?>
-    <div class="col-md-3">
-     <a href="images/gallery/<?php echo $image->image_file;?>" data-lightbox="roadtrip">   <img src="images/gallery/<?php echo $image->image_file;?>" class="img-responsive"/></a>
+   <div class="container">
+    <div class="row">
+        <?php 
+        foreach($images as $image){ ?>
+        <div class="col-md-3 thumbnail">
+            <div>     
+            
+            <a href="images/gallery/<?php echo $image->image_file;?>"  data-lightbox="roadtrip">   
+                <img src="images/gallery/<?php echo $image->image_file;?>" class="img-responsive">
+            </a>
+            </div>
+        </div>
+        <?php } ?>
     </div>
-    <?php endforeach;?>
-</div>
+    </div>
 </div>
 
 </div>

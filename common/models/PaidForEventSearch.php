@@ -18,7 +18,8 @@ class PaidForEventSearch extends PaidForEvent
     public function rules()
     {
         return [
-            [['id', 'user_id', 'event_id', 'status'], 'integer'],
+            [['id', 'user_id', 'event_id', 'status','mihpayid'], 'integer'],
+            [['bankcode'], 'string'],
         ];
     }
 
@@ -62,7 +63,9 @@ class PaidForEventSearch extends PaidForEvent
             'user_id' => $this->user_id,
             'event_id' => $this->event_id,
             'status' => $this->status,
+            'mihpayid' => $this->mihpayid,
         ]);
+        $query->andFilterWhere(['like', 'bankcode', $this->bankcode]);
 
         return $dataProvider;
     }

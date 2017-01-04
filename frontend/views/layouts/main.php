@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags()?>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
-    <title>Vishwas Shanti Seva</title>
+    <title>Vishwashanti Seva</title>
     <?= Html::csrfMetaTags() ?>
     <?php $this->head()?>
     <style type="text/css">
@@ -80,12 +80,13 @@ AppAsset::register($this);
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
+                            <li><a href="<?php echo Url::toRoute('profile/paidforevent');?>"><?php echo \Yii::t('app', 'My Events');?></a></li>
                             <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
 
                       <?php  }?>
-                     
+
 
                 </ul>
 

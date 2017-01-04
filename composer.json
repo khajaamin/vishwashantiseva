@@ -23,7 +23,8 @@
         "kartik-v/yii2-widget-timepicker": "*",
         "2amigos/yii2-date-time-picker-widget" : "~1.0",
         "kartik-v/yii2-widget-datetimepicker": "*",
-      "maxwen/yii2-curl": "^1.0"
+      "maxwen/yii2-curl": "^1.0",
+      "linslin/yii2-curl": "*"
 
 },
     "require-dev": {

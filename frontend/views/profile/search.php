@@ -45,35 +45,33 @@ use yii\helpers\Url;
     
   </div>
 
-    <div class="col-md-3 match_right">
-      <div class="form_but2">
+  <div class="col-md-3 match_right">
+       <div class="form_but2">
     
             <div class="clearfix"> </div>
-       </div>
-	<div class="view_profile">
-        	<h3>View Melava's</h3>
-        	<?php
-        	foreach ($similars as $similars) {
-        	?>	       	
-        	<ul class="profile_item">
-        	  
-        	   <li class="profile_item-img">
-        	   	  <img src="images/events/<?= $similars->image_file ?>" class="img-responsive" alt=""/>
-        	   </li>
-        	   <li class="profile_item-desc">
-        	   	  <div style="text-transform:capitalize;"><h5><?= $similars->name ?></h5>
-        	   	  </div>
-        	   	  
-        	   	  <p>Date : <?= $similars->date ?></p>
-        	   	<a href="<?php echo Url::toRoute('site/event');?>">
-        	   	  <h5>View Full Details</h5>
-        	  	</a>
-        	   </li>
-        	   <div class="clearfix"> </div>
-        	  
-           </ul>
-        	<?php } ?>
-       </div>	      
+        </div>
+      	<div class="view_profile">
+              	<h3>View Melava's</h3>
+              	<?php
+              	foreach ($similars as $similars) {
+              	?>	       	
+              	<ul class="profile_item">              	  
+              	   <li class="profile_item-img">
+              	   	  <img src="images/events/<?= $similars->image_file ?>" class="img-responsive" alt=""/>
+              	   </li>
+              	   <li class="profile_item-desc">
+              	   	  <div style="text-transform:capitalize;"><h5><?= $similars->name ?></h5>
+              	   	  </div>
+              	   	  
+              	   	  <p>Date : <?= $similars->date ?></p>
+              	   	<a href="<?php echo Url::toRoute('site/event');?>">
+              	   	  <h5>View Full Details</h5>
+              	  	</a>
+              	   </li>
+              	   <div class="clearfix"> </div>        	  
+                </ul>
+              	<?php } ?>
+        </div>	      
 
    </div>
 

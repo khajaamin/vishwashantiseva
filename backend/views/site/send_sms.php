@@ -11,7 +11,9 @@ use yii\helpers\Url;
 
 $this->title = 'Send SMS';
 
-
+if(isset($jsonData)){
+  print_r($jsonData);
+}
 $this->registerJs(
     '$("document").ready(function(){
        $("#submit").click(function(){
@@ -26,12 +28,22 @@ $this->registerJs(
                   url: url1,
                   async: false,
                   success: function(data)
-                  {$("#result").append(data);}
-                });
-                
+                  {
+                    $.ajax({
+                          type:"GET",
+                          dataType: "jsonp",
+                          url: "http://localhost/vishwashantiseva/public_html/backend/index.php?r=site/sendsms",
+                          data:data,
+                          async: false,
+                          success: function(data)
+                          {
+                            $("#result").append(data);
+                          }
+                    });
+                  }
+            });                
         });
-
-     });'
+    });'
 );
 
 ?>

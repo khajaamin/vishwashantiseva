@@ -31,6 +31,14 @@ $this->title = 'Event';
 	      <ul class="login_details1">
 			 <p><?= $events['description']?> </p>
 		  </ul>
+		  <div style="margin-top:20px;">
+                <i>
+                    <span class="m_3"> 
+                        <i class="fa fa-map-marker " aria-hidden="true"></i> 
+                        <?= $events->venue ?>
+                    </span>
+                </i>
+          </div>
 		  <div class="form-group" style="margin-top:20px;">
 		  	<ul class="footer_social">
 		  		<li>
