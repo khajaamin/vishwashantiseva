@@ -52,7 +52,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         
         return [
-                [['username', 'profile_for', 'email', 'mother_tongue','password_hash'], 'required'],
+                [['username', 'profile_for', 'email','mobile_no', 'mother_tongue','password_hash'], 'required'],
                 [['email'], 'email'],
                 [['username', 'email','password_hash'], 'string', 'max' => 255],
                 ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -200,5 +200,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function getPaidprofiles()
     {
         return $this->hasMany(PaidProfiles::className(), ['user_id' => 'id']);
+    }
+     public function getPaidForEvents()
+    {
+        return $this->hasMany(PaidForEvent::className(), ['user_id' => 'id']);
     }
 }

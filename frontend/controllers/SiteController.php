@@ -19,6 +19,8 @@ use common\models\Education;
 use common\models\Contact;
 use common\models\Gallery;
 use common\models\GallerySearch;
+use common\models\Events;
+use common\models\EventsSearch;
 
 /**
  * Site controller
@@ -183,7 +185,13 @@ class SiteController extends Controller
     {
         return $this->render('terms');
     }
+    public function actionEvent(){
 
+        $event = new Events();
+
+        $events = $event->find()->all(); 
+        return $this->render('event',['events'=>$events]);   
+    }
 
     /**
      * Signs user up.

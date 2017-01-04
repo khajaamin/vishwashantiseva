@@ -19,8 +19,16 @@ use yii\helpers\ArrayHelper;
             <div class="inline-block">
               <label class="gender_1"><?php echo \Yii::t('app', 'Located In ');?> :</label>
                 <div class="age_box1" style="max-width: 100%; display: inline-block;">
-               <?php
-                  $maritalStatus=ArrayHelper::map(\common\models\Profiles::findBySql("SELECT DISTINCT(city) as city from profiles where city != ''")->asArray()->all(),'city','city');
+               <?php 
+                  $query = new yii\db\Query();
+                  $city="";
+                  $data = $query->select(['city'])
+                  ->from('profiles')
+                  ->distinct()
+                  ->where(['not', ['city' => null]])
+                  ->andWhere(['not', ['city' => $city]])
+                  ->all(); 
+                  $maritalStatus = ArrayHelper::map($data,'city','city');
                   echo $form->field($searchModel, 'city')->dropDownList($maritalStatus, ['prompt' => 'select Location'])->label(false);    
                     ?>          
                 </div>

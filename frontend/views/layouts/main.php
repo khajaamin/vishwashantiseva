@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
-
+use common\components\languageSwitcher;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -21,7 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags()?>
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
-    <title>Vishwas Shanti Seva</title>
+    <title>Vishwashanti Seva</title>
     <?= Html::csrfMetaTags() ?>
     <?php $this->head()?>
     <style type="text/css">
@@ -65,7 +65,7 @@ AppAsset::register($this);
                     <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
                     <li><a href="<?php echo Url::toRoute('profile/advancedsearch');?>"><?php echo \Yii::t('app', 'Advanced Search');?></a></li>
                     <li><a href="<?php echo Url::toRoute('site/gallery');?>"><?php echo \Yii::t('app', 'Gallery');?></a></li>
-
+                    <li><a href="<?php echo Url::toRoute('site/event');?>"><?php echo \Yii::t('app', 'Event');?></a></li>
                       <?php
                           if (Yii::$app->user->isGuest) {
                       ?> 
@@ -80,13 +80,17 @@ AppAsset::register($this);
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
                             <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
+                            <li><a href="<?php echo Url::toRoute('profile/paidforevent');?>"><?php echo \Yii::t('app', 'My Events');?></a></li>
                             <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
                           </ul>
                         </li> 
 
                       <?php  }?>
 
+
                 </ul>
+
+
              </div><!-- /.navbar-collapse -->
             </nav>
            </div> <!-- end pull-right -->

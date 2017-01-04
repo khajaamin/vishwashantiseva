@@ -5,11 +5,13 @@ namespace frontend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
+use common\models\Events;
 use common\models\PaidProfiles;
 use common\models\Education;
 use common\models\Contact;
 use common\models\User;
 use common\models\ProfilesSearch;
+use frontend\models\Curl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -23,6 +25,7 @@ class ProfileController extends Controller
     /**
      * @inheritdoc
      */
+    public $enableCsrfValidation = false;
     public function behaviors()
     {
         return [
@@ -50,7 +53,7 @@ class ProfileController extends Controller
 
 public function beforeAction($action)
 {            
-    if ($action->id == 'makepayment' ||  $action->id == "paymentfail" ||  $action->id == "paymentsuccess") {
+    if ($action->id == 'search' || $action->id == 'makepayment' ||  $action->id == "paymentfail" ||  $action->id == "paymentsuccess") {
         $this->enableCsrfValidation = false;
     }
     return parent::beforeAction($action);
@@ -58,7 +61,7 @@ public function beforeAction($action)
 
   public function actionPaymentsuccess($pid)
 {
-    //print_r($_REQUEST); exit;
+    print_r($_REQUEST); exit;
     $model = new PaidProfiles();
     $model->user_id=Yii::$app->user->identity->id;
     $model->paid_for_profile_id=$pid;
@@ -70,7 +73,7 @@ public function beforeAction($action)
 
  public function actionPaymentfail($pid)
 {
-    // echo $_REQUEST['status']; 
+     //echo $_REQUEST['status']; exit; 
     // echo $pid;exit; 
     $model = new PaidProfiles();
     $model->user_id=Yii::$app->user->identity->id;
@@ -92,21 +95,38 @@ public function beforeAction($action)
 
   public function actionSearch()
     {
+
+
+     //  $curl = new Curl();
+     //  $curlOptions = [
+     //          // 'CURLOPT_SSL_VERIFYHOST' => true,
+     //          'CURLOPT_SSL_VERIFYPEER'    => false,
+     //          'CURLOPT_RETURNTRANSFER'    => true,
+     //          'CURLOPT_TIMEOUT'           => 30,
+     //      ];
+     //  $curl->options = $curlOptions;
+     //  // send requests
+     //  $url ="http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day";
+     // // $response = $curl->head($url, $vars = array());
+     //  $response = $curl->get($url, $vars = array()); 
+      
+     //  print_r($response);exit;
+      $this->enableCsrfValidation = false;
+        $curl = new \linslin\yii2\curl\Curl();
+        $url = 'http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day';
+      //echo $url;exit; 
+        $response = $curl->get($url);
+        $data=json_decode($response);
+        print_r($response);
+        exit;
         $searchModel = new ProfilesSearch();
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $profiles = $dataProvider->getModels();
-
-
-        // $searLinks = []; 
-        // foreach($profiles as $profile)
-        // {
-        //     $searLinks[$profile->marital_status] [] = $profile->marital_status;
-        //     $searLinks[$profile->user->mother_tongue] [] = $profile->user->mother_tongue;
-
-        // }
+        $similars =Events::find()->where(['status'=>1])->orderBy('date')->limit(4)->all();
 
           return $this->render('search', [
+            'similars'=>$similars,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);
     }
@@ -143,7 +163,17 @@ public function beforeAction($action)
       return $this->render('paid_for_profile',['records'=>$records]);
       
     }
-
+    public function actionPaidforevent()
+    {
+      
+      $user_id=Yii::$app->user->identity->id;
+     
+      $user=User::findOne($user_id);
+      $records=$user->getPaidForEvents()->andWhere(['status'=>1])->all();
+      //print_r($records);
+      return $this->render('paid_for_event',['records'=>$records]);
+      
+    }
 
     public function actionMakepayment($pid)
     {
@@ -158,6 +188,10 @@ public function beforeAction($action)
       return $this->render('make_payment',['user'=>$user,'profile'=>$profile,'pid'=>$pid]);
         
 
+    }
+     public function actionMakepaymentForEvent($pid)
+    {
+      return $this->render('make_payment_for_event');
     }
 
     /**
@@ -235,8 +269,7 @@ public function beforeAction($action)
       return $this->render('view', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'profile'=>$profile,
-           
+            'profile'=>$profile,           
             'similars'=>$similars,
         ]);
             

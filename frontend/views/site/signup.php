@@ -39,6 +39,8 @@ $this->title = 'Signup/Register';
                 
                 <?= $form->field($model, 'email') ?>
 
+                <?= $form->field($model, 'mobile_no') ?>
+
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="form-group">

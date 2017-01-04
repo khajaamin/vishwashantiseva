@@ -14,6 +14,7 @@ class SignupForm extends Model
     public $password;
     public $mother_tongue;
     public $profile_for;
+    public $mobile_no;
 
     /**
      * @inheritdoc
@@ -33,7 +34,8 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
+            ['mobile_no','required'],
+            ['mobile_no','unique', 'targetClass' => '\common\models\User', 'message' => 'This Mobile Number has already been taken.'],
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
@@ -54,7 +56,9 @@ class SignupForm extends Model
         $user->profile_for = $this->profile_for;
         $user->username = $this->username;        
         $user->email = $this->email;
+        $user->mobile_no=$this->mobile_no;
         $user->mother_tongue = $this->mother_tongue;
+
         $user->setPassword($this->password);
         $user->generateAuthKey();
 
@@ -68,6 +72,7 @@ class SignupForm extends Model
         'password' => \Yii::t('app', 'Password'),
         'mother_tongue'=>\Yii::t('app', 'Mother Tongue'),
         'email'=>\Yii::t('app', 'Email'),
+        'mobile_no'=>\Yii::t('app', 'Mobile Number'),
     ];
 }
 }
