@@ -117,7 +117,7 @@ class ProfilesSearch extends Profiles
             ->andFilterWhere(['like', 'expected_caste', $this->expected_caste])
             ->andFilterWhere(['like', 'expected_education', $this->expected_education])
             ->andFilterWhere(['like', 'expected_occupation', $this->expected_occupation]);
-
+ 
             if(isset(Yii::$app->user->identity->id))
             {
               $query->andFilterWhere(['!=', 'user.id', Yii::$app->user->identity->id]);

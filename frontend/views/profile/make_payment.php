@@ -1,8 +1,11 @@
 <?php
 use yii\helpers\Html;
 // Merchant key here as provided by Payu
-$MERCHANT_KEY = "plAebeeQ";
 
+$MERCHANT_KEY = "plAebeeQ";
+//$MERCHANT_KEY = "KRHfD2Fy";
+//$SALT = "1QndRCDvhC";
+//$PAYU_BASE_URL = "https://test.payu.in";
 // Merchant Salt as provided by Payu
 $SALT = "iCV58CoyKg";
 
@@ -98,7 +101,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             </div>
             <div class="col-md-3 ">
                 <div class="form-group">
-                  <input name="amount" value="1" class="form-control" readOnly="true" />                   
+                  <input name="amount" value="<?php echo $plan->price ?>" class="form-control" readOnly="true" />                   
                 </div>   
             </div>       
             <div class="col-md-offset-1 col-md-2">

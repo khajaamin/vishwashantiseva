@@ -1,5 +1,8 @@
 <?php
 use yii\bootstrap\BootstrapAsset;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 $this->registerJsFile('@web/kandepohe_static/js/lightbox.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
@@ -17,22 +20,19 @@ $this->registerCssFile("@web/kandepohe_static/css/lightbox.min.css", [
         <li class="current-page"><?php echo \Yii::t('app', 'Gallery');?></li>
      </ul>
    </div>
+  <?= 
+        \yii\widgets\ListView::widget([
+            'dataProvider' => $dataProvider,
+            'options' => [
+                'tag' => 'div',
+                'class' => 'list-wrapper',
+                'id' => 'list-wrapper',
+            ],
+            'layout' => "{summary}\n{items}\n\n<div class='clearfix'></div> <div class='row'>{pager}</div>",
+            'itemView' => '_list_item',
+        ]);
+        ?>
 
-   <div class="container">
-    <div class="row">
-        <?php 
-        foreach($images as $image){ ?>
-        <div class="col-md-3 thumbnail">
-            <div>     
-            
-            <a href="images/gallery/<?php echo $image->image_file;?>"  data-lightbox="roadtrip">   
-                <img src="images/gallery/<?php echo $image->image_file;?>" class="img-responsive">
-            </a>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
-    </div>
 </div>
 
 </div>

@@ -93,20 +93,32 @@ use kartik\time\TimePicker;
                                 ?>                                 
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'complextion')->textInput(['maxlength' => true]) ?>        
+                            <?php
+                                $complextion=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'complextion'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'complextion')->dropDownList($complextion,['prompt'=>'-Complextion-'])
+                              ?>         
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'built')->textInput(['maxlength' => true]) ?>
+                                <?php
+                                $bodytype=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'bodytype'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'built')->dropDownList($bodytype,['prompt'=>'-Body Type-'])
+                              ?>
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'diet')->textInput(['maxlength' => true]) ?>
+                                <?php
+                                $diet=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'diet'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'diet')->dropDownList($diet,['prompt'=>'-Diet-'])
+                                ?>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>  
+                                 <?php
+                                $education=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'education'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'education')->dropDownList($education,['prompt'=>'-Education-'])
+                                ?>
                             </div>
                         </div>
                         <div class="row">
@@ -158,7 +170,12 @@ use kartik\time\TimePicker;
                                <?= $form->field($model, 'religion')->textInput(['maxlength' => true]) ?>   
                             </div>
                             <div class="col-md-6">
-                               <?= $form->field($model, 'caste')->textInput(['maxlength' => true]) ?>        
+                               <?php //$form->field($model, 'caste')->textInput(['maxlength' => true]) ?>
+                            <?php   
+                               $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'caste'])->asArray()->all(), 'name', 'name');
+                                    echo $form->field($model, 'caste')->dropDownList($maritalStatus,['prompt'=>\Yii::t('app', 'Select Caste')])    
+                              
+                            ?>
                             </div>
                         </div>
                         <div class="row">
@@ -180,12 +197,19 @@ use kartik\time\TimePicker;
                                 ?>                                
                             </div>
                             <div class="col-md-6">
-                                <?= $form->field($model, 'charan')->textInput() ?>
+                                 <?php
+                                $charan=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'charan'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'charan')->dropDownList($charan,['prompt'=>'-Charan-'])
+                                ?>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'nadi')->textInput(['maxlength' => true]) ?>        
+                                <?php
+                                $nadi=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'nadi'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'nadi')->dropDownList($nadi,['prompt'=>'-Nadi-'])
+                                ?>     
                             </div>
                             <div class="col-md-6">
                                 <?php 
@@ -220,10 +244,10 @@ use kartik\time\TimePicker;
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'brothers')->textInput() ?>   
+                                <?= $form->field($model, 'brothers')->dropDownList([ '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Brothers']) ?>  
                             </div>
                             <div class="col-md-6">
-                              <?= $form->field($model, 'sisters')->textInput() ?>   
+                              <?= $form->field($model, 'sisters')->dropDownList([ '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Sisters']) ?>  
                             </div>
                         </div>
                         <div class="row">

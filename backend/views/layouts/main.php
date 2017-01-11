@@ -9,7 +9,13 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use common\models\SiteSetting;
 use yii\helpers\Url;
+
+$model = new SiteSetting();
+$pid = Yii::$app->user->identity->id;
+
+$site = SiteSetting::find()->where(['id'=>$pid])->one();
 
 AppAsset::register($this);
 ?>
@@ -34,7 +40,9 @@ AppAsset::register($this);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=""<?php echo Url::toRoute('site/index');?>">Vishwa Shanti Seva</a>
+                <a class="navbar-brand" href=""<?php echo Url::toRoute('site/index');?>">
+                    Vishwa Shanti Seva
+                </a>
             </div>
             <!-- /.navbar-header -->
 
@@ -89,8 +97,19 @@ AppAsset::register($this);
                             <a href="<?php echo Url::toRoute('paid-for-event/index');?>"><i class="fa fa-money" aria-hidden="true"></i> Paid For Events</a>
                         </li>
                         <li>
-                            <a href="<?php echo Url::toRoute('site/sendsms');?>"><i class="fa fa-email" aria-hidden="true"></i> Send SMS</a>
-                        </li>  
+                            <a href="<?php echo Url::toRoute('site/sendsms');?>">
+                            <i class="fa fa-weixin" aria-hidden="true"></i>
+                            Send SMS</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::toRoute('sms-response/index');?>"><i class="fa fa-weixin" aria-hidden="true"></i> Sent SMS</a>
+                        </li>
+                        <!-- <li>
+                            <a href="<?php //echo Url::toRoute('site-setting/update');?>"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a>
+                        </li> -->
+                        <li>
+                            <a href="<?php echo Url::toRoute('plans/index');?>"><i class="fa fa-gear" aria-hidden="true"></i> Pricing Plans </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -99,6 +118,7 @@ AppAsset::register($this);
         </nav>
 </div>
 <div id="page-wrapper">
+
     <?= $content ?>
 </div>
 </body>

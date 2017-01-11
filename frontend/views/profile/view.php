@@ -33,7 +33,25 @@ $this->title = 'Profiles';
                 <h2><?php echo \Yii::t('app', 'Name');?> : <?= $profile->name?></h2>
                 <div class="col_3">
                     <div class="col-sm-4 row_2">
-                        <img src="<?= 'images/profile/'.$profile->profile_image?>" width="250px" height="150px"> 
+                        <?php
+                        if(empty($profile->profile_image)){
+                             if($profile->gender=='m'){
+                            ?>
+                            
+                            <img src="images/default.jpg" width="250px" height="150px" class="img-responsive">
+
+                            <?php }else{?>
+
+                            <img src="images/defaultb.jpeg" width="250px" height="150px" class="img-responsive">
+
+                            <?php   }
+                        }else{ ?>
+
+                            <img src="<?= 'images/profile/'.$profile->profile_image?>" width="250px" height="150px">
+
+                        <?php } ?>
+
+                         
                     </div>
                     <div class="col-sm-8 row_1">
                         <table class="table_working_hours">
@@ -524,11 +542,29 @@ $this->title = 'Profiles';
             <ul class="profile_item">
               <a href="#">
                <li class="profile_item-img">
-                  <img src="images/profile/<?php echo $similar->profile_image;?>" class="img-responsive" alt=""/>
+                 <?php
+                        if(empty($similar->profile_image)){
+                             if($similar->gender=='m'){
+                            ?>
+                            
+                            <img src="images/default.jpg" class="img-responsive" alt="default image>
+
+                            <?php }else{?>
+
+                            <img src="images/defaultb.jpeg" class="img-responsive" alt="default image">
+
+                            <?php   }
+                        }else{ ?>
+
+                            <img src="<?= 'images/profile/'.$similar->profile_image?>" class="img-responsive" alt="default image>
+
+                        <?php } ?>
+
                </li>
                <li class="profile_item-desc">
                   <h4><?php echo $similar->id;?></h4>
                   <p><?php echo $similar->marital_status;?></p>
+                  <p><?php echo $similar->city;?></p>
                   <h5><a href="<?php echo Url::toRoute(['profile/view','id'=>$similar->id]);?>"><div class="vertical"><?php echo \Yii::t('app', 'View Full Profile');?></div>
              </a></h5>
                </li>

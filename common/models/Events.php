@@ -21,6 +21,8 @@ class Events extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $my_button; 
+    
     public static function tableName()
     {
         return 'events';
@@ -32,8 +34,8 @@ class Events extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'date', 'start_time', 'end_time', 'venue', 'description', 'organised_by'], 'required'],
-            [['image_file','date', 'start_time', 'end_time'], 'safe'],
+            [['name', 'date', 'start_time', 'end_time', 'venue', 'description', 'organised_by','sms','fees'], 'required'],
+            [['image_file','date', 'start_time', 'end_time','fees'], 'safe'],
             [['image_file'],'file'],
             [['venue', 'description'], 'string'],
             [['name', 'organised_by'], 'string', 'max' => 255],
@@ -53,7 +55,10 @@ class Events extends \yii\db\ActiveRecord
             'end_time' => 'End Time',
             'venue' => 'Venue',
             'description' => 'Description',
+            'sms' => 'SMS Format',
+            'fees' => 'Fees',
             'organised_by' => 'Organised By',
+
         ];
     }
 }

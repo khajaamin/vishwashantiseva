@@ -16,7 +16,13 @@ return [
     // set source language to be English
     'sourceLanguage' => 'en-US',
     'components' => [
-     'languageSwitcher' => [
+    'SmsResponse' => [
+            'class' => 'frontend\components\SmsResponse',
+         ],
+    'Response' => [
+            'class' => 'frontend\components\Response',
+         ],     
+    'languageSwitcher' => [
             'class' => 'common\components\languageSwitcher',
         ],
     'SearchById' => [
@@ -24,6 +30,7 @@ return [
             'class' => 'frontend\components\SearchById',
  
             ],
+            
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],

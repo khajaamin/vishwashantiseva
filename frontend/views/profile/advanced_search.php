@@ -21,19 +21,18 @@ use yii\helpers\ArrayHelper;
              <h1><?php echo \Yii::t('app', 'Search Result');?></h1>
               <div class="row_1">
                 <!-- <div class="col-sm-6 paid_people-left"> -->
-
-                <?php  
-        echo \yii\widgets\ListView::widget([
-            'dataProvider' => $dataProvider,
-            'options' => [
-                'tag' => 'ul',
-                'class' => 'profile_item',
-                //'id' => 'list-wrapper',
-            ],
-           // 'layout' => "{pager}\n{items}\n{summary}",
-            'itemView' => 'advanced_list_item',
-        ]);
-        ?> 
+              <?php  
+                echo \yii\widgets\ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'options' => [
+                        'tag' => 'ul',
+                        'class' => 'profile_item',
+                        //'id' => 'list-wrapper',
+                    ],
+                   // 'layout' => "{pager}\n{items}\n{summary}",
+                    'itemView' => 'advanced_list_item',
+                ]);
+                ?> 
                  
               </div>
            </div>
@@ -52,7 +51,14 @@ use yii\helpers\ArrayHelper;
                   <ul class="profile_item">
                     <a href="#">
                      <li class="profile_item-img">
+                        <?php if(!empty($similar->profile_image)){
+                        ?>    
                         <img src="images/profile/<?php echo $similar->profile_image;?>" class="img-responsive" alt=""/>
+                        <?php }else if($similar->gender == 'm'){?>
+                          <img src="images/default.jpg" class="img-responsive" alt="default.jpg"/>
+                        <?php }else{  ?>
+                        <img src="images/defaultb.jpeg" class="img-responsive" alt="default.jpg"/>
+                        <?php } ?>
                      </li>
                      <li class="profile_item-desc">
                         <h4><?php echo $similar->id;?></h4>

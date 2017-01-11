@@ -46,6 +46,10 @@ class PaidProfiles extends \yii\db\ActiveRecord
             'paid_for_profile_id' => 'Paid For Profile ID',
             'date' => 'Date',
             'status' => 'Status',
+            'mihpayid' => 'Payment ID',
+            'bankcode' => 'Bank Code',
+            'unmappedstatus' => 'Causes',
+            'addedon'=> 'Transaction On',
         ];
     }
     public function getProfiles()

@@ -18,8 +18,9 @@ class PaidProfilesSearch extends PaidProfiles
     public function rules()
     {
         return [
-            [['id', 'user_id', 'paid_for_profile_id', 'status'], 'integer'],
+            [['id', 'user_id', 'paid_for_profile_id', 'status','mihpayid'], 'integer'],
             [['date'], 'safe'],
+            [['bankcode'], 'string'],
         ];
     }
 
@@ -64,7 +65,9 @@ class PaidProfilesSearch extends PaidProfiles
             'paid_for_profile_id' => $this->paid_for_profile_id,
             'date' => $this->date,
             'status' => $this->status,
+            'mihpayid' => $this->mihpayid,
         ]);
+        $query->andFilterWhere(['like', 'bankcode', $this->bankcode]);
 
         return $dataProvider;
     }

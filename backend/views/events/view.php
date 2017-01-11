@@ -39,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'end_time',
             'venue:ntext',
             'description:ntext',
+            'sms:ntext',
+            'fees',
             'organised_by',
         ],
     ]) ?>

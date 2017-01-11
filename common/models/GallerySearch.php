@@ -47,6 +47,9 @@ class GallerySearch extends Gallery
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+           'pagination' => [
+            'pageSize' => 8
+        ]
         ]);
 
         $this->load($params);

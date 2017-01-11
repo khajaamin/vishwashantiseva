@@ -21,6 +21,11 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'SmsResponse' => [
+ 
+            'class' => 'backend\components\SmsResponse',
+ 
+         ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

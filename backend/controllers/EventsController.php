@@ -5,11 +5,14 @@ namespace backend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Events;
+use common\models\User;
+use common\models\PaidForEvent;
 use common\models\EventsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+
 
 /**
  * EventsController implements the CRUD actions for Events model.
@@ -177,5 +180,21 @@ class EventsController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionSend($id)
+    {
+        // echo $id; exit;
+        $paid = new PaidForEvent();
+        $model = new User();
+        $records=$paid->find()->where(['event_id'=>$id,'status'=>1])->all();
+        // /print_r($records);
+        foreach ($records as $record) {
+            
+           $record->dump_response;
+           $unserialize = unserialize($record);
+           print_r($unserialize);
+        }
+        // return $this->redirect('index');
     }
 }

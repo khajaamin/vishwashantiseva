@@ -4231,3 +4231,11 @@ ul.feature_list.feature_list1 {
 .has-error.checkbox-inline label {
     color: #333;
 }
+.gallery-image{
+    width: 100%;
+    height: 200px !important;
+}
+.event-image{
+     width: 100%;
+    height: 265px !important;   
+}

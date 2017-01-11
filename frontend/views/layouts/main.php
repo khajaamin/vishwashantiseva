@@ -74,8 +74,7 @@ AppAsset::register($this);
                         
 
 
-                        <?php }else{?>
-                        <li><a href="<?php echo Url::toRoute('profile/paidforprofile');?>"><?php echo \Yii::t('app', 'Paid For Profile');?></a></li>                          
+                        <?php }else{?>                        
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
                           <ul class="dropdown-menu" role="menu">
