@@ -185,15 +185,45 @@ class EventsController extends Controller
     public function actionSend($id)
     {
         // echo $id; exit;
+
         $paid = new PaidForEvent();
+        $event = new Events();
+        $event = $event->find()->where(['id'=>$id])->one();
+        $msg = $event->sms;
+        // echo $msg;
+        // exit;
         $model = new User();
         $records=$paid->find()->where(['event_id'=>$id,'status'=>1])->all();
         // /print_r($records);
         foreach ($records as $record) {
             
-           $record->dump_response;
-           $unserialize = unserialize($record);
-           print_r($unserialize);
+           $arr=$record->dump_response;
+           $unserialize = unserialize($arr);
+           $number = $unserialize['phone'];
+           
+
+           //$response = Yii::$app->SmsResponse->getResponse($number,$msg);
+          // $resArr = array();
+            //$resArr = json_decode($response);
+          
+            //print_r($resArr);
+
+            // for ($i=0; $i < sizeof($resArr->MessageData) ; $i++) { 
+            //     $smsresponse->setIsNewRecord(true);
+            //     $smsresponse->id = null;
+            //     $smsresponse->error_code = $resArr->ErrorCode;
+            //     $smsresponse->error_message = $resArr->ErrorMessage;
+            //     $smsresponse->jobid = $resArr->JobId;
+            //     $smsresponse->number=$resArr->MessageData[$i]->Number;
+            //     $smsresponse->msg_id=$resArr->MessageData[$i]->MessageParts[0]->MsgId;
+            //     $smsresponse->part_id=$resArr->MessageData[$i]->MessageParts[0]->PartId;
+            //     $smsresponse->message=$resArr->MessageData[$i]->MessageParts[0]->Text;
+            //     if($smsresponse->save()){
+
+            //         return $this->render('send_sms',['model' =>$model]);
+            //     }
+
+           //print_r($unserialize);
         }
         // return $this->redirect('index');
     }

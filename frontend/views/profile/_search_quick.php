@@ -44,22 +44,43 @@ use yii\helpers\ArrayHelper;
             </div>
           </div>
           <div class="inline-block">
-            <div class="age_box2" style="max-width: 220px;">
-              <label class="gender_1"><?php echo \Yii::t('app', 'Age');?> :</label>
-              <input class="transparent" placeholder="From:" style="width: 34%;" type="text" value="">&nbsp;-&nbsp;<input class="transparent" placeholder="To:" style="width: 34%;" type="text" value="">
+            <div class="row" style="max-width: 220px;">
+              <div class="col-md-2">
+              <label class="gender_1"><?php echo \Yii::t('app', 'Age');?></label>  
+              </div>
+              
+              <div class="col-md-4">
+              <?= $form->field($searchModel, 'age_from')->textInput(['maxlength' => true,'placeholder'=>'from' ,'class'=>'transparent','style'=>'width:150%;'])->label(false); ?>
+                
+              </div>
+              <div class="col-md-1">
+                &nbsp;-&nbsp;  
+              </div>
+              <div class="col-md-4">
+              <?= $form->field($searchModel, 'age_to')->textInput(['maxlength' => true,'placeholder'=>'to' ,'class'=>'transparent' ,'style'=>'width:150%; '])->label(false); ?>
+              </div>
+              <!-- <input class="transparent" placeholder="From:" style="width: 34%;" type="text" value="">&nbsp;-&nbsp;<input class="transparent" placeholder="To:" style="width: 34%;" type="text" value=""> -->
             </div>
           </div>
           <div class="inline-block">
-            <label class="gender_1"><?php echo \Yii::t('app', 'Marital Status');?> :</label>
-            <div class="age_box1" style="max-width: 100%; display: inline-block;">
-                  <?php
-                  $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'marital_status'])->asArray()->all(),'name','name');
-                  echo $form->field($searchModel, 'marital_status')->dropDownList($maritalStatus, ['prompt' => 'select marital status'])->label(false);    
-                    ?>          
-          
+            <div class="row">
+              <div class="col-md-4">
+                <label class="gender_1"><?php echo \Yii::t('app', 'Marital Status');?> :</label>
+              </div>  
+              <!-- <div class="col-md-8"> -->
+                  <div class="col-md-8" style="max-width: 100%; display: inline-block;">
+                        <?php
+                        $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'marital_status'])->asArray()->all(),'name','name');
+                        echo $form->field($searchModel, 'marital_status')->dropDownList($maritalStatus, ['prompt' => 'select marital status'])->label(false);    
+                          ?>          
+                 </div>
+              <!-- </div> -->
             </div>
           </div>
-          <div class="submit inline-block">
-             <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="<?php echo \Yii::t('app', 'Find matches');?>">
+          <div class=" inline-block">
+            <div class="row">
+            <div class="col-md-12">
+              <input id="submit-btn" class="hvr-wobble-vertical" style="margin-bottom:15px;" type="submit" value="<?php echo \Yii::t('app', 'Find matches');?>">
+              </div></div>
           </div>
 <?php ActiveForm::end(); ?>
