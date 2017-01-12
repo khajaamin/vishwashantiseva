@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 // Merchant key here as provided by Payu
+//echo $site->salt.' '.$site->merchant_key.' '.$site->payment_url;
+//print_r($event);exit;
 $MERCHANT_KEY = "plAebeeQ";
 
 // Merchant Salt as provided by Payu
@@ -19,7 +21,7 @@ if(!empty($_POST)) {
   
   }
 }
-
+$field1=1;
 $formError = 0;
 
 if(empty($posted['txnid'])) {
@@ -42,7 +44,8 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
           || empty($posted['productinfo'])
           || empty($posted['surl'])
           || empty($posted['furl'])
-      || empty($posted['service_provider'])
+          || empty($posted['service_provider'])
+          || empty($posted['udf1'])
   ) {
     $formError = 1;
   } else {
@@ -94,6 +97,8 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       <input type="hidden" name="key"  value="<?php echo $MERCHANT_KEY ?>" />
       <input type="hidden" name="hash" value="<?php echo $hash ?>"/>
       <input type="hidden" name="txnid" value="<?php echo $txnid ?>" />
+      
+      
 
         <div class="row">
             <div class="col-md-2">
@@ -101,7 +106,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
             </div>
             <div class="col-md-3 ">
                 <div class="form-group">
-                  <input name="amount" value="1" class="form-control" readOnly="true" />                   
+                  <input name="amount" value="<?php if(isset($event->fees)){echo $event->fees;}else{ echo '';} ?>" class="form-control" readOnly="true" />                   
                 </div>
    
             </div>
@@ -148,11 +153,11 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
          
           <td colspan="3"><input type="hidden" name="surl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["events/paymentsuccess","pid"=>$pid]); ?>" size="64" /></td>
         </tr>
+        <input type="hidden" name="udf1" value="<?php echo $field1; ?>" />
         <tr>
          
           <td colspan="3"><input  type="hidden"  name="furl" value="<?php echo Yii::$app->urlManager->createAbsoluteUrl(["events/paymentfail","pid"=>$pid]); ?>" size="64" /></td>
         </tr>
-
         <tr>
           <td colspan="3"><input type="hidden" name="service_provider" value="payu_paisa" size="64" /></td>
         </tr>

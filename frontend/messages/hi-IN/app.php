@@ -159,4 +159,5 @@ return [
     'Payment ID'=>'पेमेन्ट ID',
     'Received From'=>'रिसिव्हड फ्रॉम',
     'Print Receipt'=>'पावती प्रिंट करा', 
+    'Select Caste'=>'आपली जात निवडा ',
 ];

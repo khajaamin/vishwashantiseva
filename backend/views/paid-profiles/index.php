@@ -39,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
                  },
                 'filter'=>Helper::getSuccessFailureStatus(),
             ],
+            'mihpayid',
+            'bankcode',
             
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -4,9 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Events;
+use common\models\SiteSetting;
 use common\models\User;
 use common\models\EventsSearch;
 use common\models\PaidForEvent;
+use common\models\SmsResponse;
+use common\models\SmsResponseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,7 +23,7 @@ class EventsController extends Controller
     /**
      * @inheritdoc
      */
-    public $enableCsrfValidation = false;
+    // public $enableCsrfValidation = false;
 
    public function behaviors()
     {
@@ -47,6 +50,13 @@ class EventsController extends Controller
     }
 
 
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'makepayment' ||  $action->id == "paymentfail" ||  $action->id == "paymentsuccess") {
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
     /**
      * Lists all Events models.
      * @return mixed
@@ -92,7 +102,6 @@ class EventsController extends Controller
         
         }
         
-        //return $this->redirect(array('site/event'));
     }
 
     /**
@@ -102,6 +111,7 @@ class EventsController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Events();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -163,55 +173,73 @@ class EventsController extends Controller
 
      public function actionMakepayment($pid)
     {
-        //echo $pid;exit;
-        // $searchModel = new ProfilesSearch();
+        $event = Events::findOne($pid);
+
         $user_id=Yii::$app->user->identity->id;
-        $user=User::findOne($user_id);
-        //$profile = Events::find()->where(['user_id' => $user_id])->one();
-        //print_r($profile);exit;   
-        //print_r($user);exit;
-
-      return $this->render('make_payment',['user'=>$user,'pid'=>$pid]);
         
+        $site = SiteSetting::findOne(1);
 
+        //print_r($site);
+        //exit;
+
+        $user=User::findOne($user_id);
+
+        return $this->render('make_payment',['user'=>$user,'pid'=>$pid,'event'=>$event,'site'=>$site]);
     }
      public function actionPaymentsuccess($pid)
     {
-    
-     print_r($_REQUEST); exit;
-    $model = new PaidForEvent();
-    $model->user_id=Yii::$app->user->identity->id;
-    $model->event_id=$pid;
-    $model->status=1;
-    $model->bank_ref_num=$_REQUEST['bank_ref_num'];
-    $model->bankcode=$_REQUEST['bankcode'];
-    $model->unmappedstatus=$_REQUEST['unmappedstatus'];
-    $model->addedon = $_REQUEST['addedon'];
-    $model->mihpayid = $_REQUEST['mihpayid'];
-    $model->save();
-    
-    return $this->redirect(['events/paid_for_event', 'id' => $pid]);
-   // $this->redirect(array('profile/search')); 
+
+        $model = new PaidForEvent();        
+        $smsresponse = new SmsResponse();
+        $dump = serialize($_REQUEST);
+        $model->user_id=Yii::$app->user->identity->id;
+        $model->event_id=$_REQUEST['pid'];;
+        $model->status=1;
+        $model->bank_ref_num=$_REQUEST['bank_ref_num'];
+        $model->bankcode=$_REQUEST['bankcode'];
+        $model->unmappedstatus=$_REQUEST['unmappedstatus'];
+        $model->addedon = $_REQUEST['addedon'];
+        $model->mihpayid = $_REQUEST['mihpayid'];
+        $model->dump_response = $dump;
+        $phone = $_REQUEST['phone'];        
+        $msg = "Successfully register for vishwashanti melava";  
+        $resArr = array();
+        $response = Yii::$app->SmsResponse->getResponse($phone,$msg);         
+         $resArr = json_decode($response);
+        if($model->save()){
+        
+             if(isset($resArr)){              
+                    $smsresponse->error_code = $resArr->ErrorCode;
+                    $smsresponse->error_message = $resArr->ErrorMessage;
+                    $smsresponse->jobid = $resArr->JobId;
+                    $smsresponse->number = $resArr->MessageData[0]->Number;
+                    $smsresponse->msg_id = $resArr->MessageData[0]->MessageParts[0]->MsgId;
+                    $smsresponse->part_id = $resArr->MessageData[0]->MessageParts[0]->PartId;
+                    $smsresponse->message = $resArr->MessageData[0]->MessageParts[0]->Text;
+                    $smsresponse->save();
+             }
+        
+        }
+        //$model->save();
+        
+        return $this->redirect(['events/paid_for_event', 'id' => $pid]); 
     }
 
      public function actionPaymentfail($pid)
     {
-         //$curl = new \linslin\yii2\curl\Curl();
-
-        //get http://example.com/
-      //   $response = $curl->get('http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day');
-       print_r($response);exit;
         $model = new PaidForEvent();
+        $dump = serialize($_REQUEST);
         $model->user_id=Yii::$app->user->identity->id;
-        $model->event_id=$pid;
+        $model->event_id=$_REQUEST['pid'];;
         $model->status=0;
         $model->bank_ref_num=$_REQUEST['bank_ref_num'];
         $model->bankcode=$_REQUEST['bankcode'];
         $model->unmappedstatus=$_REQUEST['unmappedstatus'];
         $model->addedon = $_REQUEST['addedon'];
         $model->mihpayid = $_REQUEST['mihpayid'];
+        $model->dump_response = $dump;
         $model->save();
-        return $this->redirect(['events/view', 'id' => $pid]);
-        //$this->redirect(array('profile/search'));
+       return $this->redirect(['events/view', 'id' => $pid]);
     }
+
 }

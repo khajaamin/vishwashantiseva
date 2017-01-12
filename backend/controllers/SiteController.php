@@ -9,6 +9,8 @@ use common\models\LoginForm;
 use common\models\Profiles;
 use common\models\Events;
 use common\models\Sms;
+use common\models\SmsResponse;
+use common\models\SmsResponseSearch;
 /**
  * Site controller
  */
@@ -80,20 +82,40 @@ public function beforeAction($action)
  
      public function actionSendsms()
     {   
-        // if(isset($_GET['data'])){
-        //     $data = $_GET['data'];
-        //     $jsonData = json_decode($data);
-        //     //print_r($jsonData);
-        //     //echo 'success';
-        //     return $this->render('send_sms',['model' =>$model,'jsonData'=>$jsonData]);
-        // }
+       
         $model =  new Sms();
+        $smsresponse = new SmsResponse();
+        if($model->load(Yii::$app->request->post())){
+            
+            $number = $model->msisdn;
+            $msg = $model->msg;
 
+            $response = Yii::$app->SmsResponse->getResponse($number,$msg);
+            $resArr = array();
+            $resArr = json_decode($response);
+            for ($i=0; $i < sizeof($resArr->MessageData) ; $i++) { 
+                $smsresponse->setIsNewRecord(true);
+                $smsresponse->id = null;
+                $smsresponse->error_code = $resArr->ErrorCode;
+                $smsresponse->error_message = $resArr->ErrorMessage;
+                $smsresponse->jobid = $resArr->JobId;
+                $smsresponse->number=$resArr->MessageData[$i]->Number;
+                $smsresponse->msg_id=$resArr->MessageData[$i]->MessageParts[0]->MsgId;
+                $smsresponse->part_id=$resArr->MessageData[$i]->MessageParts[0]->PartId;
+                $smsresponse->message=$resArr->MessageData[$i]->MessageParts[0]->Text;
+                if($smsresponse->save()){
 
-         return $this->render('send_sms',['model' =>$model]);
+                    return $this->render('send_sms',['model' =>$model]);
+                }      
+                  
+            }
+            // exit;
+        }  
+
+        return $this->render('send_sms',['model' =>$model]);
     }
 
-
+    
    /**
      * Login action.
      *
@@ -126,5 +148,22 @@ public function beforeAction($action)
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionMessages($id)
+    {
+        $messages = \common\models\Events::find()
+                ->where(['id' => $id])
+                ->all();
+        
+
+        if(count($messages)>0){
+            foreach($messages as $message){
+                echo $message->sms;
+            }
+        }
+        else{
+            echo "Please Type something";
+        }
     }
 }

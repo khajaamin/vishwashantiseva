@@ -47,6 +47,9 @@ class EventsSearch extends Events
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+            'pageSize' => 5
+            ]
         ]);
 
         $this->load($params);
@@ -63,6 +66,7 @@ class EventsSearch extends Events
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
+            'status'=>$this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

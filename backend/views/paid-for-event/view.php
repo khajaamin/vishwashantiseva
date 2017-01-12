@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use common\models\Helper;
 /* @var $this yii\web\View */
 /* @var $model common\models\PaidForEvent */
 
@@ -31,7 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             'event_id',
-            'status',
+              [
+                'attribute'=>'status',
+                 $arr=Helper::getSuccessFailureStatus(),
+                'value'=>$arr[$model->status],
+            ],
+            'mihpayid',
+            'bankcode',
+            'unmappedstatus',
         ],
     ]) ?>
 

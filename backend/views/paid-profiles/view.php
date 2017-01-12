@@ -38,7 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
                  $arr=Helper::getSuccessFailureStatus(),
                 'value'=>$arr[$model->status],
             ],
-            //'status',
+            'mihpayid',
+            'bankcode',
+            'unmappedstatus',
         ],
     ]) ?>
 

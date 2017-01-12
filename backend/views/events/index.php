@@ -33,6 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['width' => '400px' ,'class' => 'img-responsive thumbnail']);
                 },
             ],
+            [
+
+                'attribute' => 'title',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index) {
+                    return Html::a("Send Sms",  Yii::$app->urlManager->createUrl(array_merge(["events/send"], ['id' => $model->id])), ['class'=>'btn btn-info']);
+                },
+              
+            ],
             'date',
             'start_time',
             'end_time',

@@ -5,18 +5,22 @@ namespace frontend\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
+use common\models\Plans;
 use common\models\Events;
 use common\models\PaidProfiles;
 use common\models\Education;
 use common\models\Contact;
 use common\models\User;
 use common\models\ProfilesSearch;
+use common\models\SmsResponse;
+use common\models\SmsResponseSearch;
 use frontend\models\Curl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\web\ForbiddenHttpException;
+use common\models\SiteSetting;
 /**
  * ProfileController implements the CRUD actions for Profiles model.
  */
@@ -25,7 +29,6 @@ class ProfileController extends Controller
     /**
      * @inheritdoc
      */
-    public $enableCsrfValidation = false;
     public function behaviors()
     {
         return [
@@ -61,28 +64,62 @@ public function beforeAction($action)
 
   public function actionPaymentsuccess($pid)
 {
-    print_r($_REQUEST); exit;
     $model = new PaidProfiles();
+    $dump = serialize($_REQUEST);
     $model->user_id=Yii::$app->user->identity->id;
-    $model->paid_for_profile_id=$pid;
+    $model->paid_for_profile_id=$_REQUEST['pid'];
+    $model->date = $_REQUEST['addedon'];
     $model->status=1;
-    $model->save();
+    $model->bank_ref_num=$_REQUEST['bank_ref_num'];
+    $model->bankcode=$_REQUEST['bankcode'];
+    $model->unmappedstatus=$_REQUEST['unmappedstatus'];
+    $model->addedon = $_REQUEST['addedon'];
+    $model->mihpayid = $_REQUEST['mihpayid'];
+    $model->dump_response = $dump;
+    $phone = $_REQUEST['phone'];        
+    $msg = "Successfully register for vishwashanti"; 
+    $resArr = array(); 
+    $response = Yii::$app->SmsResponse->getResponse($phone,$msg);        
+     $resArr = json_decode($response);
+    if($model->save()){
+    
+         if(isset($resArr)){              
+                $smsresponse->error_code = $resArr->ErrorCode;
+                $smsresponse->error_message = $resArr->ErrorMessage;
+                $smsresponse->jobid = $resArr->JobId;
+                $smsresponse->number = $resArr->MessageData[0]->Number;
+                $smsresponse->msg_id = $resArr->MessageData[0]->MessageParts[0]->MsgId;
+                $smsresponse->part_id = $resArr->MessageData[0]->MessageParts[0]->PartId;
+                $smsresponse->message = $resArr->MessageData[0]->MessageParts[0]->Text;
+                $smsresponse->save();
+         }
+    
+    }
     return $this->redirect(['profile/view', 'id' => $pid]);
-   // $this->redirect(array('profile/search')); 
+
 }
 
  public function actionPaymentfail($pid)
 {
-     //echo $_REQUEST['status']; exit; 
-    // echo $pid;exit; 
+
     $model = new PaidProfiles();
+    $smsresponse = new SmsResponse();
+    $dump = serialize($_REQUEST);
     $model->user_id=Yii::$app->user->identity->id;
-    $model->paid_for_profile_id=$pid;
+    $model->paid_for_profile_id=$_REQUEST['pid'];;
+    $model->date = $_REQUEST['addedon'];
     $model->status=0;
-    $model->save();
+    $model->bank_ref_num=$_REQUEST['bank_ref_num'];
+    $model->bankcode=$_REQUEST['bankcode'];
+    $model->unmappedstatus=$_REQUEST['unmappedstatus'];
+    $model->addedon = $_REQUEST['addedon'];
+    $model->mihpayid = $_REQUEST['mihpayid'];
+    $model->dump_response = $dump;        
+      
+    $model->save();    
     return $this->redirect(['profile/view', 'id' => $pid]);
-    //$this->redirect(array('profile/search'));
 }
+
   public function actionFullprofile()
   {
         $id =  Yii::$app->request->queryParams('id');
@@ -96,29 +133,6 @@ public function beforeAction($action)
   public function actionSearch()
     {
 
-
-     //  $curl = new Curl();
-     //  $curlOptions = [
-     //          // 'CURLOPT_SSL_VERIFYHOST' => true,
-     //          'CURLOPT_SSL_VERIFYPEER'    => false,
-     //          'CURLOPT_RETURNTRANSFER'    => true,
-     //          'CURLOPT_TIMEOUT'           => 30,
-     //      ];
-     //  $curl->options = $curlOptions;
-     //  // send requests
-     //  $url ="http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day";
-     // // $response = $curl->head($url, $vars = array());
-     //  $response = $curl->get($url, $vars = array()); 
-      
-     //  print_r($response);exit;
-      $this->enableCsrfValidation = false;
-        $curl = new \linslin\yii2\curl\Curl();
-        $url = 'http://sms.vndsms.com/vendorsms/pushsms.aspx?user=vishwa&password=vishwa&sid=WEBSMS&fl=0&gwid=2&msisdn=7385455311&msg=Good Day';
-      //echo $url;exit; 
-        $response = $curl->get($url);
-        $data=json_decode($response);
-        print_r($response);
-        exit;
         $searchModel = new ProfilesSearch();
         
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -142,9 +156,15 @@ public function beforeAction($action)
         {
           $gender= $profiles[0]['gender'];
         }        
+        if(isset(Yii::$app->user->identity->id)){
 
-        $similars =Profiles::find()->where(['gender'=>$gender])->indexBy('id')->limit(8)->all();
-       
+                $similars =Profiles::find()->where(['gender'=>$gender])->andWhere(['!=','user_id',Yii::$app->user->identity->id])->indexBy('id')->limit(8)->all();
+        }else{
+
+                $similars =Profiles::find()->where(['gender'=>$gender])->indexBy('id')->limit(8)->all();
+
+        }
+
         return $this->render('advanced_search', [
         'searchModel' => $searchModel,
         'dataProvider' => $dataProvider,
@@ -152,17 +172,17 @@ public function beforeAction($action)
         'similars'=>$similars,]);
     }
 
-    public function actionPaidforprofile()
-    {
+    // public function actionPaidforprofile()
+    // {
       
-      $user_id=Yii::$app->user->identity->id;
+    //   $user_id=Yii::$app->user->identity->id;
      
-      $user=User::findOne($user_id);
-      $records=$user->getPaidprofiles()->andWhere(['status'=>1])->all();
-      //print_r($records);
-      return $this->render('paid_for_profile',['records'=>$records]);
+    //   $user=User::findOne($user_id);
+    //   $records=$user->getPaidprofiles()->andWhere(['status'=>1])->all();
+    //   //print_r($records);
+    //   return $this->render('paid_for_profile',['records'=>$records]);
       
-    }
+    // }
     public function actionPaidforevent()
     {
       
@@ -178,14 +198,16 @@ public function beforeAction($action)
     public function actionMakepayment($pid)
     {
         //echo $pid;exit;
+        $plan = Plans::findOne(1);
         $searchModel = new ProfilesSearch();
         $user_id=Yii::$app->user->identity->id;
         $user=User::findOne($user_id);
         $profile = Profiles::find()->where(['user_id' => $user_id])->one();
+       
         //print_r($profile);exit;   
         //print_r($user);exit;
 
-      return $this->render('make_payment',['user'=>$user,'profile'=>$profile,'pid'=>$pid]);
+      return $this->render('make_payment',['user'=>$user,'profile'=>$profile,'pid'=>$pid,'plan'=>$plan]);
         
 
     }
@@ -243,43 +265,61 @@ public function beforeAction($action)
 
         $user_id=Yii::$app->user->identity->id;
                
-        $paid=PaidProfiles::find()->where(['and', ['user_id' => $user_id], ['paid_for_profile_id'=>$id],['status'=>1]])->one();
-        if(empty($paid))
-        {
-          //if already not paid for this profile
-          $this->redirect(array('profile/makepayment','pid'=>$id));
-        }
-        
-
-        
-
-        $searchModel = new ProfilesSearch();
-        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        $pid = $id;
-        
-
-        $profile = Profiles::find()->where(['id' => $pid])->one();
-
-
-        $similars =Profiles::find()->where(['gender' => $profile->gender])->limit(4)
-        ->all();
-    
-      return $this->render('view', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'profile'=>$profile,           
-            'similars'=>$similars,
-        ]);
+          $paid=PaidProfiles::find()->where(['and', ['user_id' => $user_id],['status'=>1]])->one();                
+          
+          if(!empty($paid))
+          {
+            $now = time(); 
             
-       
-        // $pid = Yii::$app->user->identity->id;
-        // $checkid = Profiles::find()->where( [ 'user_id' => $pid ])->one();
+            $paid_date = strtotime($paid->addedon);          
+        
+            $datediff = $now - $paid_date;
+      
+            $days=floor($datediff / (60 * 60 * 24));
+                  
+            $plan_id = $paid->plan_id;
+            
+            $plans = Plans::find()->where(['id'=>$plan_id])->one();
+            
+            if($days <= $plans->days){
+              
+              $searchModel = new ProfilesSearch();
+          
+              $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        // if($checkid['id']==$contact['user_id'] && $id==$contact['id']){
- 
-        //}
+              $pid = $id;
+          
+
+              $profile = Profiles::find()->where(['id' => $pid])->one();
+
+
+              $similars =Profiles::find()->where(['gender' => $profile->gender])->andWhere(['!=','user_id', Yii::$app->user->identity->id])->andWhere(['!=','user_id', $id])->limit(4)
+          ->all();
+      
+            return $this->render('view', [
+                  'searchModel' => $searchModel,
+                  'dataProvider' => $dataProvider,
+                  'profile'=>$profile,           
+                  'similars'=>$similars,
+              ]);
+            }else{
+
+                $this->redirect(array('profile/makepayment','pid'=>$id));
+            
+            } 
+          }else{
+                
+                $this->redirect(array('profile/makepayment','pid'=>$id));
+          
+          }  
+
+        
+        
+
+        
+
+        
+            
     }
     /**
      * Creates a new Profiles model.
@@ -301,6 +341,7 @@ public function beforeAction($action)
         }else{
         
                 $model = new Profiles();
+            
             if ($model->load(Yii::$app->request->post())) {
            
                $imageName = "profile_image_".rand();
@@ -313,13 +354,9 @@ public function beforeAction($action)
                $model->user_id = Yii::$app->user->getId();
            
                $model->save();
-               // if($model->save()){
-                    // $this->redirect(array('education/create')); 
-               // }
-               
+              
                Yii::$app->response->redirect([
                                 'profile/index',
-                                //'profile'=>$profile,
                                 'user'=>$user,
                                 'education'=>$education,
                                 'contact'=>$contact,

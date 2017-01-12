@@ -90,14 +90,17 @@ class SiteController extends Controller
         return $this->render('index',['sliders'=>$sliders,'searchModel'=>$searchModel]);
     }
 
-  public function actionGallery()
+    public function actionGallery()
     {
-        
-        $slider = new Gallery();
-        $searchModel = new GallerySearch();
 
-        $images = $slider->find()->where(['is_active'=>1])->all(); 
-        return $this->render('gallery',['images'=>$images,'searchModel'=>$searchModel]);
+        $searchModel = new GallerySearch();
+        $searchModel->is_active = 1;    
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('gallery', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
     }
 
 
@@ -115,8 +118,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-           $this->redirect(array('profile/create'));
-             //return $this->goBack();
+           //$this->redirect(array('profile/create'));
+             return $this->goBack();
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -187,10 +190,14 @@ class SiteController extends Controller
     }
     public function actionEvent(){
 
-        $event = new Events();
+        $searchModel = new EventsSearch();
+        $searchModel->status = 1;    
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $events = $event->find()->all(); 
-        return $this->render('event',['events'=>$events]);   
+        return $this->render('event', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);   
     }
 
     /**

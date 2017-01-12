@@ -1,9 +1,16 @@
 	 <?php use yii\helpers\Url;?>
 	 <div class="profile_top">
-     <a href="view_profile.html">
+     <a href="<?php echo Url::toRoute(['profile/view','id'=>$model->id]);?>">
       <h2><?php echo $model->id;?> | Profile Created for <?php echo $model->education;?></h2>
 	    <div class="col-sm-3 profile_left-top">
-	    	<img src="images/profile/<?php echo $model->profile_image;?>" class="img-responsive" alt=""/>
+	    	<?php if(!empty($model->profile_image)){
+	    	?>		
+	    		<img src="images/profile/<?php echo $model->profile_image;?>" class="img-responsive" alt=""/>
+	    	<?php }else if($model->gender == 'm'){?>
+	    		<img src="images/default.jpg" class="img-responsive" alt="default.jpg"/>
+	    	<?php }else{  ?>
+	    	<img src="images/defaultb.jpeg" class="img-responsive" alt="default.jpg"/>
+	    	<?php } ?>
 	    </div>
 	    <div class="col-sm-3">
 	      <ul class="login_details1">

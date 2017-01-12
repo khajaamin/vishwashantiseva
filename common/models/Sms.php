@@ -10,9 +10,9 @@ use yii\base\Model;
  */
 class Sms extends Model
 {
-    public $to;
-    public $message;
- 
+    public $msisdn;
+    public $msg;
+
     /**
      * @inheritdoc
      */
@@ -20,7 +20,7 @@ class Sms extends Model
     {
         return [
             // name, email, subject and body are required
-            [['to', 'message'], 'required']
+            [['msisdn', 'msg'], 'required']
          ];
     }
 
@@ -30,7 +30,8 @@ class Sms extends Model
     public function attributeLabels()
     {
         return [
-            'to' => 'Phone Numbers',
+            'msisdn' => 'Phone Numbers',
+            'msg'=>'Message',
         ];
     }
 
