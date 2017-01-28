@@ -34,8 +34,18 @@ use kartik\time\TimePicker;
                         </div>
                         <div class="row">
                             <div class="col-md-6">  
-                                <?= $form->field($model,'date_of_birth')->widget(yii\jui\DatePicker::className(),['dateFormat' => 'yyyy-MM-dd',
-                                        'options' => ['class' => 'form-control']]) 
+                                 <?=  
+                                    $form->field($model,'date_of_birth')->widget(yii\jui\DatePicker::className(),[ 'dateFormat' => 'yyyy-MM-dd',
+
+                                                        'clientOptions' => [
+                                                            
+                                                            'changeYear'=>true,
+                                                            'changeMonth'=>true,
+                                                            'yearRange'=>'-70y:c+nn',
+                                                            'maxDate'=>'-1d'
+                                                        ],
+                                                        'options' => ['class' => 'form-control']
+                                                    ])
                                     ?>
                             </div>
                             <div class="col-md-6">
@@ -64,6 +74,11 @@ use kartik\time\TimePicker;
                         <div class="row">
                             <div class="col-md-12">
                                 <?= $form->field($model, 'city')->textInput(['maxlength' => true])?> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?= $form->field($model, 'permanant_address')->textarea(['rows' => 2])?>
                             </div>
                         </div>
                     </div>
@@ -115,20 +130,31 @@ use kartik\time\TimePicker;
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                 <?php
-                                $education=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'education'])->asArray()->all(), 'name', 'name');
-                                    echo  $form->field($model, 'education')->dropDownList($education,['prompt'=>'-Education-'])
-                                ?>
+                            <?php
+                                 $interestedIn=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'interested_in'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'interested_in')->dropDownList($interestedIn,['prompt'=>'Select area of interest'])
+                             ?>       
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                 <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>
+                            </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
                                 <?= $form->field($model, 'occupation')->textInput(['maxlength' => true]) ?>
                             </div>
+                        
+
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'income')->textInput(['maxlength' => true]) ?>   
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <?= $form->field($model, 'income')->textInput(['maxlength' => true]) ?>   
+                                <?= $form->field($model, 'residensial_address')->textarea(['rows' => 2])?>
                             </div>
                         </div>                                    
                     </div>                        
@@ -171,16 +197,32 @@ use kartik\time\TimePicker;
                             </div>
                             <div class="col-md-6">
                                <?php //$form->field($model, 'caste')->textInput(['maxlength' => true]) ?>
-                            <?php   
-                               $maritalStatus=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'caste'])->asArray()->all(), 'name', 'name');
-                                    echo $form->field($model, 'caste')->dropDownList($maritalStatus,['prompt'=>\Yii::t('app', 'Select Caste')])    
-                              
+                            <?php 
+                                $data = ArrayHelper::map(\common\models\Masters::find()->where(['parent_id'=>0,'type'=>'caste'])->asArray()->all(),'id','name');
                             ?>
+                            <?php echo $form->field($model, 'caste')->dropDownList($data,
+                            ['prompt'=>'Select Caste',
+
+                            'onchange'=>'
+                                $.get({url:"'.Yii::$app->urlManager->createUrl('profile/subcaste') . '",data:{id:$(this).val()}, 
+                                success:function( data ) {
+                                    $( "select#profiles-sub_caste" ).html( data );
+                                }});',
+
+                           ]);?>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'sub_caste')->textInput(['maxlength' => true])?>
+                                <?php
+                                    $data = ArrayHelper::map(\common\models\Masters::find()->where(['!=','parent_id',0])->asArray()->all(),'id','name');
+                                // $form->field($model, 'sub_caste')->textInput(['maxlength' => true])
+                                ?>
+                                <?php 
+                                        echo $form->field($model, 'sub_caste')->dropDownList($data,
+                                ['prompt'=>'Select Sub Caste']);
+                               ?>
                             </div>
                             <div class="col-md-6">
                                 <?php 
@@ -244,38 +286,63 @@ use kartik\time\TimePicker;
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'brothers')->dropDownList([ '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Brothers']) ?>  
+                                <?= $form->field($model, 'brothers')->dropDownList(['0' => '0', '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Brothers']) ?>  
                             </div>
                             <div class="col-md-6">
-                              <?= $form->field($model, 'sisters')->dropDownList([ '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Sisters']) ?>  
+                              <?= $form->field($model, 'sisters')->dropDownList(['0' => '0', '1' => '1','2' => '2','3' => '3','4' => '4','5' => '5', 'above 5' => '6 & above' ], ['prompt' => 'Select Sisters']) ?>  
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <?= $form->field($model, 'expected_caste')->textInput(['maxlength' => true]) ?>        
+                               <?php 
+                                $data = ArrayHelper::map(\common\models\Masters::find()->where(['parent_id'=>0,'type'=>'caste'])->asArray()->all(),'id','name');
+                            ?>
+                            <?php echo $form->field($model, 'expected_caste')->dropDownList($data,
+                            ['prompt'=>'Select Expected Caste',
+
+                            'onchange'=>'
+                                $.get({url:"'.Yii::$app->urlManager->createUrl('profile/subcaste') . '",data:{id:$(this).val()}, 
+                                success:function( data ) {
+                                    $( "select#profiles-expected_sub_caste" ).html( data );
+                                }});',
+
+                           ]);?>       
                             </div>
+                            <div class="col-md-6">
+                               <?php
+                                    $data = ArrayHelper::map(\common\models\Masters::find()->where(['!=','parent_id',0])->asArray()->all(),'id','name');
+                                // $form->field($model, 'sub_caste')->textInput(['maxlength' => true])
+                                ?>
+                                <?php 
+                                        echo $form->field($model, 'expected_sub_caste')->dropDownList($data,
+                                ['prompt'=>'Select Expected Sub Caste']);
+                               ?>       
+                            </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <?= $form->field($model, 'expected_min_age')->textInput() ?>            
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <?= $form->field($model, 'expected_max_age')->textInput() ?>        
                             </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <?= $form->field($model, 'expected_min_height')->textInput() ?>         
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <?= $form->field($model, 'expected_max_height')->textInput() ?>               
                             </div>
+                            
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <?= $form->field($model, 'expected_education')->textInput(['maxlength' => true]) ?>         
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <?= $form->field($model, 'expected_occupation')->textInput(['maxlength' => true]) ?>           
                             </div>
                         </div>             

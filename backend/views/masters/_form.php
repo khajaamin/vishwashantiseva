@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Helper;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Masters */
@@ -24,7 +25,11 @@ use common\models\Helper;
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'is_active')->dropDownList(Helper::getActiveInActiveStatus(),['prompt'=>'select status']) ?>
+	<?= $form->field($model, 'is_active')->dropDownList(Helper::getActiveInActiveStatus(),['prompt'=>'select status']) ?>
+    <?php 
+        $parent=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'caste','parent_id'=>0])->asArray()->all(), 'id', 'name');
+        echo  $form->field($model, 'parent_id')->dropDownList($parent,['prompt'=>'select parent']) 
+    ?>   
     
 
     <div class="form-group">

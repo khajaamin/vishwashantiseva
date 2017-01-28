@@ -21,6 +21,7 @@ use common\models\Gallery;
 use common\models\GallerySearch;
 use common\models\Events;
 use common\models\EventsSearch;
+use common\models\Contacts;
 
 /**
  * Site controller
@@ -148,11 +149,20 @@ class SiteController extends Controller
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+           if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+
+                $contact = new  Contacts(); 
+                $contact->name = $model->name ;
+                $contact->email = $model->email ;
+                $contact->subject = $model->subject ;
+                $contact->body = $model->body ;
+                //print_r($contact);exit;
+
+                $contact->save(false);
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending email.');
-            }
+             } else {
+                 Yii::$app->session->setFlash('error', 'There was an error sending email.');
+             }
 
             return $this->refresh();
         } else {
@@ -189,11 +199,16 @@ class SiteController extends Controller
         return $this->render('terms');
     }
     public function actionEvent(){
-
+        
+        $time = new \DateTime('now');
+        $today = $time->format('Y-m-d');
+        //$currtime= $time->format('h:i:s');
+        //echo $currtime ;exit;
         $searchModel = new EventsSearch();
         $searchModel->status = 1;    
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->query->where(['>=','date',$today])->all();
+        //echo "<pre>";print_r($s);exit;
         return $this->render('event', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider

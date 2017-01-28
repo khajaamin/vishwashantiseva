@@ -40,11 +40,13 @@ $this->title = 'Education Details';
                                     <th><?php echo \Yii::t('app', 'Institute');?></th>
                                     <th><?php echo \Yii::t('app', 'Result');?></th>
                                     <th><?php echo \Yii::t('app', 'Place');?></th>
-                                    <th colspan="2"><CENTER><?php echo \Yii::t('app', 'Actions');?></CENTER></th>
+                                    <th ><?php echo \Yii::t('app', 'Actions');?></th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php $j=1; for($i=0; $i < $count; $i++) { 
+                              if(!empty($education[$i]['education_area']) || $education[$i]['education_area']!=0 || $education[$i]['education_area']!=NULL || $education[$i]['education_area']!='')
+                              {
                             ?>    
                                 <tr>
                                    <td><?= $j?></td> 
@@ -56,12 +58,13 @@ $this->title = 'Education Details';
                                    <td><?= $education[$i]['result']?></td>
                                    <td><?= $education[$i]['place']?></td>           
                                    <td><a href="<?php echo Url::toRoute('education/update')."&id=".$education[$i]['id'];?>" class="btn btn-primary btn-block btn_1"><?php echo \Yii::t('app', 'Update');?></a></td>
-                                   <td><a href="<?php echo Url::toRoute('education/delete')."&id=".$education[$i]['id'];?>" class="btn btn-primary btn-block btn_1"><?php echo \Yii::t('app', 'Delete');?></a></td>
+                                   
                                 </tr>
                             <?php  
                                
                               
                                $j++;
+                               }
                             } ?>     
                             </tbody>
                            

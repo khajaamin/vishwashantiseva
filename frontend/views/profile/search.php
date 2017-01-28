@@ -16,7 +16,7 @@ use yii\helpers\Url;
    </div>
 
   <div class="profile_search">
-      <div class="container wrap_1">
+      <div class="container-fluid">
       <?php echo $this->render("_search_quick",['searchModel'=>$searchModel]);?>       
 
       </div>

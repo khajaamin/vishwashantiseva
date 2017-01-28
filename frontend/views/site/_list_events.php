@@ -1,4 +1,7 @@
-<?php use yii\helpers\Url;?> 
+<?php 
+use yii\helpers\Url;
+Use common\models\PaidForEvent;
+?> 
 <div class="profile_top">
       	<div style="text-transform:capitalize;">
       		<h2><?= $model->name?> </h2>
@@ -40,12 +43,31 @@
 		  	</ul>
 		  </div>
 
-		  <?php 
-		 
+		  <?php
+		  	if(isset(Yii::$app->user->identity->id))
+		  	{
+		  	$user_id=Yii::$app->user->identity->id;
+		  	
+		 	$paid=PaidForEvent::find()->where(['and', ['user_id' => $user_id], ['event_id'=>$model->id],['status'=>1]])->one();
+		 	
+		 	}else{
+		 		$paid = array();
+		 		//echo"array is";print_r(!empty($paid));exit;	
+		 	}
+		 	
 		  	$similar = $model->id;
 		  ?>
+
 		  <div class="">
-			   <a href="<?php echo Url::toRoute(['events/view','id'=>$similar]);?>" class="btn btn-success btn_1"><?php echo \Yii::t('app', 'Register for Melava');?></a>
+			   <a href="<?php echo Url::toRoute(['events/view','id'=>$similar]);?>" class="btn btn-success btn_1"><?php 
+			   if(!empty($paid))
+			   {
+			   	echo \Yii::t('app', 'View full information');
+			   }else{
+			   echo \Yii::t('app', 'Register for Melava');	
+			   }
+			   
+			   ?></a>
 		   </div>
 	    
 	    </div>

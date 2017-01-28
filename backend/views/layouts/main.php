@@ -54,11 +54,11 @@ AppAsset::register($this);
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                       <!--  <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
+                        </li> -->
+                        <!-- <li class="divider"></li> -->
                         <li><?= Html::a('Logout', ['site/logout'], ['data-method' => 'post']) ?>
                         </li>
                     </ul>
@@ -110,6 +110,9 @@ AppAsset::register($this);
                         </li> -->
                         <li>
                             <a href="<?php echo Url::toRoute('plans/index');?>"><i class="fa fa-gear" aria-hidden="true"></i> Pricing Plans </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo Url::toRoute('contacts/index');?>"><i class="fa fa-phone" aria-hidden="true"></i> Contacts</a>
                         </li>
                     </ul>
                 </div>

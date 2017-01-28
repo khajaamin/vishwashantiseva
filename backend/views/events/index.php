@@ -38,7 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'title',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index) {
-                    return Html::a("Send Sms",  Yii::$app->urlManager->createUrl(array_merge(["events/send"], ['id' => $model->id])), ['class'=>'btn btn-info']);
+                    return Html::a("Send Sms",  Yii::$app->urlManager->createUrl(array_merge(["events/send"], ['id' => $model->id])), ['class'=>'btn btn-info',
+                        'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                        ],
+                        ]);
                 },
               
             ],

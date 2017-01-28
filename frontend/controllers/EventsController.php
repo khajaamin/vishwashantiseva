@@ -85,7 +85,9 @@ class EventsController extends Controller
         $paid=PaidForEvent::find()->where(['and', ['user_id' => $user_id], ['event_id'=>$id],['status'=>1]])->one();
 
         // print_r($paid);exit;    
-        $similars =Events::find()->where(['status'=>1])->orderBy('date')->limit(4)->all();
+        //->andWhere(['!=', 'cancel_date', $date])->all();
+
+        $similars =Events::find()->where(['status'=>1])->andWhere(['!=', 'id', $id])->orderBy('date')->limit(4)->all();
         if(empty($paid)){
 
              $this->redirect(array('events/makepayment','pid'=>$id));

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Education */
 
-$this->title = 'Create Education';
+$this->title = \Yii::t('app','Create Education');
 // $this->params['breadcrumbs'][] = ['label' => 'Educations', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +19,7 @@ $this->title = 'Create Education';
         <li class="current-page"><?= Html::encode($this->title) ?></li>
      </ul>
    </div>
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode(\Yii::t('app','Create Education')) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

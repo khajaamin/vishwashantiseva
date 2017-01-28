@@ -14,9 +14,10 @@ class AppAsset extends AssetBundle
     public $css = [
         // 'css/site.css',
         'kandepohe_static/css/style.css',
-        'kandepohe_static/css/font-awesome.css',
+        'kandepohe_static/css/font-awesome.min.css',
         'kandepohe_static/css/popup.css',
         'kandepohe_static/css/flexslider.css',
+        'css/fonts.css',
     ];
     public $js = [
         // 'kandepohe_static/js/jquery.min.js',

@@ -26,7 +26,7 @@ class PlansController extends Controller
                 'only' => ['index','create','view','update','delete','logout'],
                 'rules' => [
                     [
-                        'actions' => ['index','view','update','delete','logout'],
+                        'actions' => ['index','view','update','logout','delete','create'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],

@@ -116,6 +116,13 @@ class EducationController extends Controller
             if($count<4){  
                 if ($model->load(Yii::$app->request->post())) {
                     $model->user_id=$pid;
+                        $startDate=$model->start_date;
+                        // $sdate = str_replace('/', '-',$startDate);
+                        // $model->start_date=date('Y-m-d', strtotime($sdate));
+                
+                        // $endDate=$model->end_date;
+                        // $edate = str_replace('/', '-',$endDate);
+                        // $model->end_date=date('Y-m-d', strtotime($edate));
                     $model->save();
                     $this->redirect(array('profile/index'));                
                 }else{
@@ -130,6 +137,15 @@ class EducationController extends Controller
         }else{
             if ($model->load(Yii::$app->request->post())) {
                 $model->user_id=$pid;
+
+                // $startDate=$model->start_date;
+                // $sdate = str_replace('/', '-',$startDate);
+                // $model->start_date=date('Y-m-d', strtotime($sdate));
+                
+                // $endDate=$model->end_date;
+                // $edate = str_replace('/', '-',$endDate);
+                // $model->end_date=date('Y-m-d', strtotime($edate));
+
                 $model->save();
                  $this->redirect(array('contact/create'));
             } else {
@@ -156,7 +172,21 @@ class EducationController extends Controller
 
         if($checkid['id']==$education['user_id'] && $id==$education['id']){
             $model = $this->findModel($id);
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) ) {
+               //print_r($model);
+                //echo"<br><br>".$model->start_date;
+                // $startDate=$model->start_date;
+                // $sdate = str_replace('/', '-',$startDate);
+                // $model->start_date=date('Y-m-d', strtotime($sdate));
+                
+                // $endDate=$model->end_date;
+                // $edate = str_replace('/', '-',$endDate);
+                // $model->end_date=date('Y-m-d', strtotime($edate));
+
+                //echo"<br>after change:<br>".$model->start_date;
+                //echo"<br>after change:<br>".$model->end_date;
+                
+                $model->save();    
                 Yii::$app->session->setFlash('success',\Yii::t('app',"Education Details Updated Successfully !!!") );
                 return $this->redirect(array('profile/index'));
             } else {
