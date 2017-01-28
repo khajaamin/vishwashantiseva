@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
 use common\models\ProfilesSearch;
+use common\models\Masters;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,6 +56,29 @@ class ProfilesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    public function actionSubcaste()
+    {
+            $ids =Yii::$app->request->get('id'); 
+            $model = new Masters();
+            if($ids!=0)
+            {
+                $castes = \common\models\Masters::find()
+                        ->where(['in','parent_id', $ids])
+                        ->all(); 
+                if(count($castes) > 0){
+                    foreach($castes as $caste){
+
+                        echo "<option value='".$caste->id."'>$caste->name</option>";
+                    }
+                }else
+                {
+                   echo "<option>-</option>";   
+                }
+            }
+            else{
+                echo "<option>-</option>";
+            }
     }
 
     /**

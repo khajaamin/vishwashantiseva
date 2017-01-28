@@ -55,6 +55,7 @@ class Profiles extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'profiles';
@@ -67,14 +68,14 @@ class Profiles extends \yii\db\ActiveRecord
     {
         return [
 
-            [['name','marital_status', 'mobile', 'gender','country', 'state', 'city', 'blood_group'], 'required'],
+            [['name','marital_status', 'mobile', 'gender','country', 'state', 'city', 'blood_group','permanant_address','residensial_address'], 'required'],
             [['mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
-            [['date_of_birth', 'birthtime','profile_image','interested_in','description'], 'safe'],
+            [['date_of_birth', 'birthtime','profile_image','interested_in','description','permanant_address','residensial_address'], 'safe'],
             [['mobile'],'match','pattern'=>'/^[0-9]{10}$/'],
             [['gender','description'], 'string'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],
             [['profile_image'],'file'],
-            [['name','marital_status', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation','description'], 'string', 'max' => 255], 
+            [['name','marital_status', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste','expected_sub_caste', 'expected_education', 'expected_occupation','description'], 'string', 'max' => 255], 
         ];
     }
 
@@ -95,6 +96,8 @@ class Profiles extends \yii\db\ActiveRecord
             'state' => \Yii::t('app', 'State'),
             'description'=>\Yii::t('app','About Me'),
             'city' =>\Yii::t('app', 'City'),
+            'permanant_address'=>\Yii::t('app','Permanant Address'),
+            'residensial_address'=>\Yii::t('app','Residensial Address'),
             'mobile' =>\Yii::t('app', 'Mobile Number'),
             'height' =>\Yii::t('app', 'Height'),
             'weight' => \Yii::t('app','Weight'),
@@ -105,10 +108,11 @@ class Profiles extends \yii\db\ActiveRecord
             'caste' => \Yii::t('app', 'Caste'),
             'sub_caste' =>\Yii::t('app', 'Sub Caste'),
             'diet' =>\Yii::t('app',  'Diet'),
+            'interested_in'=>\Yii::t('app', 'Area of interest'),
             'birthplace' => \Yii::t('app','Place of Birth'),
             'birthtime' =>\Yii::t('app', 'Time of Birth'),
             'rashi' =>\Yii::t('app', 'Rashi'),
-            'nakshatra' =>\Yii::t('app', 'Nakshtra '),
+            'nakshatra' =>\Yii::t('app', 'Nakshatra'),
             'charan' =>\Yii::t('app', 'Charan'),
             'nadi' =>\Yii::t('app', 'Nadi'),
             'gan' =>\Yii::t('app', 'Gan'),
@@ -121,6 +125,7 @@ class Profiles extends \yii\db\ActiveRecord
             'brothers' => \Yii::t('app', 'No. of Brothers'),
             'sisters' => \Yii::t('app', 'No. of Sisters'),
             'expected_caste' => \Yii::t('app', 'Expected Caste'),
+            'expected_sub_caste'=>\Yii::t('app', 'Expected Sub Caste'),
             'expected_min_age' => \Yii::t('app', 'Expected Min Age'),
             'expected_max_age' => \Yii::t('app', 'Expected Max Age'),
             'expected_min_height' => \Yii::t('app', 'Expected Min Height'),
@@ -148,4 +153,21 @@ class Profiles extends \yii\db\ActiveRecord
         return $this->hasMany(Contact::className(), ['user_id' => 'id']);
     }
 
+
+    public function getExpectedCaste()
+    {
+        return $this->hasOne(Masters::className(), ['id' => 'expected_caste']);
+    }
+    public function getExpectedSubCaste()
+    {
+        return $this->hasOne(Masters::className(), ['id' => 'expected_sub_caste']);
+    }
+    public function getMyCaste()
+    {
+        return $this->hasOne(Masters::className(), ['id' => 'caste']);
+    }
+    public function getMySubCaste()
+    {
+        return $this->hasOne(Masters::className(), ['id' => 'sub_caste']);
+    }
 }

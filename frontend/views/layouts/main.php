@@ -19,8 +19,10 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <?= Html::csrfMetaTags()?>
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+   <!--  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">  -->
     <title>Vishwashanti Seva</title>
     <?= Html::csrfMetaTags() ?>
     <?php $this->head()?>
@@ -42,8 +44,9 @@ AppAsset::register($this);
     <div class="navbar navbar-inverse-blue">
     <!--<div class="navbar navbar-inverse-blue navbar-fixed-top">-->
       <div class="navbar-inner " >
-        <div class="container">
-           <a class="brand" href="<?php echo Url::toRoute('site/index');?>"> <img src="images/Logo.png" alt="Vishwashanti Seva"></a>
+        <div class="container-fluid">
+           <a class="brand" href="<?php echo Url::toRoute('site/index');?>"> 
+           <img src="images/Logo.png" style="max-width:100%" alt="Vishwashanti Seva"></a>
            <div class="pull-right">
             <nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,38 +61,48 @@ AppAsset::register($this);
            </div> 
            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-                <ul class="nav navbar-nav nav_1">
-                    <li><a href="<?php echo Url::toRoute('site/index');?>"><?php echo \Yii::t('app', 'Home');?></a></li>
-                    <li><a href="<?php echo Url::toRoute('site/about');?>"><?php echo \Yii::t('app', 'About Us');?></a></li>
+                <?php
+                 $menuItems = [
+                    ['label' => \Yii::t('app', 'Home') , 'url' => ['/site/index']],
+                    ['label' => \Yii::t('app', 'About Us'), 'url' => ['/site/about']],
+                    ['label' => \Yii::t('app', 'Contact us'), 'url' => ['/site/contact']],
+                    ['label' => \Yii::t('app', 'Search'), 'url'=>['profile/search']],
+                    ['label' => \Yii::t('app', 'Advanced Search'), 'url'=>['profile/advancedsearch']],
+                    ['label' => \Yii::t('app', 'Gallery'), 'url'=>['site/gallery']],
+                    ['label' => \Yii::t('app', 'Event'), 'url'=>['site/event']],
 
-                    <li><a href="<?php echo Url::toRoute('profile/search');?>"><?php echo \Yii::t('app', 'Search');?></a></li>
-                    <li><a href="<?php echo Url::toRoute('profile/advancedsearch');?>"><?php echo \Yii::t('app', 'Advanced Search');?></a></li>
-                    <li><a href="<?php echo Url::toRoute('site/gallery');?>"><?php echo \Yii::t('app', 'Gallery');?></a></li>
-                    <li><a href="<?php echo Url::toRoute('site/event');?>"><?php echo \Yii::t('app', 'Event');?></a></li>
-                      <?php
-                          if (Yii::$app->user->isGuest) {
-                      ?> 
-                        <li><a href="<?php echo Url::toRoute('site/login');?>"><?php echo \Yii::t('app', 'Login');?> </a></li>
-                        <li><a href="<?php echo Url::toRoute('site/signup');?>"><?php echo \Yii::t('app', 'Register');?></a></li>
-                        
+                ];
+                if (Yii::$app->user->isGuest) {
 
+                    $menuItems[] = ['label' => \Yii::t('app', 'Login'), 'url' => ['/site/login']];
+                    $menuItems[] = ['label' => \Yii::t('app', 'Register'), 'url' => ['/site/signup']];
 
-                        <?php }else{?>                        
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= ucfirst(Yii::$app->user->identity->username) ?><span class="caret"></span></a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="<?php echo Url::toRoute('profile/index');?>"><?php echo \Yii::t('app', 'My profile');?></a></li>
-                            <li><a href="<?php echo Url::toRoute('profile/paidforevent');?>"><?php echo \Yii::t('app', 'My Events');?></a></li>
-                            <li><?= Html::a(\Yii::t("app", "logout"), ['site/logout'], ['data' => ['method' => 'post']]) ?></li>
-                          </ul>
-                        </li> 
+                }else{
+                
+                $menuItems[] = [
+                                    'label' => ucfirst(Yii::$app->user->identity->username),
+                                    'items' => [
+                                         ['label' => \Yii::t('app', 'My profile'), 'url' => ['profile/index']],
+                                         ['label' => \Yii::t('app', 'My Events'), 'url' => ['profile/paidforevent']],
+                                         
+                                         '<li class="divider"></li>',
+                                         '<li>'
+                                            . Html::beginForm(['/site/logout'], 'post')
+                                            . Html::submitButton(
+                                                \Yii::t("app", "logout"),
+                                                ['class' => 'btn btn-link logout']
+                                            )
+                                            . Html::endForm()
+                                        . '</li>',
+                                    ],
+                                ];
 
-                      <?php  }?>
-
-
-                </ul>
-
-
+                }
+                echo Nav::widget([
+                    'options' => ['class' => 'nav navbar-nav nav_1'],
+                    'items' => $menuItems,
+                ]);
+                ?>
              </div><!-- /.navbar-collapse -->
             </nav>
            </div> <!-- end pull-right -->

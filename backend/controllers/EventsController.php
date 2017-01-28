@@ -12,7 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use common\models\SmsResponse;
 
 /**
  * EventsController implements the CRUD actions for Events model.
@@ -97,13 +97,13 @@ class EventsController extends Controller
                     
                        $model->image_file->saveAs('../images/events/'.$imageName.'.'.$model->image_file->extension);
                        $model->image_file = $imageName.'.'.$model->image_file->extension;     
-                      $model->save();
+                       $model->save();
 
                     return $this->redirect(['view', 'id' => $model->id]); 
                 }
                 else
                 {
-                       
+                     
                      $model->image_file = 'default_event.png';                            
                      $model->save();
                     return $this->redirect(['view', 'id' => $model->id]); 
@@ -185,7 +185,7 @@ class EventsController extends Controller
     public function actionSend($id)
     {
         // echo $id; exit;
-
+        $smsresponse=new SmsResponse();
         $paid = new PaidForEvent();
         $event = new Events();
         $event = $event->find()->where(['id'=>$id])->one();
@@ -202,29 +202,30 @@ class EventsController extends Controller
            $number = $unserialize['phone'];
            
 
-           //$response = Yii::$app->SmsResponse->getResponse($number,$msg);
-          // $resArr = array();
-            //$resArr = json_decode($response);
+           $response = Yii::$app->SmsResponse->getResponse($number,$msg);
+          $resArr = array();
+            $resArr = json_decode($response);
           
-            //print_r($resArr);
+            print_r($resArr);
 
-            // for ($i=0; $i < sizeof($resArr->MessageData) ; $i++) { 
-            //     $smsresponse->setIsNewRecord(true);
-            //     $smsresponse->id = null;
-            //     $smsresponse->error_code = $resArr->ErrorCode;
-            //     $smsresponse->error_message = $resArr->ErrorMessage;
-            //     $smsresponse->jobid = $resArr->JobId;
-            //     $smsresponse->number=$resArr->MessageData[$i]->Number;
-            //     $smsresponse->msg_id=$resArr->MessageData[$i]->MessageParts[0]->MsgId;
-            //     $smsresponse->part_id=$resArr->MessageData[$i]->MessageParts[0]->PartId;
-            //     $smsresponse->message=$resArr->MessageData[$i]->MessageParts[0]->Text;
-            //     if($smsresponse->save()){
-
-            //         return $this->render('send_sms',['model' =>$model]);
-            //     }
+            for ($i=0; $i < sizeof($resArr->MessageData) ; $i++) { 
+                $smsresponse->setIsNewRecord(true);
+                $smsresponse->id = null;
+                $smsresponse->error_code = $resArr->ErrorCode;
+                $smsresponse->error_message = $resArr->ErrorMessage;
+                $smsresponse->jobid = $resArr->JobId;
+                $smsresponse->number=$resArr->MessageData[$i]->Number;
+                $smsresponse->msg_id=$resArr->MessageData[$i]->MessageParts[0]->MsgId;
+                $smsresponse->part_id=$resArr->MessageData[$i]->MessageParts[0]->PartId;
+                $smsresponse->message=$resArr->MessageData[$i]->MessageParts[0]->Text;
+                //if($smsresponse->save()){
+                    $smsresponse->save();
+                    // return $this->render('send_sms',['model' =>$model]);
+                //}
 
            //print_r($unserialize);
         }
-        // return $this->redirect('index');
+      }  
+       return $this->redirect(['events/index']);
     }
 }

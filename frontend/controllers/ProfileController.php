@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use common\models\Profiles;
 use common\models\Plans;
+use common\models\Masters;
 use common\models\Events;
 use common\models\PaidProfiles;
 use common\models\Education;
@@ -21,6 +22,8 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\web\ForbiddenHttpException;
 use common\models\SiteSetting;
+use kartik\mpdf\Pdf;
+
 /**
  * ProfileController implements the CRUD actions for Profiles model.
  */
@@ -34,10 +37,10 @@ class ProfileController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','create','view','update','delete','logout','fullprofile'],
+                'only' => ['index','create','view','Createpdf','update','delete','logout','fullprofile'],
                 'rules' => [
                     [
-                        'actions' => ['index','fullprofile','create','view','update','delete','logout'],
+                        'actions' => ['index','fullprofile','create','view','Createpdf','update','delete','logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -143,6 +146,47 @@ public function beforeAction($action)
             'similars'=>$similars,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider]);
+    }
+
+    //   public function actionSubcategory()
+    // {
+    //         $ids =Yii::$app->request->get('id'); 
+    //         $model = new Categories();
+    //         $categories = \common\models\Categories::find()
+    //                 ->where(['in','parent_id', $ids])
+    //                 ->all(); 
+    //         if(count($categories) > 0){
+    //             foreach($categories as $post){
+    //                 echo "<option value='".$post->id."'>".$post->category_name."</option>";
+    //             }
+    //         }
+    //         else{
+    //             echo "<option>-</option>";
+    //         }
+    // }
+
+    public function actionSubcaste()
+    {
+            $ids =Yii::$app->request->get('id'); 
+            $model = new Masters();
+            if($ids!=0)
+            {
+                $castes = \common\models\Masters::find()
+                        ->where(['in','parent_id', $ids])
+                        ->all(); 
+                if(count($castes) > 0){
+                    foreach($castes as $caste){
+
+                        echo "<option value='".$caste->id."'>$caste->name</option>";
+                    }
+                }else
+                {
+                   echo "<option>-</option>";   
+                }
+            }
+            else{
+                echo "<option>-</option>";
+            }
     }
 
     public function actionAdvancedsearch()
@@ -269,57 +313,151 @@ public function beforeAction($action)
           
           if(!empty($paid))
           {
-            $now = time(); 
-            
-            $paid_date = strtotime($paid->addedon);          
-        
-            $datediff = $now - $paid_date;
-      
-            $days=floor($datediff / (60 * 60 * 24));
-                  
-            $plan_id = $paid->plan_id;
-            
-            $plans = Plans::find()->where(['id'=>$plan_id])->one();
-            
-            if($days <= $plans->days){
+              $now = time(); 
               
-              $searchModel = new ProfilesSearch();
+              $paid_date = strtotime($paid->addedon);          
           
-              $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+              $datediff = $now - $paid_date;
+        
+              $days=floor($datediff / (60 * 60 * 24));
+              //if(!empty($paid->plan_id))      
+              // {
+                $plan_id = $paid->plan_id;
 
-              $pid = $id;
-          
+              // }
+              $plans = Plans::find()->where(['id'=>$plan_id])->one();
+              //print_r($plans);exit;
+                  if(!empty($plans))
+                  {
 
-              $profile = Profiles::find()->where(['id' => $pid])->one();
+
+                      if($days <= $plans->days)
+                      {
+                        
+                        $searchModel = new ProfilesSearch();
+                    
+                        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+                        $pid = $id;
+                    
+
+                        $profile = Profiles::find()->where(['id' => $pid])->one();
 
 
-              $similars =Profiles::find()->where(['gender' => $profile->gender])->andWhere(['!=','user_id', Yii::$app->user->identity->id])->andWhere(['!=','user_id', $id])->limit(4)
-          ->all();
-      
-            return $this->render('view', [
-                  'searchModel' => $searchModel,
-                  'dataProvider' => $dataProvider,
-                  'profile'=>$profile,           
-                  'similars'=>$similars,
-              ]);
-            }else{
+                        $similars =Profiles::find()->where(['gender' => $profile->gender])->andWhere(['!=','user_id', Yii::$app->user->identity->id])->andWhere(['!=','user_id', $id])->limit(4)->all();
+              
+                        return $this->render('view', [
+                          'searchModel' => $searchModel,
+                          'dataProvider' => $dataProvider,
+                          'profile'=>$profile,           
+                          'similars'=>$similars,
+                        ]);
+                      }else{
 
-                $this->redirect(array('profile/makepayment','pid'=>$id));
-            
-            } 
+                        $this->redirect(array('profile/makepayment','pid'=>$id));
+                      } 
+               }//if plan is empty
+               else
+               {
+                  throw new NotFoundHttpException("Please try again later...!!!");  
+               }
           }else{
                 
                 $this->redirect(array('profile/makepayment','pid'=>$id));
           
-          }  
+          }           
+    }
+    public function actionCreatepdf($id)
+    {
 
+        $user_id=Yii::$app->user->identity->id;
+               
+          $paid=PaidProfiles::find()->where(['and', ['user_id' => $user_id],['status'=>1]])->one();                
+          
+          if(!empty($paid))
+          {
+              $now = time(); 
+              
+              $paid_date = strtotime($paid->addedon);          
+          
+              $datediff = $now - $paid_date;
         
-        
+              $days=floor($datediff / (60 * 60 * 24));
+              //if(!empty($paid->plan_id))      
+              // {
+                $plan_id = $paid->plan_id;
 
-        
+              // }
+              $plans = Plans::find()->where(['id'=>$plan_id])->one();
+              //print_r($plans);exit;
+                  if(!empty($plans))
+                  {
 
-        
-            
+
+                      if($days <= $plans->days)
+                      {
+                        
+                        $searchModel = new ProfilesSearch();
+                    
+                        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+                        $pid = $id;
+                    
+
+                        $profile = Profiles::find()->where(['id' => $pid])->one();
+
+
+                        $similars =Profiles::find()->where(['gender' => $profile->gender])->andWhere(['!=','user_id', Yii::$app->user->identity->id])->andWhere(['!=','user_id', $id])->limit(4)->all();
+              
+                         $content= $this->renderPartial('pdf', [
+                          'searchModel' => $searchModel,
+                          'dataProvider' => $dataProvider,
+                          'profile'=>$profile,           
+                          'similars'=>$similars,
+                        ]);
+
+                        $pdf = new Pdf([
+                                          // set to use core fonts only
+                                          'mode' => Pdf::MODE_UTF8, 
+                                          // A4 paper format
+                                          'format' => Pdf::FORMAT_A4, 
+                                          // portrait orientation
+                                          'orientation' => Pdf::ORIENT_PORTRAIT, 
+                                          // stream to browser inline
+                                          'destination' => Pdf::DEST_BROWSER, 
+                                          // your html content input
+                                          'content' => $content,  
+                                          // format content from your own css file if needed or use the
+                                          // enhanced bootstrap css built by Krajee for mPDF formatting 
+                                          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+                                          // any css to be embedded if required
+                                          'cssInline' => '.kv-heading-1{font-size:18px;}', 
+                                           // set mPDF properties on the fly
+                                          'options' => ['title' => 'Vishwashantiseva'],
+                                           // call mPDF methods on the fly
+                                          'methods' => [ 
+                                              'SetHeader'=>['Vishwashantiseva'], 
+                                              'SetFooter'=>['{PAGENO}'],
+                                          ]
+                                      ]);
+                                   // print_r($content);exit;
+
+                                  // return the pdf output as per the destination setting
+                                  return $pdf->render(); 
+                      }else{
+
+                        $this->redirect(array('profile/makepayment','pid'=>$id));
+                      } 
+               }//if plan is empty
+               else
+               {
+                  throw new NotFoundHttpException("Please try again later...!!!");  
+               }
+          }else{
+                
+                $this->redirect(array('profile/makepayment','pid'=>$id));
+          
+          }           
     }
     /**
      * Creates a new Profiles model.
@@ -343,7 +481,7 @@ public function beforeAction($action)
                 $model = new Profiles();
             
             if ($model->load(Yii::$app->request->post())) {
-           
+                
                $imageName = "profile_image_".rand();
            
                $model->profile_image = UploadedFile::getInstance($model,'profile_image');
@@ -407,18 +545,20 @@ public function beforeAction($action)
              $model = $this->findModel($profile->id);
 
             if ($model->load(Yii::$app->request->post())) {
-
+ 
                     $model->profile_image;
                     $imageName = "profile_image_".rand();
                     $model->profile_image = UploadedFile::getInstance($model,'profile_image');
 
                     //calculating age
-                    $orderdate = explode('-', $model->date_of_birth);
-                    $year=$orderdate[2];
-                    $currentyr=date("Y");
-                    $age=($currentyr-$year)+1;
-                    $model->age=$age;
-                   
+                    if(!empty($model->date_of_birth))
+                    {
+                      $orderdate = explode('-', $model->date_of_birth);    
+                      $year=$orderdate[2];
+                      $currentyr=date("Y");
+                      $age=($currentyr-$year)+1; 
+                      $model->age=$age;
+                    } 
                    if(!empty($model->profile_image)){
                    
                        $model->profile_image->saveAs('images/profile/'.$imageName.'.'.$model->profile_image->extension);

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\Contact */
 
-$this->title = 'Create Contact';
+$this->title = \Yii::t('app','Create Contact');
 // $this->params['breadcrumbs'][] = ['label' => 'Contacts', 'url' => ['index']];
 // $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +19,7 @@ $this->title = 'Create Contact';
         <li class="current-page"><?= Html::encode($this->title) ?></li>
      </ul>
    </div>
-   <h1><?= Html::encode($this->title) ?></h1>
+   <h1><?= Html::encode(\Yii::t('app','Create Contact')) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -27,11 +27,17 @@ use janisto\timepicker\TimePicker;
 
                          <?= $form->field($model, 'profile_image')->fileInput() ?>
 
-                         <?= $form->field($model, 'date_of_birth')->widget(\yii\jui\DatePicker::classname(), [
-                        //'language' => 'ru',
-                        'dateFormat' => 'yyyy-MM-dd',
-                        'options'=>['class'=>'form-control'],
-                        ]) ?>    
+                         <?= $form->field($model, 'date_of_birth')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd',
+
+                                'clientOptions' => [
+                                    
+                                    'changeYear'=>true,
+                                    'changeMonth'=>true,
+                                    'yearRange'=>'-70y:c+nn',
+                                    'maxDate'=>'-1d'
+                                ],
+                                'options' => ['class' => 'form-control']
+                            ]) ?>    
                     </div>
                 </div>
 
@@ -58,6 +64,11 @@ use janisto\timepicker\TimePicker;
                         <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>                                             
                     </div>
                 </div>
+                <div class="row">
+                            <div class="col-md-12">
+                                <?= $form->field($model, 'permanant_address')->textarea(['rows' => 2])?>
+                            </div>
+               </div>
 
                 <div class="row">
                     <div class=" col-md-12">
@@ -94,10 +105,32 @@ use janisto\timepicker\TimePicker;
                         <?= $form->field($model, 'religion')->textInput(['maxlength' => true]) ?>                                              
                     </div>
                     <div class=" col-md-4">
-                        <?= $form->field($model, 'caste')->textInput(['maxlength' => true]) ?>                      
+                        <?php //echo $form->field($model, 'caste')->textInput(['maxlength' => true]) ?>
+                        <?php 
+                                $data = ArrayHelper::map(\common\models\Masters::find()->where(['parent_id'=>0,'type'=>'caste'])->asArray()->all(),'id','name');
+                            ?>
+                            <?php echo $form->field($model, 'caste')->dropDownList($data,
+                            ['prompt'=>'Select Caste',
+
+                            'onchange'=>'
+                                $.get({url:"'.Yii::$app->urlManager->createUrl('profiles/subcaste') . '",data:{id:$(this).val()}, 
+                                success:function( data ) {
+                                    $( "select#profiles-sub_caste" ).html( data );
+                                }});',
+
+                           ]);?>
+                      
                     </div>
                     <div class=" col-md-4">
-                        <?= $form->field($model, 'sub_caste')->textInput(['maxlength' => true]) ?>                   
+                        <?php //echo $form->field($model, 'sub_caste')->textInput(['maxlength' => true]) ?>
+                        <?php
+                                    $data = ArrayHelper::map(\common\models\Masters::find()->where(['!=','parent_id',0])->asArray()->all(),'id','name');
+                                // $form->field($model, 'sub_caste')->textInput(['maxlength' => true])
+                                ?>
+                                <?php 
+                                        echo $form->field($model, 'sub_caste')->dropDownList($data,
+                                ['prompt'=>'Select Sub Caste']);
+                           ?>                   
                     </div>
                 </div>
 
@@ -164,7 +197,13 @@ use janisto\timepicker\TimePicker;
                 </div>
 
                 <div class="row">
-                    <div class=" col-md-12">
+                        <div class=" col-md-6">
+                            <?php
+                                 $interestedIn=ArrayHelper::map(\common\models\Masters::find()->where(['type'=>'interested_in'])->asArray()->all(), 'name', 'name');
+                                    echo  $form->field($model, 'interested_in')->dropDownList($interestedIn,['prompt'=>'Select area of interest'])
+                             ?>    
+                        </div>
+                    <div class=" col-md-6">
                            <?= $form->field($model, 'education')->textInput(['maxlength' => true]) ?>                                       
                     </div>
                 </div>
@@ -179,6 +218,11 @@ use janisto\timepicker\TimePicker;
                     </div>
                     
                 </div>
+                <div class="row">
+                            <div class="col-md-12">
+                                <?= $form->field($model, 'residensial_address')->textarea(['rows' => 2])?>
+                            </div>
+                </div>   
 
                 <div class="row">
                     <div class=" col-md-6">
@@ -199,9 +243,31 @@ use janisto\timepicker\TimePicker;
                 </div>    
                 
                 <div class="row">
-                    <div class=" col-md-12">
-                            <?= $form->field($model, 'expected_caste')->textInput(['maxlength' => true]) ?>
+                    <div class=" col-md-6">
+                            <?php 
+                                $data = ArrayHelper::map(\common\models\Masters::find()->where(['parent_id'=>0,'type'=>'caste'])->asArray()->all(),'id','name');
+                            ?>
+                            <?php echo $form->field($model, 'expected_caste')->dropDownList($data,
+                            ['prompt'=>'Select Expected Caste',
+
+                            'onchange'=>'
+                                $.get({url:"'.Yii::$app->urlManager->createUrl('profiles/subcaste') . '",data:{id:$(this).val()}, 
+                                success:function( data ) {
+                                    $( "select#profiles-expected_sub_caste" ).html( data );
+                                }});',
+
+                           ]);?>       
                     </div>
+                     <div class="col-md-6">
+                               <?php
+                                    $data = ArrayHelper::map(\common\models\Masters::find()->where(['!=','parent_id',0])->asArray()->all(),'id','name');
+                                // $form->field($model, 'sub_caste')->textInput(['maxlength' => true])
+                                ?>
+                                <?php 
+                                        echo $form->field($model, 'expected_sub_caste')->dropDownList($data,
+                                ['prompt'=>'Select Expected Sub Caste']);
+                               ?>       
+                            </div>
                 </div>
 
                 <div class="row">

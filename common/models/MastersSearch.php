@@ -19,7 +19,7 @@ class MastersSearch extends Masters
     {
         return [
             [['id', 'is_active'], 'integer'],
-            [['name', 'type'], 'safe'],
+            [['name', 'type','parent_id'], 'safe'],
         ];
     }
 
@@ -64,7 +64,8 @@ class MastersSearch extends Masters
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'type', $this->type]);
+            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'parent_id', $this->parent_id]);
 
         return $dataProvider;
     }

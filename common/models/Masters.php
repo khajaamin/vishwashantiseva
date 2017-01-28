@@ -30,6 +30,7 @@ class Masters extends \yii\db\ActiveRecord
         return [
             [['name', 'type','is_active'], 'required'],
             [['is_active'], 'integer'],
+            [['parent_id'], 'safe'],
             [['name', 'type'], 'string', 'max' => 255],
         ];
     }
@@ -43,6 +44,7 @@ class Masters extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'type' => 'Type',
+            'parent_id'=>'Parent Id',
             'is_active' => 'Is Active',
         ];
     }

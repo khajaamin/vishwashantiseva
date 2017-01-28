@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'Vishwashantiseva',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log','languageSwitcher',],
     'controllerNamespace' => 'frontend\controllers',

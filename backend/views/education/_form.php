@@ -29,19 +29,29 @@ use yii\jui\DatePicker;
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::classname(), [
-                        
-                        'dateFormat' => 'yyyy-MM-dd',
-                        'options'=>['class'=>'form-control'],
-                        ]) ?>    
+                        <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::classname(), [  'dateFormat' => 'yyyy-MM-dd',
+                                'clientOptions' => [
+                                   
+                                    'changeYear'=>true,
+                                    'changeMonth'=>true,
+                                    'yearRange'=>'-40y:c+nn',
+                                    'maxDate'=>'-1d'
+                                ],
+                                'options' => ['class' => 'form-control']
+                            ])  ?>    
                     </div>
                 
                     <div class="col-md-6">
-                        <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::classname(), [
-                         
-                        'dateFormat' => 'yyyy-MM-dd',
-                        'options'=>['class'=>'form-control'],
-                        ]) ?>    
+                        <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::classname(), [  'dateFormat' => 'yyyy-MM-dd',
+                                'clientOptions' => [
+                                   
+                                    'changeYear'=>true,
+                                    'changeMonth'=>true,
+                                    'yearRange'=>'-40y:c+nn',
+                                    'maxDate'=>'-1d'
+                                ],
+                                'options' => ['class' => 'form-control']
+                            ])  ?>    
                     </div>
                 </div>    
                         

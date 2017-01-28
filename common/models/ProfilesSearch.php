@@ -25,7 +25,7 @@ class ProfilesSearch extends Profiles
         return [
         //[['gender'],'required'],
             [['id', 'user_id','mobile', 'charan', 'brothers', 'sisters', 'expected_min_age', 'expected_max_age'], 'integer'],
-            [['name', 'profile_image', 'date_of_birth','interested_in', 'marital_status', 'gender', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'birthtime', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste', 'expected_education', 'expected_occupation','age_from','age_to','mother_tongue='], 'safe'],
+            [['name', 'profile_image', 'date_of_birth','interested_in', 'marital_status', 'gender', 'country', 'state', 'city', 'blood_group', 'complextion', 'built', 'religion', 'caste', 'sub_caste', 'diet', 'birthplace', 'birthtime', 'rashi', 'nakshatra', 'nadi', 'gan', 'gotra', 'education', 'occupation', 'income', 'father', 'mother', 'expected_caste','expected_sub_caste','permanant_address','residensial_address','expected_education', 'expected_occupation','age_from','age_to','mother_tongue'], 'safe'],
             [['height','weight', 'expected_min_height', 'expected_max_height'], 'number'],
         ];
     }
@@ -67,11 +67,10 @@ class ProfilesSearch extends Profiles
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'profiles.id' => $this->id,
             'user_id' => $this->user_id,
             'mobile' => $this->mobile,
             'user.mother_tongue' => $this->mother_tongue,
-          
             'height' => $this->height,
             'weight' => $this->weight,
             'birthtime' => $this->birthtime,
@@ -115,6 +114,9 @@ class ProfilesSearch extends Profiles
             ->andFilterWhere(['like', 'father', $this->father])
             ->andFilterWhere(['like', 'mother', $this->mother])
             ->andFilterWhere(['like', 'expected_caste', $this->expected_caste])
+            ->andFilterWhere(['like', 'expected_sub_caste', $this->expected_sub_caste])
+            ->andFilterWhere(['like', 'permanant_address', $this->permanant_address])
+            ->andFilterWhere(['like', 'residensial_address', $this->residensial_address])
             ->andFilterWhere(['like', 'expected_education', $this->expected_education])
             ->andFilterWhere(['like', 'expected_occupation', $this->expected_occupation]);
  

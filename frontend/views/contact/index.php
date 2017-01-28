@@ -36,11 +36,13 @@ $this->title = 'Contact Details';
                                     <th><?php echo \Yii::t('app', 'Phone Number');?></th>
                                     <th><?php echo \Yii::t('app', 'Email');?></th>
                                     <th><?php echo \Yii::t('app', 'Description');?></th>
-                                    <th colspan="2"><CENTER><?php echo \Yii::t('app', 'Actions');?></CENTER></th>
+                                    <th><?php echo \Yii::t('app', 'Actions');?></th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $j=1; for($i=0; $i < $count; $i++) { 
+                            <?php $j=1; for($i=0; $i < $count; $i++) {
+                               if(!empty($contact[$i]['name']) || $contact[$i]['name']!=0 || $contact[$i]['name']!=NULL || $contact[$i]['name']!='') 
+                                           { 
                             ?>    
                                 <tr>
                                    <td><?= $j?></td> 
@@ -49,12 +51,13 @@ $this->title = 'Contact Details';
                                    <td><?= $contact[$i]['email']?></td>
                                    <td><?= $contact[$i]['message']?></td>           
                                    <td><a href="<?php echo Url::toRoute('contact/update')."&id=".$contact[$i]['id'];?>" class="btn btn-primary btn-block btn_1"><?php echo \Yii::t('app', 'Update');?></a></td>
-                                   <td><a href="<?php echo Url::toRoute('contact/delete')."&id=".$contact[$i]['id'];?>" class="btn btn-primary btn-block btn_1"><?php echo \Yii::t('app', 'Delete');?></a></td>
+                                   
                                 </tr>
                             <?php  
                                
                               
                                $j++;
+                             }
                             } ?>     
                             </tbody>
                            

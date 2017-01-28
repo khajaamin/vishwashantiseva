@@ -78,7 +78,15 @@ class MastersController extends Controller
     {
         $model = new Masters();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            
+            if(empty($model->parent_id))
+            {
+                $model->parent_id=0;
+                // echo $model->parent_id;exit;
+            }
+            // echo $model->parent_id;exit;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -97,7 +105,14 @@ class MastersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            if(empty($model->parent_id))
+            {
+                $model->parent_id=0;
+                // echo $model->parent_id;exit;
+            }
+            // echo $model->parent_id;exit;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
